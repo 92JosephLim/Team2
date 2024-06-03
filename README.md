@@ -36,7 +36,7 @@
 |**김민곤**|**도현우**|**박지연**|**한수정**|
 |:---:|:---:|:---:|:---:|
 |**조원**|**조원**|**조원**|**조원**|
-|[🔗][바로가기](https://github.com/alsrhs97)|[🔗][바로가기](https://github.com/yeonjp)|[🔗][바로가기](https://github.com/yeonjp)|[🔗][바로가기](https://github.com/yeonjp)|
+|[🔗][바로가기](https://github.com/alsrhs97)|[🔗][바로가기](https://github.com/yeonjp)|[🔗][바로가기](https://github.com/yeonjp)|[🔗][바로가기](https://github.com/bori0)|
 
 ### 👨‍👩‍👧‍👦 Team Culture
 
