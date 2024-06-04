@@ -26,7 +26,7 @@ function Mainpage() {
             <i className="fa fa-facebook"></i>
             <i className="fa fa-google"></i>
             <i className="fa fa-apple"></i>
-            <button className="login-btn">로그인</button>
+            <Link to="/login" className="login-btn">로그인</Link>
           </div>
         </div>
       </header>
