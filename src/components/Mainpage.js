@@ -15,9 +15,8 @@ function Mainpage() {
         </div>
         <nav className="nav">
           <Link to="/video">Video Chat</Link>
-          <Link to="/cr">방만들기</Link>
           <Link to="/roomList">방목록</Link>
-          <Link to="/about">About</Link>
+          <Link to="/about">얘는 뭐로할까여?</Link>
         </nav>
         <div className="actions">
           <button className="action-button">상점</button>
@@ -26,7 +25,7 @@ function Mainpage() {
             <i className="fa fa-facebook"></i>
             <i className="fa fa-google"></i>
             <i className="fa fa-apple"></i>
-            <Link to="/login" className="login-btn">로그인</Link>
+            <button className="login-btn">로그인</button>
           </div>
         </div>
       </header>
