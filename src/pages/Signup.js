@@ -181,7 +181,7 @@ function Signup() {
                     Password
                   </label>
                   <input
-                    type=""
+                    type="password"
                     name="password"
                     id="password"
                     value={password}
@@ -198,7 +198,7 @@ function Signup() {
                     Password Check
                   </label>
                   <input
-                    type=""
+                    type="password"
                     name="passwordCheck"
                     id="passwordCheck"
                     value={passwordCheck}

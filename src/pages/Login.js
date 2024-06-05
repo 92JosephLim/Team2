@@ -93,7 +93,7 @@ function Login() {
                     Email
                   </label>
                   <input
-                    type=""
+                    type="email"
                     name="Eamil"
                     id="Eamil"
                     value={email}
@@ -109,7 +109,7 @@ function Login() {
                     Password
                   </label>
                   <input
-                    type=""
+                    type="password"
                     id="password"
                     value={password}
                     onChange={onChangePassword}
