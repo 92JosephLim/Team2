@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom"; // Import useLocation
 
 function initjanus() {
@@ -318,11 +318,12 @@ function JoinRoom() {
   const location = useLocation(); // Initialize useLocation
   const queryParams = new URLSearchParams(location.search);
   const roomId = queryParams.get("roomId");
-
+  const [roomName, setRoomName] = useState("");
   useEffect(() => {
     if (roomId) {
       // 방번호와 방제목을 설정
-      $("#roomname").val(roomId);
+      // $("#roomname").val(roomId);
+      setRoomName(roomId);
     }
   }, [roomId]);
 
@@ -361,6 +362,7 @@ function JoinRoom() {
                         type="text"
                         placeholder="방번호를 입력하세요"
                         id="roomname"
+                        value={roomName}
                         readOnly
                       />
                     </div>
