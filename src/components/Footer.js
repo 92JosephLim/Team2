@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-links">
-        <a href="#about">About azar</a> |<a href="#blog">Blog</a> |<a href="#usage">아자르 사용법</a> |
+        <a href="#about">About OurHour</a> |<a href="#blog">Blog</a> |<a href="#usage">OurHour 사용법</a> |
         <a href="#guidelines">커뮤니티 가이드라인</a> |<a href="#terms">서비스이용약관</a> |
         <a href="#privacy">개인정보처리방침</a> |<a href="#youth">청소년 보호 정책</a> |
         <a href="#location">위치기반 서비스 약관</a> |<a href="#ip">지식 재산권</a> |<a href="#support">고객센터</a> |
