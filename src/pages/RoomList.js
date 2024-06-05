@@ -1,5 +1,31 @@
-import { React, useEffect, useRef, useState } from "react";
+import { React, useEffect, useState } from "react";
+import "../css/RoomList.css";
+import { useNavigate } from "react-router-dom";
 function RoomList() {
+  const navigate = useNavigate();
+  const [rooms, setRooms] = useState([]);
+
+  function getRoomList() {
+    var body = { request: "list" };
+    sfutest.send({
+      message: body,
+      success: function (result) {
+        if (result && result.list) {
+          var rooms = result.list;
+          console.log("Rooms list: ", rooms);
+          setRooms(rooms);
+        }
+      },
+    });
+  }
+
+  const handleJoinRoom = (roomId) => {
+    console.log(`참가할 방 ID: ${roomId}`);
+    // 참가 로직을 여기에 추가하세요
+    // /video 경로로 이동하고 방번호와 방제목을 URL 파라미터로 전달
+    navigate(`/joinRoom?roomId=${roomId}`);
+  };
+
   useEffect(() => {
     console.log("방목록");
     initjanus()
@@ -11,9 +37,19 @@ function RoomList() {
       });
   }, []);
   return (
-    <div>
-      <h1>ㅎㅇㅇㅇ</h1>
-      <ul id="roomlist"></ul>
+    <div className="room-list-container">
+      <h1>방 목록</h1>
+      <ul>
+        {rooms.map((room) => (
+          <li key={room.room}>
+            <div>
+              <h2>{room.description}</h2>
+              <p>참여 인원수: {room.num_participants}</p>
+              <button onClick={() => handleJoinRoom(room.room)}>참가하기</button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -335,25 +371,6 @@ function initjanus() {
         reject(new Error("Session destroyed"));
       },
     });
-  });
-}
-
-function getRoomList() {
-  var body = { request: "list" };
-  sfutest.send({
-    message: body,
-    success: function (result) {
-      if (result && result.list) {
-        var rooms = result.list;
-        console.log("Rooms list: ", rooms);
-        var roomListElement = $("#roomlist");
-        roomListElement.empty(); // Clear any previous list
-        for (var i = 0; i < rooms.length; i++) {
-          var room = rooms[i];
-          roomListElement.append("<li>Room ID: " + room.room + ", Description: " + room.description + "</li>");
-        }
-      }
-    },
   });
 }
 

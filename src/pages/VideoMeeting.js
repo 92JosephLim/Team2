@@ -386,9 +386,28 @@ function VideoMeeting() {
                           if (e.key === "Enter") checkEnter(e.target, e);
                         }}
                       />
-                      <span className="input-group-btn">
+
+                      {/* <span className="input-group-btn">
                         <button className="btn btn-success" autoComplete="off" id="register">
                           대화방 참여
+                        </button>
+                      </span> */}
+                    </div>
+                    <div className="input-group margin-bottom-md">
+                      <span className="input-group-addon">방제목</span>
+                      <input
+                        autoComplete="off"
+                        className="form-control"
+                        type="text"
+                        placeholder="방제목"
+                        id="description"
+                        onKeyPress={(e) => {
+                          if (e.key === "Enter") checkEnter(e.target, e);
+                        }}
+                      />
+                      <span className="input-group-btn">
+                        <button className="btn btn-success" autoComplete="off" id="register">
+                          대화방 만들기
                         </button>
                       </span>
                     </div>
