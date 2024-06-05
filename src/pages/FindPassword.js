@@ -33,27 +33,29 @@ function FindPassword() {
                     type=""
                     name="Eamil"
                     id="Eamil"
-                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full text-2xl"
                     placeholder="Eamil"
                   />
                 </div>
                 {/* 인증번호 전송하기 버튼을 누르면 모달창으로 비밀번호 재설정 비밀번호 재설정 메일을 통해 비밀번호를 변경해 주시기 바랍니다. <버튼> 확인 </버튼>을 띄워준다. */}
                 {/* 인증번호로 비밀번호 재설정 완료하면 모달창으로 비밀번호 재설정 비밀번호 재설정이 완료되었습니다. 로그인 페이지로 이동합니다. 를 띄워준다. */}
                 <button className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full">
-                  인증번호 전송하기
+                  인증번호 전송
                 </button>
               </form>
               {/* 계정이 없는 경우 */}
-              <p className="mt-12 text-xs text-center font-light text-gray-400">
+              <p className="mt-12 text-xl text-center font-light text-gray-400">
                 {" "}
-                계정이 생각나셨나요?{" "}
-                <a href="/login" className="text-black font-medium">
+                계정이 있으신가요?{" "}
+                <a href="/login" className="text-blue-800 font-semibold">
                   {" "}
                   로그인하기{" "}
                 </a>
+              </p>
+              <p className="mt-2 text-xl text-center font-light text-gray-400">
                 {" "}
                 계정이 없으신가요?{" "}
-                <a href="/signup" className="text-black font-medium">
+                <a href="/signup" className="text-blue-800 font-semibold">
                   {" "}
                   회원가입하기{" "}
                 </a>

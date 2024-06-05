@@ -43,7 +43,7 @@ function Login() {
       setPasswordMessage("영어 대소문자, 특수문자, 숫자를 조합해 8자리 이상 20자리 이하로 입력해주세요!");
       setIsPassword(false);
     } else {
-      setPasswordMessage("사용 가능한 비밀번혼 입니다!");
+      setPasswordMessage("사용 가능한 비밀번호 입니다!");
       setIsPassword(true);
     }
   };
@@ -71,6 +71,7 @@ function Login() {
       .catch(error => {
         console.error("error : ", error);
       });
+
   };
 
   return (
@@ -87,21 +88,21 @@ function Login() {
               <h1 className="font-medium text-2xl mt-3 text-center">Login</h1>
               {/* form 태그 POST로 email, password 넘겨주기 */}
               <form onSubmit={handleLISubmit} className="mt-6">
-                <div className="my-5 text-sm">
+                <div className="my-5">
                   {/* 이메일 유효성 검사 */}
-                  <label htmlFor="username" className="block text-black text-left">
+                  <label htmlFor="email" className="block text-black text-left">
                     Email
                   </label>
                   <input
                     type="email"
-                    name="Eamil"
-                    id="Eamil"
+                    name="email"
+                    id="email"
                     value={email}
                     onChange={onChangeEmail}
-                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
-                    placeholder="Eamil"
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full"
+                    placeholder="Email"
                   />
-                  <p className="errorMsg">{emailMessage}</p>
+                  <p className="errorMsg mt-2">{emailMessage}</p>
                 </div>
                 <div className="my-5 text-sm">
                   {/* 비밀번호 유효성 검사 */}
@@ -110,14 +111,15 @@ function Login() {
                   </label>
                   <input
                     type="password"
+                    name="password"
                     id="password"
                     value={password}
                     onChange={onChangePassword}
-                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full"
                     placeholder="Password"
                   />
-                  <p className="errorMsg">{passwordMessage}</p>
-                  <div className="flex justify-end mt-2 text-xs text-gray-600">
+                  <p className="errorMsg mt-2 text-xl">{passwordMessage}</p>
+                  <div className="flex justify-end mt-5 text-lg text-blue-800 font-semibold">
                     <a href="/findpwd">비밀번호가 생각나지 않는다면?</a>
                   </div>
                 </div>
@@ -135,7 +137,7 @@ function Login() {
                   style={{ height: 1 }}
                   className="bg-gray-300 md:block hidden w-4/12"
                 />
-                <p className="md:mx-2 text-sm font-light text-gray-400">
+                <p className="md:mx-2 text-large font-light text-gray-400">
                   {" "}
                   Login With Social{" "}
                 </p>
@@ -147,7 +149,7 @@ function Login() {
               {/* 소셜 로그인 kakao, google */}
               <div className="grid md:grid-cols-2 gap-2 mt-7">
                 <div>
-                  <button className="text-center w-full text-black bg-yellow-300 p-3 duration-300 rounded-sm hover:bg-blue-700">
+                  <button className="text-center w-full text-black bg-yellow-300 p-3 duration-300 rounded-sm hover:bg-amber-900 hover:text-white">
                     Kakao
                   </button>
                 </div>
@@ -158,10 +160,10 @@ function Login() {
                 </div>
               </div>
               {/* 계정이 없는 경우 */}
-              <p className="mt-12 text-xs text-center font-light text-gray-400">
+              <p className="mt-12 text-xl text-center font-light text-gray-400">
                 {" "}
                 계정이 없으신가요?{" "}
-                <a href="/signup" className="text-black font-medium">
+                <a href="/signup" className="text-blue-800 font-semibold">
                   {" "}
                   회원가입하기{" "}
                 </a>

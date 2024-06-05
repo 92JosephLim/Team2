@@ -146,7 +146,7 @@ function Signup() {
                       id="email"
                       value={email}
                       onChange={onChangeEmail}
-                      className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-full"
+                      className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-full text-2xl"
                       placeholder="Email"
                     />
                     <button className="ml-2 text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black">
@@ -166,7 +166,7 @@ function Signup() {
                       type=""
                       name="emailCheck"
                       id="emailCheck"
-                      className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-full"
+                      className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-full text-2xl"
                       placeholder="인증번호"
                     />
                     <button className="ml-2 text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black">
@@ -186,10 +186,10 @@ function Signup() {
                     id="password"
                     value={password}
                     onChange={onChangePassword}
-                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full"
                     placeholder="Password"
                   />
-                  <p className="errorMsg">{passwordMessage}</p>
+                  <p className="errorMsg mt-2 text-xl">{passwordMessage}</p>
                 </div>
                 {/* 비밀번호 체크 */}
                 <div className="my-5 text-sm">
@@ -203,10 +203,10 @@ function Signup() {
                     id="passwordCheck"
                     value={passwordCheck}
                     onChange={onChangePasswordCheck}
-                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full"
                     placeholder="Password"
                   />
-                  <p className="errorMsg">{passwordCheckMessage}</p>
+                  <p className="errorMsg mt-2 text-xl">{passwordCheckMessage}</p>
                 </div>
                 {/* 핸드폰 번호 */}
                 <div className="my-5 text-sm">
@@ -220,10 +220,10 @@ function Signup() {
                     id="phoneNumber"
                     value={phoneNumber}
                     onChange={onChangePhone}
-                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full text-2xl"
                     placeholder="Phone Number"
                   />
-                  <p className="errorMsg">{phoneNumberMessage}</p>
+                  <p className="errorMsg mt-2 text-xl">{phoneNumberMessage}</p>
                 </div>
                 {/* 성별 */}
                 <div className="my-5 text-sm">
@@ -251,7 +251,7 @@ function Signup() {
                   <label htmlFor="language" className="block text-black text-left">
                     Language
                   </label>
-                  <select className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 mt-3">
+                  <select className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 mt-3 text-2xl">
                     <option value="korean">한국어</option>
                     <option value="english">English</option>
                     <option value="japanese">일본어</option>
@@ -267,7 +267,7 @@ function Signup() {
                   </label>
                   <input
                     type="file"
-                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 mt-3"
+                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 mt-3 text-2xl"
                   />
                 </div>
                 {/* 회원가입 */}
@@ -280,10 +280,10 @@ function Signup() {
                 </button>
               </form>
               {/* 계정이 없는 경우 : 이때 로그인하기 클릭하면 alert 창 또는 모달 창으로 작서하신 정보가 전부 지워집니다. 그래도 로그인하러 가시겠습니까? 띄워주기 */}
-              <p className="mt-12 text-xs text-center font-light text-gray-400">
+              <p className="mt-12 text-xl text-center font-light text-gray-400">
                 {" "}
-                계정이 생각나셨나요?{" "}
-                <a href="/login" className="text-black font-medium">
+                계정이 있으신가요?{" "}
+                <a href="/login" className="text-blue-800 font-semibold">
                   {" "}
                   로그인하기{" "}
                 </a>
