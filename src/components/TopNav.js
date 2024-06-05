@@ -1,32 +1,35 @@
 import React from "react";
-import logo from "../assets/logo.jpeg"; // 로고 이미지 경로
-import { Link } from "react-router-dom";
+import newLogo from "../assets/new_logo.png"; // 새로운 로고 이미지 경로
+import { Link, useNavigate } from "react-router-dom";
 
 function TopNav() {
+  const navigate = useNavigate();
+
+  // Video Chat 클릭 시 동작할 함수
+  const handleVideoChat = () => {
+    navigate("/video");
+  };
+
   return (
     <header className="header">
       <div className="logo">
-        <img src={logo} alt="Logo" />
-        <span>예비메인페이지</span>
+        <button className="logo-button">
+          <img src={newLogo} alt="New Logo" /> {/* 변경된 이미지 경로로 수정 */}
+        </button>
       </div>
       <nav className="nav">
-        <Link to="/video">Video Chat</Link>
-        <Link to="/cr">방만들기</Link>
-        <Link to="/roomList">방목록</Link>
-        <Link to="/about">About</Link>
-      </nav>
-      <div className="actions">
-        <button className="action-button">상점</button>
-        <button className="action-button">지난 대화 상대</button>
+        {/* Video Chat 버튼 */}
+        <button className="nav-button video-chat-btn" onClick={handleVideoChat}>Video Chat</button>
+        <Link to="/cr" className="action-link">방만들기</Link>
+        <Link to="/roomList" className="action-link">방목록</Link>
+        <Link to="/about" className="action-link">About</Link>
+        <button className="action-button">My Page</button>
         <div className="login-options">
-          <i className="fa fa-facebook"></i>
-          <i className="fa fa-google"></i>
-          <i className="fa fa-apple"></i>
-          <Link to="/login" className="login-btn">로그인</Link>
+          <Link to="/login" className="login-btn">Login</Link>
         </div>
-      </div>
+      </nav>
     </header>
-  )
+  );
 }
 
 export default TopNav;

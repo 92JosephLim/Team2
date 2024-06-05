@@ -12,14 +12,7 @@ function Mainpage() {
     <div className="main-page">
       <TopNav />
       <div className="content">
-        <div className="left-pane">
-          <h1>2조사이트</h1>
-          <p>247,584 건의 매칭이 진행 중이에요</p>
-          <button className="start-button" onClick={() => navigate("/video")}>
-            비디오 채팅하기
-          </button>
-        </div>
-        <div className="right-pane">
+        <div className="left-pane"> {/* 왼쪽 패널 */}
           <div className="profile-grid">
             <div className="profile">
               <img src="profile1.jpg" alt="Emma, 25" />
@@ -45,18 +38,15 @@ function Mainpage() {
                 <p>Grace, 30</p>
               </div>
             </div>
-            <div className="profile">
-              <img src="profile5.jpg" alt="Abigail, 22" />
-              <div className="profile-info">
-                <p>Abigail, 22</p>
-              </div>
-            </div>
-            <div className="profile">
-              <img src="profile6.jpg" alt="Olivia, 23" />
-              <div className="profile-info">
-                <p>Olivia, 23</p>
-              </div>
-            </div>
+          </div>
+        </div>
+        <div className="right-pane"> {/* 오른쪽 패널 */}
+          <div className="vertical-section">
+            <h1>2조사이트</h1>
+            <p>247,584 건의 매칭이 진행 중이에요...</p>
+            <button className="start-button" onClick={() => navigate("/video")}>
+              비디오 채팅하기
+            </button>
           </div>
         </div>
       </div>

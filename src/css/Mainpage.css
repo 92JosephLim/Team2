@@ -18,7 +18,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #121212;
+  background-color: grey;
 }
 
 .logo {
@@ -36,14 +36,25 @@ body {
   font-weight: bold;
 }
 
-.nav a {
-  color: white;
-  text-decoration: none;
-  margin: 0 15px;
-  font-weight: bold;
+.nav {
+  display: flex;
+  gap: 20px; /* 링크들 사이의 간격 조정 */
 }
 
-.nav a:hover {
+.nav a,
+.nav button {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.5rem; /* 링크 텍스트의 크기 조정 */
+  padding: 8px 12px; /* 링크의 패딩 조정 */
+  margin-right: 12px; /* 링크들 사이의 간격 조정 */
+  display: flex;
+  align-items: center; /* 수직 정렬 */
+}
+
+.nav a:hover,
+.nav button:hover {
   text-decoration: underline;
 }
 
@@ -97,12 +108,13 @@ body {
 }
 
 .left-pane {
-  flex: 1;
+  flex: 3;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  background-color: white; /* 왼쪽 패널의 배경색을 하얀색으로 변경 */
 }
 
 .left-pane h1 {
@@ -131,10 +143,12 @@ body {
 }
 
 .right-pane {
-  flex: 1;
+  flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
+  color: #121212;
 }
 
 .profile-grid {
@@ -144,6 +158,8 @@ body {
 }
 
 .profile {
+  width: 200px; /* 프로필의 가로 길이 조정 */
+  height: 200px; /* 프로필의 세로 길이 조정 */
   background-color: #2b2b2b;
   border-radius: 10px;
   overflow: hidden;
@@ -152,7 +168,8 @@ body {
 
 .profile img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover; /* 이미지가 잘리지 않도록 설정 */
 }
 
 .profile-info {
@@ -165,9 +182,9 @@ body {
 
 /* Footer styles */
 .footer {
-  background-color: #121212;
+  background-color: grey;
   color: white;
-  padding: 20px;
+  padding: 10px; /* 더 작은 패딩 값으로 조정 */
   text-align: center;
 }
 
@@ -198,16 +215,59 @@ body {
   gap: 10px;
 }
 
-.store-button {
-  background: none;
-  border: 1px solid white;
+.start-button {
+  background-color: #007bff;
   color: white;
-  padding: 5px 10px;
-  border-radius: 20px;
+  padding: 15px 30px; /* 원하는 패딩으로 조정 */
+  font-size: 1.2rem; /* 원하는 크기로 조정 */
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.store-button:hover {
-  background-color: #333;
+.start-button:hover {
+  background-color: #0056b3;
+}
+
+.vertical-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.vertical-section h1 {
+  font-size: 2rem; /* 원하는 크기로 조정 */
+  margin-bottom: 15px;
+}
+
+.vertical-section p {
+  font-size: 2rem; /* 원하는 크기로 조정 */
+}
+
+.vertical-section .start-button {
+  margin-top: 20px; /* 원하는 여백으로 조정 */
+}
+
+.logo-button,
+.action-button,
+.login-btn {
+  padding: 0; /* 텍스트만큼의 영역만큼의 패딩 제거 */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white; /* 버튼 텍스트 색상 설정 */
+  font-size: inherit; /* 폰트 크기 상속 */
+  font-family: inherit; /* 폰트 패밀리 상속 */
+}
+
+.login-btn:hover,
+.action-button:hover {
+  text-decoration: underline;
+}
+
+/* Video Chat 버튼의 위치 조정 */
+.video-chat-btn {
+  order: -1; /* 다른 버튼들 보다 먼저 표시 */
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "../css/Mainpage.css"; // CSS 파일을 import
-import logo from "../assets/logo.jpeg"; // 로고 이미지 경로
+import "../css/Mainpage.css";
+import logo from "../assets/logo.jpeg";
 
 function Mainpage() {
   const navigate = useNavigate();
@@ -10,34 +10,22 @@ function Mainpage() {
     <div className="main-page">
       <header className="header">
         <div className="logo">
-          <img src={logo} alt="Logo" />
-          <span>예비메인페이지</span>
+          <img src={logo} alt="로고" />
+          <span>메인페이지</span>
         </div>
         <nav className="nav">
-          <Link to="/video">Video Chat</Link>
+          <Link to="/video">비디오 채팅</Link>
           <Link to="/roomList">방목록</Link>
           <Link to="/about">얘는 뭐로할까여?</Link>
         </nav>
         <div className="actions">
-          <button className="action-button">상점</button>
-          <button className="action-button">지난 대화 상대</button>
           <div className="login-options">
-            <i className="fa fa-facebook"></i>
-            <i className="fa fa-google"></i>
-            <i className="fa fa-apple"></i>
             <button className="login-btn">로그인</button>
           </div>
         </div>
       </header>
       <div className="content">
         <div className="left-pane">
-          <h1>2조사이트</h1>
-          <p>247,584 건의 매칭이 진행 중이에요</p>
-          <button className="start-button" onClick={() => navigate("/video")}>
-            비디오 채팅하기
-          </button>
-        </div>
-        <div className="right-pane">
           <div className="profile-grid">
             <div className="profile">
               <img src="profile1.jpg" alt="Emma, 25" />
@@ -63,38 +51,33 @@ function Mainpage() {
                 <p>Grace, 30</p>
               </div>
             </div>
-            <div className="profile">
-              <img src="profile5.jpg" alt="Abigail, 22" />
-              <div className="profile-info">
-                <p>Abigail, 22</p>
-              </div>
-            </div>
-            <div className="profile">
-              <img src="profile6.jpg" alt="Olivia, 23" />
-              <div className="profile-info">
-                <p>Olivia, 23</p>
-              </div>
-            </div>
           </div>
+        </div>
+        <div className="righst-pane">
+          <h1>2조사이트</h1>
+          <p>247,584 건의 매칭이 진행 중이에요</p>
+          <button className="start-button" onClick={() => navigate("/video")}>
+            비디오 채팅 시작하기
+          </button>
         </div>
       </div>
       <footer className="footer">
         <div className="footer-links">
-          <a href="#about">About azar</a> |<a href="#blog">Blog</a> |<a href="#usage">아자르 사용법</a> |
-          <a href="#guidelines">커뮤니티 가이드라인</a> |<a href="#terms">서비스이용약관</a> |
+          <a href="#about">아자(Azar) 정보</a> |<a href="#blog">블로그</a> |<a href="#usage">사용법</a> |
+          <a href="#guidelines">커뮤니티 가이드라인</a> |<a href="#terms">서비스 이용 약관</a> |
           <a href="#privacy">개인정보처리방침</a> |<a href="#youth">청소년 보호 정책</a> |
-          <a href="#location">위치기반 서비스 약관</a> |<a href="#ip">지식 재산권</a> |<a href="#support">고객센터</a> |
-          <a href="#cookie-policy">Cookie Policy</a> |<a href="#cookie-settings">Cookie Settings</a>
+          <a href="#location">위치 기반 서비스 약관</a> |<a href="#ip">지적 재산권</a> |<a href="#support">고객센터</a> |
+          <a href="#cookie-policy">쿠키 정책</a> |<a href="#cookie-settings">쿠키 설정</a>
         </div>
         <div className="footer-info">
-          대표 업무 집행자: 김린다수아 | 이메일: help@azarlive.com | 주소: 서울시 강남구 영동대로 517 | 사업자 등록번호:
-          220-88-75836 | Mail-order-sales approval number: 2019-SeoulGangnam-2501
+          대표: 김린다수아 | 이메일: help@azarlive.com | 주소: 서울시 강남구 영동대로 517 | 사업자 등록번호:
+          220-88-75836 | 전자상거래 등록번호: 2019-서울강남-2501
         </div>
         <div className="footer-bottom">
           <p>© 2024 Hyperconnect LLC. All rights reserved.</p>
           <div className="store-buttons">
-            <button className="store-button">App Store</button>
-            <button className="store-button">Google Play</button>
+            <button className="store-button">앱 스토어</button>
+            <button className="store-button">구글 플레이</button>
           </div>
         </div>
       </footer>
