@@ -7,7 +7,8 @@ import teamlogo from "../assets/lizard.jpg";
 function FindPassword() {
   //이메일 유효성 검사
 
-  // 비밀번호 찾기 다하고 다음 페이지로 넘어가야 함ㄷㄷㄷㄷㄷ <= 연휴 동안 이거 생각하기
+  // 비밀번호 찾기 다하고 다음 페이지로 넘어가야 함
+  // 이메일 유효성 검사 관련 코드 작성하기
   return (
     <>
       <TopNav />
