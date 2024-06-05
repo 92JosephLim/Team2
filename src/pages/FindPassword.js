@@ -15,7 +15,7 @@ function FindPassword() {
         <div className="flex lg:w-1/2">
           {/* team logo 애니메이션 넣은거 컴포넌트로 넣을 예정 */}
           <div className="m-auto">
-            <img src={teamlogo} alt="This is my team logo" className="rounded-lg" />
+            <img src={teamlogo} alt="This is my team logo" />
           </div>
         </div>
         {/* FindPassword화면의 right side */}

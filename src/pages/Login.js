@@ -16,53 +16,41 @@ function Login() {
   return (
     <>
       <TopNav />
-      {/* 전체 레이아웃 */}
-      <div className="flex min-h-screen bg-white">
-        {/* login화면의 left side, 크기는 50% bg 나중에 애니메이션 보고 필요하면 넣기 */}
-        <div className="flex lg:w-1/2">
-          {/* team logo 애니메이션 넣은거 컴포넌트로 넣을 예정 */}
-          <div className="m-auto">
-            <img src={teamlogo} alt="This is my team logo" />
-          </div>
-        </div>
-        {/* login화면의 right side */}
-        <div className="flex flex-col justify-center w-full lg:w-1/2">
-          <div className="max-w-lg mx-auto bg-white rounded-lg">
-            {/* 이거 글씨도 이상하게 안키워짐 */}
-            <h2 className="text-2xl font-bold text-center mb-4">로그인</h2>
-            {/* 로그인 창 */}
-            <form className="space-y-4 border h-40">
-              <div className="relative w-96">
-                <input
-                  type="text"
-                  placeholder="아이디"
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-                />
-              </div>
-              <div className="relative">
-                <input
-                  type="password"
-                  placeholder="비밀번호"
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-                />
-                <div className="text-right mt-2">
-                  <a href="/findpwd" className="text-sm text-blue-500 hover:underline">비밀번호 찾기</a>
+      <div className="min-h-screen bg-no-repeat bg-cover bg-center"
+        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1486520299386-6d106b22014b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80)' }}>
+        <div className="flex justify-end">
+          <div className="bg-white min-h-screen w-1/2 flex justify-center items-center">
+            <div>
+              <form>
+                <div>
+                  <span className="text-sm text-gray-900">Welcome back</span>
+                  <h1 className="text-2xl font-bold">Login to your account</h1>
                 </div>
-              </div>
-              <button
-                type="submit"
-                className="w-full py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800"
-              >
-                로그인
-              </button>
-              <div className="text-center text-gray-500 mt-4">
-                <span>000이 처음이신가요? </span>
-                {/* 이거 nav로 할 지 그냥 a 태그로 할 지 고민 a 태그보다 react route dom이 좀 더 부드럽게??넘어가는걸로 아는데 일단 a 태그로 해봄 */}
-                <a href="/signup" className="text-blue-500 hover:underline">회원가입하기</a>
-              </div>
-            </form>
+                <div className="mt-5">
+                  <label className="block text-md mb-2" htmlFor="password">Password</label>
+                  <input className="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="password" name="password" placeholder="password" />
+                </div>
+                <div className="my-3">
+                  <label className="block text-md mb-2" htmlFor="email">Email</label>
+                  <input className="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="email" name="email" placeholder="email" />
+                </div>
+                <div className="flex justify-between">
+                  <div>
+                    <input className="cursor-pointer" type="radio" name="rememberme" />
+                    <span className="text-sm">Remember Me</span>
+                  </div>
+                  <span className="text-sm text-blue-700 hover:underline cursor-pointer">Forgot password?</span>
+                </div>
+                <div>
+                  <button className="mt-4 mb-3 w-full bg-green-500 hover:bg-green-400 text-white py-2 rounded-md transition duration-100">Login now</button>
+                  <div className="flex space-x-2 justify-center items-center bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-md transition duration-100">
+                    <img className="h-5 cursor-pointer" src="https://i.imgur.com/arC60SB.png" alt="Google" />
+                    <button>Or sign-in with google</button>
+                  </div>
+                </div>
+              </form>
+              <p className="mt-8"> Dont have an account? <span className="cursor-pointer text-sm text-blue-600"> Join free today</span></p>
+            </div>
           </div>
         </div>
       </div>
