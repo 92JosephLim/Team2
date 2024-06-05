@@ -4,12 +4,6 @@ import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 
 function Login() {
-  //id, password 유효성 검사
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [idMsg, setIdMsg] = useState("");
-  const [pwdMsg, setPwdMsg] = useState("");
 
   return (
     <>

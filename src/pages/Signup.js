@@ -1,15 +1,124 @@
 //회원가입 페이지
-import React from "react";
+import React, { useState } from "react";
 import "../css/Login.css"; // 로그인 페이지 스타일 파일 import
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
-import teamlogo from "../assets/lizard.jpg";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+//나중에 navigator 맞게 수정하기
+//시간 되면 컴포넌트로 수정해서 따로 빼기 
 
 function Signup() {
-  //email, password 유효성 검사 + 핸드폰 번호
 
-  //나중에 navigator 맞게 수정하기
-  //시간 되면 컴포넌트로 수정해서 따로 빼기 
+  //useNavigate 훅으로 페이지 이동하기
+  const navigate = useNavigate();
+
+  //1. 초기값 세팅 - 이메일, 비밀번호, 비밀번호 확인, 전화번호, 성별, 언어선택, 프로필 사진
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+
+  //2. 오류 메세지 상태 저장
+  const [emailMessage, setEmailMessage] = useState('');
+  const [passwordMessage, setPasswordMessage] = useState('');
+  const [passwordCheckMessage, setPasswordCheckMessage] = useState('');
+  const [phoneNumberMessage, setPhoneNumberMessage] = useState('');
+
+  //3. 유효성 검사 - 이메일, 비밀번호, 핸드폰 번호
+  const [isEmail, setIsEmail] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
+  const [isPasswordCheck, setIsPasswordCheck] = useState(false);
+  const [isPhoneNumber, setIsPhoneNumber] = useState(false);
+
+  //4. 입력한 필드 값들이 유효한지 검사해서 상태 업데이트 하기 - 이메일, 비밀번호, 핸드폰 번호
+  //4-1. 이메일
+  const onChangeEmail = (e) => {
+    const currentEmail = e.target.value;
+    setEmail(currentEmail);
+    //이메일 정규식
+    const emailRegTest = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
+    //이메일 형식이 맞지 않으면 메세지 띄우기
+    if (!emailRegTest.test(currentEmail)) {
+      setEmailMessage("이메일의 형식이 올바르지 않습니다!");
+      setIsEmail(false);
+    } else {
+      setEmailMessage("사용 가능한 이메일 입니다!");
+      setIsEmail(true);
+    }
+  };
+
+  //4-2. 비밀번호
+  const onChangePassword = (e) => {
+    const currentPassword = e.target.value;
+    setPassword(currentPassword);
+    //비밀번호 정규식
+    const passwordRegTest = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
+    //메세지 띄우기
+    if (!passwordRegTest.test(currentPassword)) {
+      setPasswordMessage("영어 대소문자, 특수문자, 숫자를 조합해 8자리 이상 20자리 이하로 입력해주세요!");
+      setIsPassword(false);
+    } else {
+      setPasswordMessage("사용 가능한 비밀번혼 입니다!");
+      setIsPassword(true);
+    }
+  };
+
+  //4-3. 비밀번호 확인
+  const onChangePasswordCheck = (e) => {
+    const currentPasswordCheck = e.target.value;
+    setPasswordCheck(currentPasswordCheck);
+    // 앞서 작성한 비밀번호랑 다르면 error msg 내보내기
+    if (password !== currentPasswordCheck) {
+      setPasswordCheckMessage("비밀번호가 다릅니다! 다시 작성해주세요!")
+      setIsPasswordCheck(false);
+    } else {
+      setPasswordCheckMessage("똑같은 비밀번호를 입력하였습니다.");
+      setIsPasswordCheck(true);
+    }
+  };
+  //4-4. 전화번호
+  const onChangePhone = (e) => {
+    const currentPhoneNumber = e.target.value;
+    setPhoneNumber(currentPhoneNumber);
+    const phoneRegTest = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
+    if (!phoneRegTest.test(currentPhoneNumber)) {
+      setPhoneNumberMessage("올바른 형식이 아닙니다! -을 빼고 작성해주세요!");
+      setIsPhoneNumber(false);
+    } else {
+      setPhoneNumberMessage("사용 가능한 전화번호입니다.");
+      setIsPhoneNumber(true);
+    }
+  }
+  //생각해본 거 - 이메일 중복 확인 하는지 + 위의 사항이 전부 ok면 가입 버튼 활성화
+
+  //form 제출 핸들러 - axios 사용
+  const handleSUSubmit = (e) => {
+
+    e.preventDefault();
+
+    const formData = {
+      email,
+      password,
+      phoneNumber
+    };
+
+    //endpoint 주소가 https://js2.jsflux.co.kr/ 이거에요 아님 15.164.250.39 이거에요????????
+    axios.post("엔드포인트 주소", formData)
+      .then(reponse => {
+        if (reponse.data.success) {
+          navigate('/login');
+        } else {
+          //에러 메세지 있으면 표시하기
+          alert(Response.data.message);
+        }
+      })
+      .catch(error => {
+        console.error("error : ", error);
+      });
+  };
+
   return (
     <>
       <TopNav />
@@ -23,7 +132,7 @@ function Signup() {
             <div className="py-8 px-8 rounded-xl">{/* 이거 위치 조금만 더 내리기 */}
               <h1 className="font-medium text-2xl mt-3 text-center">회원가입</h1>
               {/* form 태그 POST */}
-              <form action="" className="mt-6">
+              <form onSubmit={handleSUSubmit} className="mt-6">
                 {/* 이메일 */}
                 <div className="my-5 text-sm">
                   {/* 이메일 유효성 검사 */}
@@ -35,12 +144,15 @@ function Signup() {
                       type="email"
                       name="email"
                       id="email"
+                      value={email}
+                      onChange={onChangeEmail}
                       className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-full"
                       placeholder="Email"
                     />
                     <button className="ml-2 text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black">
                       인증번호 전송
                     </button>
+                    <p className="errorMsg">{emailMessage}</p>
                   </div>
                 </div>
                 {/* 인증번호 */}
@@ -72,9 +184,29 @@ function Signup() {
                     type=""
                     name="password"
                     id="password"
+                    value={password}
+                    onChange={onChangePassword}
                     className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
                     placeholder="Password"
                   />
+                  <p className="errorMsg">{passwordMessage}</p>
+                </div>
+                {/* 비밀번호 체크 */}
+                <div className="my-5 text-sm">
+                  {/* 비밀번호 유효성 검증 */}
+                  <label htmlFor="password" className="block text-black text-left">
+                    Password Check
+                  </label>
+                  <input
+                    type=""
+                    name="passwordCheck"
+                    id="passwordCheck"
+                    value={passwordCheck}
+                    onChange={onChangePasswordCheck}
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                    placeholder="Password"
+                  />
+                  <p className="errorMsg">{passwordCheckMessage}</p>
                 </div>
                 {/* 핸드폰 번호 */}
                 <div className="my-5 text-sm">
@@ -86,9 +218,12 @@ function Signup() {
                     type=""
                     name="phoneNumber"
                     id="phoneNumber"
+                    value={phoneNumber}
+                    onChange={onChangePhone}
                     className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
                     placeholder="Phone Number"
                   />
+                  <p className="errorMsg">{phoneNumberMessage}</p>
                 </div>
                 {/* 성별 */}
                 <div className="my-5 text-sm">
@@ -136,7 +271,11 @@ function Signup() {
                   />
                 </div>
                 {/* 회원가입 */}
-                <button className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full">
+                <button
+                  className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
+                  type="submit"
+                  disabled={!isEmail || !isPassword || !isPasswordCheck || !isPhoneNumber}
+                >
                   회원가입
                 </button>
               </form>
