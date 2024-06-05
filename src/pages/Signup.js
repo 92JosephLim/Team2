@@ -6,8 +6,10 @@ import Footer from "../components/Footer";
 import teamlogo from "../assets/lizard.jpg";
 
 function Signup() {
-  //id, password, email 유효성 검사
+  //email, password 유효성 검사 + 핸드폰 번호
 
+  //나중에 navigator 맞게 수정하기
+  //시간 되면 컴포넌트로 수정해서 따로 빼기 
   return (
     <>
       <TopNav />
@@ -34,7 +36,7 @@ function Signup() {
                   <div className="my-3">
                     <label className="block text-md mb-2" htmlFor="text">인증번호</label>
                     <input className="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="text" name="emailCheck" placeholder="인증번호" />
-                    {/* 인증번호 전송 누르면 모달창 띄우기 */}
+                    {/* 인증번호 체크 누르면 모달창 띄우기 */}
                     <button type="button" className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md">인증번호 체크</button>
                   </div>
                   {/* 비밀번호 : 유효성 검사 */}
@@ -105,6 +107,8 @@ function Signup() {
                     <label>마케팅 수신 동의 (선택)</label>
                   </div>
                 </div>
+                {/* 버튼을 클릭하면(js로) 모달창 or alert창으로 회원가입에 성공하셨습니다! 뜨게 하기 */}
+                <button className="mt-4 mb-3 w-full bg-green-500 hover:bg-green-400 text-white py-2 rounded-md transition duration-100"><a href="/login">회원가입</a></button>
               </form>
               <p className="mt-8"> 계정이 있으신가요? <a href="/login" className="text-blue-500 hover:underline"><span className="cursor-pointer text-sm text-blue-600">로그인하기</span></a></p>
             </div>
