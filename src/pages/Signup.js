@@ -122,24 +122,23 @@ function Signup() {
   return (
     <>
       <TopNav />
-      <div className="relative min-h-screen flex ">
+      <div className="relative min-h-screen flex">
         <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
           <div className="sm:w-1/2 xl:w-3/5 h-full md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative">
             {/* 애니메이션 */}
             {/* <img src={teamlogo} alt="this is our team logo" /> */}
           </div>
           <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 mt-5">
-            <div className="py-8 px-8 rounded-xl">{/* 이거 위치 조금만 더 내리기 */}
+            <div className="py-8 px-8 rounded-xl">
               <h1 className="font-medium text-2xl mt-3 text-center">회원가입</h1>
               {/* form 태그 POST */}
               <form onSubmit={handleSUSubmit} className="mt-6">
                 {/* 이메일 */}
                 <div className="my-5 text-sm">
-                  {/* 이메일 유효성 검사 */}
                   <label htmlFor="email" className="block text-black text-left">
                     Email
                   </label>
-                  <div className="flex mt-3">
+                  <div className="relative flex mt-3">
                     <input
                       type="email"
                       name="email"
@@ -152,12 +151,11 @@ function Signup() {
                     <button className="ml-2 text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black">
                       인증번호 전송
                     </button>
-                    <p className="errorMsg">{emailMessage}</p>
                   </div>
+                  <p className="errorMsg mt-1 text-red-600 text-xl">{emailMessage}</p>
                 </div>
                 {/* 인증번호 */}
                 <div className="my-5 text-sm">
-                  {/* 인증번호 체크 */}
                   <label htmlFor="emailCheck" className="block text-black text-left">
                     인증
                   </label>
@@ -176,7 +174,6 @@ function Signup() {
                 </div>
                 {/* 비밀번호 */}
                 <div className="my-5 text-sm">
-                  {/* 비밀번호 유효성 검증 */}
                   <label htmlFor="password" className="block text-black text-left">
                     Password
                   </label>
@@ -189,12 +186,11 @@ function Signup() {
                     className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full"
                     placeholder="Password"
                   />
-                  <p className="errorMsg mt-2 text-xl">{passwordMessage}</p>
+                  <p className="errorMsg mt-2 text-xl text-red-600">{passwordMessage}</p>
                 </div>
                 {/* 비밀번호 체크 */}
                 <div className="my-5 text-sm">
-                  {/* 비밀번호 유효성 검증 */}
-                  <label htmlFor="password" className="block text-black text-left">
+                  <label htmlFor="passwordCheck" className="block text-black text-left">
                     Password Check
                   </label>
                   <input
@@ -206,11 +202,10 @@ function Signup() {
                     className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full"
                     placeholder="Password"
                   />
-                  <p className="errorMsg mt-2 text-xl">{passwordCheckMessage}</p>
+                  <p className="errorMsg mt-2 text-xl text-red-600">{passwordCheckMessage}</p>
                 </div>
                 {/* 핸드폰 번호 */}
                 <div className="my-5 text-sm">
-                  {/* 핸드폰 번호 유효성 검사 */}
                   <label htmlFor="phoneNumber" className="block text-black text-left">
                     Phone Number
                   </label>
@@ -223,14 +218,13 @@ function Signup() {
                     className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full text-2xl"
                     placeholder="Phone Number"
                   />
-                  <p className="errorMsg mt-2 text-xl">{phoneNumberMessage}</p>
+                  <p className="errorMsg mt-2 text-xl text-red-600">{phoneNumberMessage}</p>
                 </div>
                 {/* 성별 */}
                 <div className="my-5 text-sm">
                   <label htmlFor="gender" className="block text-black text-left">
                     Gender
                   </label>
-                  {/* 라디오버튼 가운데 맞춰주기 */}
                   <div className="flex items-center mt-4">
                     <label className="inline-flex items-center mr-4">
                       <input type="radio" name="gender" value="none" className="mr-2" defaultChecked />
@@ -279,7 +273,6 @@ function Signup() {
                   회원가입
                 </button>
               </form>
-              {/* 계정이 없는 경우 : 이때 로그인하기 클릭하면 alert 창 또는 모달 창으로 작서하신 정보가 전부 지워집니다. 그래도 로그인하러 가시겠습니까? 띄워주기 */}
               <p className="mt-12 text-xl text-center font-light text-gray-400">
                 {" "}
                 계정이 있으신가요?{" "}
@@ -295,6 +288,7 @@ function Signup() {
       <Footer />
     </>
   );
+
 }
 
 export default Signup;

@@ -102,7 +102,7 @@ function Login() {
                     className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full"
                     placeholder="Email"
                   />
-                  <p className="errorMsg mt-2">{emailMessage}</p>
+                  <p className="errorMsg text-red-600 mt-2 text-xl">{emailMessage}</p>
                 </div>
                 <div className="my-5 text-sm">
                   {/* 비밀번호 유효성 검사 */}
@@ -118,7 +118,7 @@ function Login() {
                     className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full"
                     placeholder="Password"
                   />
-                  <p className="errorMsg mt-2 text-xl">{passwordMessage}</p>
+                  <p className="errorMsg text-red-600 mt-2 text-xl">{passwordMessage}</p>
                   <div className="flex justify-end mt-5 text-lg text-blue-800 font-semibold">
                     <a href="/findpwd">비밀번호가 생각나지 않는다면?</a>
                   </div>
