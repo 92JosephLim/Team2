@@ -13,50 +13,87 @@ function Signup() {
   return (
     <>
       <TopNav />
-      <div className="min-h-screen bg-no-repeat bg-cover bg-center"
-        // 이거 애니메이션으로 넣어주기
-        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1486520299386-6d106b22014b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80)' }}>
-        <div className="flex justify-end">
-          <div className="bg-white min-h-screen w-1/2 flex justify-center items-center">
-            <div>
-              <form>
-                <div>
-                  <span className="text-sm text-gray-900">환영합니다!</span>
-                  <h1 className="text-2xl font-bold">회원가입</h1>
+      <div className="relative min-h-screen flex ">
+        <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
+          <div className="sm:w-1/2 xl:w-3/5 h-full md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative">
+            {/* 애니메이션 */}
+            {/* <img src={teamlogo} alt="this is our team logo" /> */}
+          </div>
+          <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 mt-5">
+            <div className="py-8 px-8 rounded-xl">{/* 이거 위치 조금만 더 내리기 */}
+              <h1 className="font-medium text-2xl mt-3 text-center">회원가입</h1>
+              {/* form 태그 POST */}
+              <form action="" className="mt-6">
+                {/* 이메일 */}
+                <div className="my-5 text-sm">
+                  {/* 이메일 유효성 검사 */}
+                  <label htmlFor="username" className="block text-black text-left">
+                    Email
+                  </label>
+                  <input
+                    type=""
+                    name="Eamil"
+                    id="Eamil"
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                    placeholder="Eamil"
+                  />
+                  {/* 이메일 인증 버튼 : 좌측으로 */}
+                  <button className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full">
+                    이메일 인증
+                  </button>
                 </div>
-                <div className="mt-5">
-                  {/* 이메일 */}
-                  <div className="my-3">
-                    <label className="block text-md mb-2" htmlFor="email">이메일</label>
-                    <input className="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="email" name="email" placeholder="email" />
-                    {/* 인증번호 전송 누르면 모달창 띄우기 */}
-                    <button type="button" className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md">인증번호 전송</button>
-                  </div>
-                  {/* 이메일로 받은 인증번호 체크 */}
-                  <div className="my-3">
-                    <label className="block text-md mb-2" htmlFor="text">인증번호</label>
-                    <input className="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="text" name="emailCheck" placeholder="인증번호" />
-                    {/* 인증번호 체크 누르면 모달창 띄우기 */}
-                    <button type="button" className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md">인증번호 체크</button>
-                  </div>
-                  {/* 비밀번호 : 유효성 검사 */}
-                  <label className="block text-md mb-2" htmlFor="password">비밀번호</label>
-                  <input className="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="password" name="password" placeholder="password" />
+                {/* 인증번호 : alert나 모달창으로 전송되었다고 알려주기 + 이메일 인증 버튼 누르면 나오게 할지 아니면 그냥 같이 나오기*/}
+                <div className="my-5 text-sm">
+                  {/* 인증번호 체크 : 좌측으로 */}
+                  <label htmlFor="username" className="block text-black text-left">
+                    인증
+                  </label>
+                  <input
+                    type=""
+                    name="emailCheck"
+                    id="emailCheck"
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                    placeholder="인증번호"
+                  />
+                  {/* 인증 버튼 */}
+                  <button className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full">
+                    인증하기
+                  </button>
                 </div>
-                <div className="mt-5">
-                  {/* 비밀번호 확인 유효성 검사 : 작성한 비밀번호랑 같지 않으면 에러 표기 띄우기 */}
-                  {/* password로 할지 txt로 할지???아주 고민입니당 */}
-                  <label className="block text-md mb-2" htmlFor="password">비밀번호 확인</label>
-                  <input className="px-4 w-full border-2 py-2 rounded-md text-sm outline-none" type="password" name="password" placeholder="password" />
+                {/* 비밀번호 */}
+                <div className="my-5 text-sm">
+                  {/* 비밀번호 유효성 검증 */}
+                  <label htmlFor="username" className="block text-black text-left">
+                    Password
+                  </label>
+                  <input
+                    type=""
+                    name="password"
+                    id="pwd"
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                    placeholder="password"
+                  />
                 </div>
                 {/* 핸드폰 번호 */}
-                <div className="mb-4">
-                  <label className="block text-gray-700">휴대전화</label>
-                  <input type="tel" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+                <div className="my-5 text-sm">
+                  {/* 핸드폰 번호 유효성 검사 */}
+                  <label htmlFor="username" className="block text-black text-left">
+                    Phone Number
+                  </label>
+                  <input
+                    type=""
+                    name="phoneNumber"
+                    id="phoneNumber"
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
+                    placeholder="phoneNumber"
+                  />
                 </div>
                 {/* 성별 */}
-                <div className="mb-4">
-                  <label className="block text-gray-700">성별</label>
+                <div className="my-5 text-sm">
+                  <label htmlFor="username" className="block text-black text-left">
+                    Gender
+                  </label>
+                  {/* 라디오 버튼 css 수정하기 */}
                   <div className="flex items-center">
                     <input type="radio" name="gender" value="none" className="mr-2" defaultChecked />
                     <label>선택안함</label>
@@ -66,9 +103,11 @@ function Signup() {
                     <label>여성</label>
                   </div>
                 </div>
-                {/* 언어 선택 */}
-                <div className="mb-4">
-                  <label className="block text-gray-700">언어 선택</label>
+                {/* 언어 */}
+                <div className="my-5 text-sm">
+                  <label htmlFor="username" className="block text-black text-left">
+                    Language
+                  </label>
                   <select className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600">
                     <option value="korean">한국어</option>
                     <option value="english">English</option>
@@ -78,39 +117,29 @@ function Signup() {
                     <option value="japanese">아랍어</option>
                   </select>
                 </div>
-                {/* 프로필 사진 업로드 */}
-                <div className="mb-4">
-                  <label className="block text-gray-700">프로필 사진 업로드</label>
+                {/* 프로필 사진 */}
+                <div className="my-5 text-sm">
+                  {/* 핸드폰 번호 유효성 검사 */}
+                  <label htmlFor="username" className="block text-black text-left">
+                    Profile Image
+                  </label>
+                  {/* 프로필 사진은 나중에 사진 미리보기도 할 수 있어야 한다. */}
                   <input type="file" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600" />
                 </div>
-                {/* 서비스 약관 : 모달 창으로 보여주기 */}
-                <div className="mb-4">
-                  <label className="block text-gray-700">서비스 정책</label>
-                  <div className="flex items-center">
-                    <input type="checkbox" className="mr-2" />
-                    <label>전체 동의</label>
-                  </div>
-                  <div className="flex items-center">
-                    <input type="checkbox" className="mr-2" />
-                    <label>만 14세 이상입니다. (필수)</label>
-                  </div>
-                  <div className="flex items-center">
-                    <input type="checkbox" className="mr-2" />
-                    <label>서비스 이용약관 동의 (필수)</label>
-                  </div>
-                  <div className="flex items-center">
-                    <input type="checkbox" className="mr-2" />
-                    <label>개인정보 수집 및 이용 동의 (필수)</label>
-                  </div>
-                  <div className="flex items-center">
-                    <input type="checkbox" className="mr-2" />
-                    <label>마케팅 수신 동의 (선택)</label>
-                  </div>
-                </div>
-                {/* 버튼을 클릭하면(js로) 모달창 or alert창으로 회원가입에 성공하셨습니다! 뜨게 하기 */}
-                <button className="mt-4 mb-3 w-full bg-green-500 hover:bg-green-400 text-white py-2 rounded-md transition duration-100"><a href="/login">회원가입</a></button>
+                {/* 회원가입 다 하고 나면 로그인 페이지로 넘어가야 한다 + 모달창으로 회원가입 축하합니다 메세지 띄워주기 */}
+                <button className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full">
+                  회원가입
+                </button>
               </form>
-              <p className="mt-8"> 계정이 있으신가요? <a href="/login" className="text-blue-500 hover:underline"><span className="cursor-pointer text-sm text-blue-600">로그인하기</span></a></p>
+              {/* 계정이 없는 경우 : 이때 로그인하기 클릭하면 alert 창 또는 모달 창으로 작서하신 정보가 전부 지워집니다. 그래도 로그인하러 가시겠습니까? 띄워주기 */}
+              <p className="mt-12 text-xs text-center font-light text-gray-400">
+                {" "}
+                계정이 생각나셨나요?{" "}
+                <a href="/login" className="text-black font-medium">
+                  {" "}
+                  로그인하기{" "}
+                </a>
+              </p>
             </div>
           </div>
         </div>
