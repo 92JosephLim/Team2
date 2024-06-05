@@ -1,6 +1,6 @@
 //로그인 페이지  
 import React, { useState } from "react";
-import "../css/Login.css"; // 로그인 페이지 스타일 파일 import
+// import "../css/Login.css";
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import teamlogo from "../assets/lizard.jpg";
@@ -22,20 +22,22 @@ function Login() {
         <div className="flex lg:w-1/2">
           {/* team logo 애니메이션 넣은거 컴포넌트로 넣을 예정 */}
           <div className="m-auto">
-            <img src={teamlogo} alt="This is my team logo" className="rounded-lg" />
+            <img src={teamlogo} alt="This is my team logo" />
           </div>
         </div>
         {/* login화면의 right side */}
-        <div className="flex flex-col justify-center w-full lg:w-1/2 p-8">
-          <div className="max-w-lg mx-auto bg-white rounded-lg p-6">
-            <h2 className="text-2xl font-bold text-center mb-6">로그인</h2>
-            <form className="space-y-4">
-              <div className="relative">
+        <div className="flex flex-col justify-center w-full lg:w-1/2">
+          <div className="max-w-lg mx-auto bg-white rounded-lg">
+            {/* 이거 글씨도 이상하게 안키워짐 */}
+            <h2 className="text-2xl font-bold text-center mb-4">로그인</h2>
+            {/* 로그인 창 */}
+            <form className="space-y-4 border h-40">
+              <div className="relative w-96">
                 <input
                   type="text"
                   placeholder="아이디"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
                 />
               </div>
               <div className="relative">
@@ -43,7 +45,7 @@ function Login() {
                   type="password"
                   placeholder="비밀번호"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
                 />
                 <div className="text-right mt-2">
                   <a href="/findpwd" className="text-sm text-blue-500 hover:underline">비밀번호 찾기</a>
