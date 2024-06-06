@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 //나중에 navigator 맞게 수정하기
-//시간 되면 컴포넌트로 수정해서 따로 빼기 
-
+//컴포넌트 따로 빼기 
 function Signup() {
 
   //useNavigate 훅으로 페이지 이동하기
@@ -95,26 +94,29 @@ function Signup() {
 
   //form 제출 핸들러 - axios 사용
   const handleSUSubmit = (e) => {
-
+    //폼 제출시 페이지 새로고침 되는 것을 방지해줌.
     e.preventDefault();
 
+    //서버로 전송할 데이터
     const formData = {
       email,
       password,
       phoneNumber
     };
 
+    //post방식으로 전송
     //endpoint 주소가 https://js2.jsflux.co.kr/ 이거에요 아님 15.164.250.39 이거에요????????
     axios.post("엔드포인트 주소", formData)
-      .then(reponse => {
-        if (reponse.data.success) {
-          navigate('/login');
+      .then(response => {//서버에서 응답이 오면 .then 실행
+        //응답처리
+        if (response.data.success) {
+          navigate('/login');//login 페이지로 이동
         } else {
-          //에러 메세지 있으면 표시하기
-          alert(Response.data.message);
+          //에러 메세지 있으면 서버에서 받아서 표시하기
+          alert(response.data.message);
         }
       })
-      .catch(error => {
+      .catch(error => { //에러 발생시 콘솔에 에러출력
         console.error("error : ", error);
       });
   };
@@ -148,27 +150,29 @@ function Signup() {
                       className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-full text-2xl"
                       placeholder="Email"
                     />
+                    {/* 인증번호 전송 버튼을 누르면 axios post로 넘겨주면 될듯?? */}
+                    {/* 인증번호 전송 버튼을 누르면 3분 타이머와 함게 인증 코드 입력창이 제공된다. */}
                     <button className="ml-2 text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black">
-                      인증번호 전송
+                      인증번호 받기
                     </button>
                   </div>
                   <p className="errorMsg mt-1 text-red-600 text-xl">{emailMessage}</p>
                 </div>
-                {/* 인증번호 */}
+                {/* 인증 */}
                 <div className="my-5 text-sm">
-                  <label htmlFor="emailCheck" className="block text-black text-left">
-                    인증
+                  <label htmlFor="emainCheck" className="flex justify-end block text-black text-center text-xl/2">
+                    인증 번호를 입력하세요
                   </label>
-                  <div className="flex mt-3">
+                  <div className="flex justify-end flex mt-3">
                     <input
-                      type=""
-                      name="emailCheck"
-                      id="emailCheck"
-                      className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-full text-2xl"
+                      type="text"
+                      name="emainCheck"
+                      id="emainCheck"
+                      className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-5/6 text-2xl"
                       placeholder="인증번호"
                     />
                     <button className="ml-2 text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black">
-                      인증번호 체크
+                      인증번호 확인
                     </button>
                   </div>
                 </div>
@@ -210,7 +214,7 @@ function Signup() {
                     Phone Number
                   </label>
                   <input
-                    type=""
+                    type="text"
                     name="phoneNumber"
                     id="phoneNumber"
                     value={phoneNumber}
