@@ -21,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/findpwd" element={<FindPassword />} />
+          {/* <Route path="/auth/kakao/callback" element={<} */}
         </Routes>
       </BrowserRouter>
     </div>

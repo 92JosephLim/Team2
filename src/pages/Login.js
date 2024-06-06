@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import Kakao from "../components/social/Kakao";
 
 function Login() {
   //useNavigator 훅으로 페이지 이동
   const navigate = useNavigate();
 
-  //
+  //상태 저장
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -73,6 +74,18 @@ function Login() {
       });
 
   };
+
+  //소셜 로그인 : 배포하면 배포 주소 추가해주기 지금은 그냥 localhost:3000으로 설정
+  /**
+   * 리액트 ----> 카카오 : 인가 코드 요청
+   * 카카오 ----> 리액트 : redirect url로 인가코드 리턴
+   * 리액트 ----> 스프링부트 : 받아온 인가코드 서버로 전달
+   * 스프링부트 ----> 카카오 : 인가코드 주고 토큰 받아오기 w.redirect url
+   * 카카오 ----> 스프링부트 : 유효성검증을 통해서 토큰 서버로 전달
+   * 스프링부트 : 카카오에서 받은 토큰으로 유저 정보를 활용해 서버 전용 토큰 발행
+   * 스프링부트 ----> 리액트 : 우리 플젝 서버로 전용 토큰 넘겨준다.
+   * 리액트 : 토큰확인, 로그인 완료, 로그인 완료 후 메인페이지로 넘겨주기
+   */
 
   return (
     <>
@@ -149,9 +162,11 @@ function Login() {
               {/* 소셜 로그인 kakao, google */}
               <div className="grid md:grid-cols-2 gap-2 mt-7">
                 <div>
-                  <button className="text-center w-full text-black bg-yellow-300 p-3 duration-300 rounded-sm hover:bg-amber-900 hover:text-white">
+                  <Kakao />
+                  {/* onClick으로 kakao 넘겨주기 */}
+                  {/* <button className="text-center w-full text-black bg-yellow-300 p-3 duration-300 rounded-sm hover:bg-amber-900 hover:text-white">
                     Kakao
-                  </button>
+                  </button> */}
                 </div>
                 <div>
                   <button className="text-center w-full text-white bg-gray-700 p-3 duration-300 rounded-sm hover:bg-blue-500">
