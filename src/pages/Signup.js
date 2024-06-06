@@ -90,9 +90,8 @@ function Signup() {
       setIsPhoneNumber(true);
     }
   }
-  //생각해본 거 - 이메일 중복 확인 하는지 + 위의 사항이 전부 ok면 가입 버튼 활성화
 
-  //form 제출 핸들러 - axios 사용
+  //5.form 제출 핸들러 - axios 사용
   const handleSUSubmit = (e) => {
     //폼 제출시 페이지 새로고침 되는 것을 방지해줌.
     e.preventDefault();
@@ -120,6 +119,13 @@ function Signup() {
         console.error("error : ", error);
       });
   };
+
+  //6. 이메일 인증 : 생각해본 거 - 이메일 중복 확인 하는지 + 위의 사항이 전부 ok면 가입 버튼 활성화
+  //6-1. 이메일 주소 확인 후 인증번호 발송
+
+  //6-2. 이메일 인증번호 일치여부 확인
+
+  //6-3. 이메일 인증번호 보내면 바로 카운트다운 3분 시작하기
 
   return (
     <>
