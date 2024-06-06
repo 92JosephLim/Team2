@@ -7,23 +7,22 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 //나중에 navigator 맞게 수정하기
-//컴포넌트 따로 빼기 
+//컴포넌트 따로 빼기
 function Signup() {
-
   //useNavigate 훅으로 페이지 이동하기
   const navigate = useNavigate();
 
   //1. 초기값 세팅 - 이메일, 비밀번호, 비밀번호 확인, 전화번호, 성별, 언어선택, 프로필 사진
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordCheck, setPasswordCheck] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [verificationCode, setVerificationCode] = useState("");
   //2. 오류 메세지 상태 저장
-  const [emailMessage, setEmailMessage] = useState('');
-  const [passwordMessage, setPasswordMessage] = useState('');
-  const [passwordCheckMessage, setPasswordCheckMessage] = useState('');
-  const [phoneNumberMessage, setPhoneNumberMessage] = useState('');
+  const [emailMessage, setEmailMessage] = useState("");
+  const [passwordMessage, setPasswordMessage] = useState("");
+  const [passwordCheckMessage, setPasswordCheckMessage] = useState("");
+  const [phoneNumberMessage, setPhoneNumberMessage] = useState("");
 
   //3. 유효성 검사 - 이메일, 비밀번호, 핸드폰 번호
   const [isEmail, setIsEmail] = useState(false);
@@ -71,7 +70,7 @@ function Signup() {
     setPasswordCheck(currentPasswordCheck);
     // 앞서 작성한 비밀번호랑 다르면 error msg 내보내기
     if (password !== currentPasswordCheck) {
-      setPasswordCheckMessage("비밀번호가 다릅니다! 다시 작성해주세요!")
+      setPasswordCheckMessage("비밀번호가 다릅니다! 다시 작성해주세요!");
       setIsPasswordCheck(false);
     } else {
       setPasswordCheckMessage("똑같은 비밀번호를 입력하였습니다.");
@@ -90,7 +89,7 @@ function Signup() {
       setPhoneNumberMessage("사용 가능한 전화번호입니다.");
       setIsPhoneNumber(true);
     }
-  }
+  };
 
   //5.form 제출 핸들러 - axios 사용
   const handleSUSubmit = (e) => {
@@ -101,30 +100,78 @@ function Signup() {
     const formData = {
       email,
       password,
-      phoneNumber
+      phoneNumber,
     };
 
     //post방식으로 전송
     //endpoint 주소가 https://js2.jsflux.co.kr/ 이거에요 아님 15.164.250.39 이거에요????????
-    axios.post("엔드포인트 주소", formData)
-      .then(response => {//서버에서 응답이 오면 .then 실행
+    axios
+      .post("엔드포인트 주소", formData)
+      .then((response) => {
+        //서버에서 응답이 오면 .then 실행
         //응답처리
         if (response.data.success) {
-          navigate('/login');//login 페이지로 이동
+          navigate("/login"); //login 페이지로 이동
         } else {
           //에러 메세지 있으면 서버에서 받아서 표시하기
           alert(response.data.message);
         }
       })
-      .catch(error => { //에러 발생시 콘솔에 에러출력
+      .catch((error) => {
+        //에러 발생시 콘솔에 에러출력
         console.error("error : ", error);
       });
   };
 
   //6. 이메일 인증 : 생각해본 거 - 이메일 중복 확인 하는지 + 위의 사항이 전부 ok면 가입 버튼 활성화
   //6-1. 이메일 주소 확인 후 인증번호 발송
+  const handleEmailSubmit = (e) => {
+    //폼 제출시 페이지 새로고침 되는 것을 방지해줌.
+    e.preventDefault();
 
+    //서버로 전송할 데이터
+    const formData = {
+      email,
+    };
+
+    //post방식으로 전송
+    //이메일 보내서 인증번호 받기
+    axios
+      .post("http://localhost:8080/emailSend", formData)
+      .then((response) => {
+        //서버에서 응답이 오면 .then 실행
+        //응답처리
+        alert(response.data);
+        console.log("hihihi");
+      })
+      .catch((error) => {
+        //에러 발생시 콘솔에 에러출력
+        console.error("error : ", error);
+      });
+  };
   //6-2. 이메일 인증번호 일치여부 확인
+  const handleCodeSubmit = (e) => {
+    //폼 제출시 페이지 새로고침 되는 것을 방지해줌.
+    e.preventDefault();
+
+    //서버로 전송할 데이터
+    const formData = {
+      email,
+      code: verificationCode,
+    };
+
+    axios
+      .post("http://localhost:8080/emailConfirm", formData)
+      .then((response) => {
+        //서버에서 응답이 오면 .then 실행
+        //응답처리
+        alert(response.data);
+      })
+      .catch((error) => {
+        //에러 발생시 콘솔에 에러출력
+        console.error("error : ", error);
+      });
+  };
 
   //6-3. 이메일 인증번호 보내면 바로 카운트다운 5분 시작하기
   const [showVerification, setShowVerification] = useState(false);
@@ -155,6 +202,11 @@ function Signup() {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  };
+
+  //인증번호 입력반응
+  const handleCodeChange = (e) => {
+    setVerificationCode(e.target.value);
   };
 
   return (
@@ -207,6 +259,8 @@ function Signup() {
                         type="text"
                         name="emainCheck"
                         id="emainCheck"
+                        value={verificationCode}
+                        onChange={handleCodeChange}
                         className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-5/6 text-2xl"
                         placeholder="인증번호"
                       />
@@ -339,7 +393,6 @@ function Signup() {
       <Footer />
     </>
   );
-
 }
 
 export default Signup;
