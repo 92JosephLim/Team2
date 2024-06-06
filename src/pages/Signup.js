@@ -126,7 +126,7 @@ function Signup() {
 
   //6-2. 이메일 인증번호 일치여부 확인
 
-  //6-3. 이메일 인증번호 보내면 바로 카운트다운 3분 시작하기
+  //6-3. 이메일 인증번호 보내면 바로 카운트다운 5분 시작하기
   const [showVerification, setShowVerification] = useState(false);
   const [timer, setTimer] = useState(300); // 5 minutes in seconds
 
