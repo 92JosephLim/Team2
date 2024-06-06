@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
-import Kakao from "../components/social/Kakao";
+import Kakao from "./social/Kakao";
+import GoogleLogin from "./social/GoogleLogin";
+import GoogleLoginButton from "./social/GoogleLoginButton";
 
 function Login() {
   //useNavigator 훅으로 페이지 이동
@@ -169,9 +171,10 @@ function Login() {
                   </button> */}
                 </div>
                 <div>
-                  <button className="text-center w-full text-white bg-gray-700 p-3 duration-300 rounded-sm hover:bg-blue-500">
+                  <GoogleLoginButton />
+                  {/* <button className="text-center w-full text-white bg-gray-700 p-3 duration-300 rounded-sm hover:bg-blue-500">
                     Google
-                  </button>
+                  </button> */}
                 </div>
               </div>
               {/* 계정이 없는 경우 */}
