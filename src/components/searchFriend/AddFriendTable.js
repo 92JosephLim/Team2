@@ -1,4 +1,6 @@
 import React from "react";
+import { TbMessages } from "react-icons/tb";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 function AddFriendTable() {
   return (
@@ -26,18 +28,19 @@ function AddFriendTable() {
                   className="bg-transparent"
                 />
               </td>
+              {/* dm, delete 버튼 사이즈 키우기 */}
               <td className="p-3 px-5 flex justify-end">
                 <button
                   type="button"
-                  className="mr-3 text-xl bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                  className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                 >
-                  수락
+                  <TbMessages />
                 </button>
                 <button
                   type="button"
-                  className="text-xl bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                  className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                 >
-                  거절
+                  <RiDeleteBin5Line />
                 </button>
               </td>
             </tr>
