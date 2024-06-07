@@ -8,27 +8,27 @@ function SideNav() {
         <div className="flex-1">
           <ul className="pt-2 pb-4 space-y-1 text-sm">
             <li className="rounded-sm">
-              <a href="#profile" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
+              <a href="#" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
                 <span>프로필</span>
               </a>
             </li>
             <li className="rounded-sm">
-              <a href="#chat-history" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
+              <a href="#" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
                 <span>채팅 내역</span>
               </a>
             </li>
             <li className="rounded-sm">
-              <a href="#video-chat-history" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
+              <a href="#" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
                 <span>화상채팅 내역</span>
               </a>
             </li>
             <li className="rounded-sm">
-              <a href="#friends" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
+              <a href="#" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
                 <span>친구</span>
               </a>
             </li>
             <li className="rounded-sm">
-              <a href="#settings" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
+              <a href="#" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
                 <span>설정</span>
               </a>
             </li>
