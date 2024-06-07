@@ -10,6 +10,8 @@ function TopNav() {
     navigate("/video");
   };
 
+  //mypage 클릭시 동작할 함수
+
   return (
     <header className="header">
       <div className="logo">
