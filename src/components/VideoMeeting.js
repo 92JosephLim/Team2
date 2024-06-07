@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom"; // Import useLocation
 
 function initjanus() {
   if (!Janus.isWebrtcSupported()) {
@@ -332,6 +334,19 @@ function getRoomList() {
 }
 
 function VideoMeeting() {
+  const location = useLocation(); // Initialize useLocation
+  const queryParams = new URLSearchParams(location.search);
+  const roomId = queryParams.get("roomId");
+  const roomDescription = queryParams.get("roomDescription");
+
+  useEffect(() => {
+    if (roomId && roomDescription) {
+      // 방번호와 방제목을 설정
+      $("#roomname").val(roomId);
+      $("#description").val(roomDescription);
+    }
+  }, [roomId, roomDescription]);
+
   return (
     <div>
       <nav className="navbar navbar-default navbar-static-top"></nav>
@@ -340,12 +355,9 @@ function VideoMeeting() {
           <div className="col-md-12">
             <div className="page-header">
               <h1>
-                화상회의
+                방만들기
                 <button className="btn btn-default" autoComplete="off" id="start" onClick={initjanus}>
-                  Start
-                </button>
-                <button className="roomlist" autoComplete="off" id="list" onClick={getRoomList}>
-                  방목록조회
+                  클릭!
                 </button>
               </h1>
             </div>
@@ -382,6 +394,20 @@ function VideoMeeting() {
                         type="text"
                         placeholder="내 대화명"
                         id="username"
+                        onKeyPress={(e) => {
+                          if (e.key === "Enter") checkEnter(e.target, e);
+                        }}
+                      />
+                    </div>
+                    <span className="label label-info" id="mydescription"></span>
+                    <div className="input-group margin-bottom-md">
+                      <span className="input-group-addon">방제목</span>
+                      <input
+                        autoComplete="off"
+                        className="form-control"
+                        type="text"
+                        placeholder="방제목"
+                        id="description"
                         onKeyPress={(e) => {
                           if (e.key === "Enter") checkEnter(e.target, e);
                         }}

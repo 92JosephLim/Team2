@@ -1,22 +1,54 @@
 import { React, useEffect, useRef, useState } from "react";
+import "../css/RoomList.css";
+import { useNavigate } from "react-router-dom";
+
 function RoomList() {
+  const navigate = useNavigate();
+  const [rooms, setRooms] = useState([]);
   useEffect(() => {
-    console.log("방목록");
+    console.log("방목록을 불러옵니다...");
     initjanus()
       .then(() => {
-        getRoomList();
+        getMyRoomList()
+          .then((roomList) => {
+            setRooms(roomList);
+            // console.log(rooms);
+          })
+          .catch((error) => {
+            console.error("방 목록을 불러오는 데 실패했습니다:", error);
+          });
       })
       .catch((error) => {
-        console.error("Failed to initialize Janus:", error);
+        console.error("Janus 초기화에 실패했습니다:", error);
       });
   }, []);
+
+  const handleJoinRoom = (roomId) => {
+    console.log(`참가할 방 ID: ${roomId}`);
+    // 참가 로직을 여기에 추가하세요
+    // /video 경로로 이동하고 방번호와 방제목을 URL 파라미터로 전달
+    navigate(`/joinRoom?roomId=${roomId}`);
+  };
+
   return (
-    <div>
-      <h1>ㅎㅇㅇㅇ</h1>
-      <ul id="roomlist"></ul>
+    <div className="room-list-container">
+      <h1>방 목록</h1>
+      <ul>
+        {rooms.map((room) => (
+          <li key={room.room}>
+            <div>
+              <h2>{room.description}</h2>
+              <p>참여 인원수: {room.num_participants}</p>
+              <button onClick={() => handleJoinRoom(room.room)}>참가하기</button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
+
+export default RoomList;
 
 function initjanus() {
   return new Promise((resolve, reject) => {
@@ -338,23 +370,21 @@ function initjanus() {
   });
 }
 
-function getRoomList() {
-  var body = { request: "list" };
-  sfutest.send({
-    message: body,
-    success: function (result) {
-      if (result && result.list) {
-        var rooms = result.list;
-        console.log("Rooms list: ", rooms);
-        var roomListElement = $("#roomlist");
-        roomListElement.empty(); // Clear any previous list
-        for (var i = 0; i < rooms.length; i++) {
-          var room = rooms[i];
-          roomListElement.append("<li>Room ID: " + room.room + ", Description: " + room.description + "</li>");
+async function getMyRoomList() {
+  return new Promise((resolve, reject) => {
+    var body = { request: "list" };
+    sfutest.send({
+      message: body,
+      success: function (result) {
+        if (result && result.list) {
+          resolve(result.list);
+        } else {
+          reject(new Error("방 목록을 불러올 수 없습니다"));
         }
-      }
-    },
+      },
+      error: function (error) {
+        reject(error);
+      },
+    });
   });
 }
-
-export default RoomList;

@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom"; // Import useLocation
 
 function initjanus() {
   if (!Janus.isWebrtcSupported()) {
@@ -312,26 +314,18 @@ function initjanus() {
   });
 }
 
-function getRoomList() {
-  var body = { request: "list" };
-  sfutest.send({
-    message: body,
-    success: function (result) {
-      if (result && result.list) {
-        var rooms = result.list;
-        console.log("Rooms list: ", rooms);
-        var roomListElement = $("#roomlist");
-        roomListElement.empty(); // Clear any previous list
-        for (var i = 0; i < rooms.length; i++) {
-          var room = rooms[i];
-          roomListElement.append("<li>Room ID: " + room.room + ", Description: " + room.description + "</li>");
-        }
-      }
-    },
-  });
-}
+function JoinRoom() {
+  const location = useLocation(); // Initialize useLocation
+  const queryParams = new URLSearchParams(location.search);
+  const roomId = queryParams.get("roomId");
 
-function VideoMeeting() {
+  useEffect(() => {
+    if (roomId) {
+      // 방번호와 방제목을 설정
+      $("#roomname").val(roomId);
+    }
+  }, [roomId]);
+
   return (
     <div>
       <nav className="navbar navbar-default navbar-static-top"></nav>
@@ -340,21 +334,17 @@ function VideoMeeting() {
           <div className="col-md-12">
             <div className="page-header">
               <h1>
-                화상회의
+                방참여하기
                 <button className="btn btn-default" autoComplete="off" id="start" onClick={initjanus}>
-                  Start
-                </button>
-                <button className="roomlist" autoComplete="off" id="list" onClick={getRoomList}>
-                  방목록조회
+                  클릭!
                 </button>
               </h1>
             </div>
             <div className="container" id="details">
               <div className="row">
                 <div className="col-md-12">
-                  <h3>Start 버튼을 누르고 데모를 시작하세요</h3>
-                  <h4>채팅방 ID로 기존 채팅방을 연결하거나 새로 생성합니다.</h4>
-                  <h4>* ID는 영문 또는 숫자로 입력해야 합니다.</h4>
+                  <h3>버튼을 눌러서 방에 참가하세요</h3>
+                  <h4>대화명은 영어만 가능합니다.</h4>
                 </div>
               </div>
             </div>
@@ -371,6 +361,7 @@ function VideoMeeting() {
                         type="text"
                         placeholder="방번호를 입력하세요"
                         id="roomname"
+                        readOnly
                       />
                     </div>
                     <span className="label label-info" id="you"></span>
@@ -525,4 +516,4 @@ const checkEnter = (target, event) => {
   }
 };
 
-export default VideoMeeting;
+export default JoinRoom;
