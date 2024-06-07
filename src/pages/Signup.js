@@ -177,6 +177,7 @@ function Signup() {
   const handleCodeChange = (e) => {
     setVerificationCode(e.target.value);
   };
+
   return (
     <>
       <TopNav />
