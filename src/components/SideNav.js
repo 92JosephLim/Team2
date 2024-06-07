@@ -24,7 +24,7 @@ function SideNav() {
               </a>
             </li>
             <li className="rounded-sm">
-              <a href="#" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
+              <a href="/friendMain" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
                 <span>친구</span>
               </a>
             </li>

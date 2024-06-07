@@ -1,6 +1,6 @@
 import React from "react";
 
-function FriendTable() {
+function AddFriendTable() {
   return (
     <>
       <div className="py-4 flex justify-center ml-100">
@@ -29,9 +29,15 @@ function FriendTable() {
               <td className="p-3 px-5 flex justify-end">
                 <button
                   type="button"
+                  className="mr-3 text-xl bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                >
+                  수락
+                </button>
+                <button
+                  type="button"
                   className="text-xl bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                 >
-                  삭제
+                  거절
                 </button>
               </td>
             </tr>
@@ -43,4 +49,4 @@ function FriendTable() {
   )
 }
 
-export default FriendTable;
+export default AddFriendTable;

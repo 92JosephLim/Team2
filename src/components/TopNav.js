@@ -7,7 +7,7 @@ function TopNav() {
 
   // Video Chat 클릭 시 동작할 함수
   const handleVideoChat = () => {
-    navigate("/video");
+    navigate("/friendMain");
   };
 
   //mypage 클릭시 동작할 함수
@@ -16,7 +16,7 @@ function TopNav() {
     <header className="header">
       <div className="logo">
         <button className="logo-button">
-          <img src={newLogo} alt="New Logo" /> {/* 변경된 이미지 경로로 수정 */}
+          <a href="/" ><img src={newLogo} alt="New Logo" /></a>
         </button>
       </div>
       <nav className="nav">

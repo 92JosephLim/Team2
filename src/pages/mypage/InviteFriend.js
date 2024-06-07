@@ -2,9 +2,11 @@ import React from "react";
 import TopNav from "../../components/TopNav";
 import Footer from "../../components/Footer";
 import SideNav from "../../components/SideNav";
-import FriendTitle from "../../components/searchFriend/FriendTitle";
-import FriendTable from "../../components/searchFriend/FriendTable";
+import AddFriendTitle from "../../components/searchFriend/AddFriendTitle";
+import AddFriendTable from "../../components/searchFriend/AddFriendTable";
 
+//친구 추가페이지...
+//이거 친구 추가 수락/거절 할건지???
 function InviteFriend() {
   //검색 결과 post로 서버에 보내주기
   return (
@@ -13,7 +15,7 @@ function InviteFriend() {
       <div className="flex min-h-screen">
         <SideNav />
         <div className="flex flex-col flex-1">
-          <FriendTitle />
+          <AddFriendTitle />
           {/* 뭐지 왜 searchBar로 컴포넌트 나눴는데 왜 안나와!!! */}
           <div className="searchBar">
             <div className="container mx-auto">
@@ -33,7 +35,7 @@ function InviteFriend() {
           </div>
           {/* 아니 hr 태그 왜 안먹지 */}
           <hr />
-          <FriendTable />
+          <AddFriendTable />
         </div>
       </div>
       <Footer />
