@@ -9,7 +9,7 @@ function SideNav() {
           <ul className="pt-2 pb-4 space-y-1 text-sm">
             <li className="rounded-sm">
               <a href="#" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
-                <span>프로필</span>
+                <span>상세 프로필 설정</span>
               </a>
             </li>
             <li className="rounded-sm">
