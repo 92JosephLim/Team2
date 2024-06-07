@@ -1,5 +1,5 @@
 //회원가입 페이지
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../css/Login.css"; // 로그인 페이지 스타일 파일 import
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
@@ -29,7 +29,6 @@ function Signup() {
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordCheck, setIsPasswordCheck] = useState(false);
   const [isPhoneNumber, setIsPhoneNumber] = useState(false);
-  const [isEmailVerified, setIsEmailVerified] = useState(false);
 
   //4. 입력한 필드 값들이 유효한지 검사해서 상태 업데이트 하기 - 이메일, 비밀번호, 핸드폰 번호
   //4-1. 이메일
@@ -172,43 +171,12 @@ function Signup() {
         console.error("error : ", error);
       });
   };
-
-  //6-3. 이메일 인증번호 보내면 바로 카운트다운 5분 시작하기
-  const [showVerification, setShowVerification] = useState(false);
-  const [timer, setTimer] = useState(300); // 5 minutes in seconds
-
-  useEffect(() => {
-    if (showVerification && timer > 0) {
-      const countdown = setInterval(() => {
-        setTimer(timer - 1);
-      }, 1000);
-      return () => clearInterval(countdown);
-    }
-  }, [showVerification, timer]);
-
-  const handleVerificationClick = () => {
-    setShowVerification(true);
-    setTimer(300); // Reset the timer to 5 minutes
-    setIsEmailVerified(false); // 인증번호 받기를 클릭할 때마다 이메일 인증 상태 초기화
-  };
-
-  const handleVerifyCodeClick = () => {
-    // 여기에 실제 인증 코드 검증 로직을 추가해야 합니다.
-    // 검증이 성공하면 아래와 같이 이메일 인증 상태를 업데이트합니다.
-    setIsEmailVerified(true);
-  };
-
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-  };
+  //6-3. 이메일 인증번호 보내면 바로 카운트다운 3분 시작하기
 
   //인증번호 입력반응
   const handleCodeChange = (e) => {
     setVerificationCode(e.target.value);
   };
-
   return (
     <>
       <TopNav />
@@ -238,10 +206,11 @@ function Signup() {
                       className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-full text-2xl"
                       placeholder="Email"
                     />
+                    {/* 인증번호 전송 버튼을 누르면 axios post로 넘겨주면 될듯?? */}
+                    {/* 인증번호 전송 버튼을 누르면 3분 타이머와 함게 인증 코드 입력창이 제공된다. */}
                     <button
-                      type="button"
                       className="ml-2 text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black"
-                      onClick={handleVerificationClick}
+                      onClick={handleEmailSubmit}
                     >
                       인증번호 받기
                     </button>
@@ -249,34 +218,28 @@ function Signup() {
                   <p className="errorMsg mt-1 text-red-600 text-xl">{emailMessage}</p>
                 </div>
                 {/* 인증 */}
-                {showVerification && (
-                  <div className="my-5 text-sm">
-                    <label htmlFor="emainCheck" className="flex justify-end block text-black text-center text-xl/2">
-                      인증 번호를 입력하세요
-                    </label>
-                    <div className="flex justify-end flex mt-3">
-                      <input
-                        type="text"
-                        name="emainCheck"
-                        id="emainCheck"
-                        value={verificationCode}
-                        onChange={handleCodeChange}
-                        className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-5/6 text-2xl"
-                        placeholder="인증번호"
-                      />
-                      <button
-                        type="button"
-                        className="ml-2 text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black"
-                        onClick={handleVerifyCodeClick}
-                      >
-                        인증번호 확인
-                      </button>
-                    </div>
-                    <div className="text-right text-red-600 text-xl mt-2">
-                      남은 시간: {formatTime(timer)}
-                    </div>
+                <div className="my-5 text-sm">
+                  <label htmlFor="emainCheck" className="flex justify-end block text-black text-center text-xl/2">
+                    인증 번호를 입력하세요
+                  </label>
+                  <div className="flex justify-end flex mt-3">
+                    <input
+                      type="text"
+                      name="emainCheck"
+                      id="emainCheck"
+                      value={verificationCode}
+                      onChange={handleCodeChange}
+                      className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-5/6 text-2xl"
+                      placeholder="인증번호"
+                    />
+                    <button
+                      className="ml-2 text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black"
+                      onClick={handleCodeSubmit}
+                    >
+                      인증번호 확인
+                    </button>
                   </div>
-                )}
+                </div>
                 {/* 비밀번호 */}
                 <div className="my-5 text-sm">
                   <label htmlFor="password" className="block text-black text-left">
@@ -373,7 +336,7 @@ function Signup() {
                 <button
                   className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
                   type="submit"
-                  disabled={!isEmail || !isPassword || !isPasswordCheck || !isPhoneNumber || !isEmailVerified}
+                  disabled={!isEmail || !isPassword || !isPasswordCheck || !isPhoneNumber}
                 >
                   회원가입
                 </button>
