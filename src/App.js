@@ -12,6 +12,7 @@ import CustomerService from "./pages/CustomerService";
 import Announcement from "./pages/Announcement";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ReportFriend from "./pages/mypage/ReportFriend";
+import InviteFriend from "./pages/mypage/InviteFriend";
 
 const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/report" element={<ReportFriend />} />
             <Route path="/customerService" element={<CustomerService />} />
             <Route path="/announcement" element={<Announcement />} />
+            <Route path="/invite" element={<InviteFriend />} />
           </Routes>
         </BrowserRouter>
       </div>
