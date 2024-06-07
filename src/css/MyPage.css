@@ -1,0 +1,123 @@
+.myPage {
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    background-color: #f8f8f8;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .content {
+    display: flex;
+    height: calc(100vh - 50px); /* Adjust height based on header size */
+  }
+  
+  .sidebar {
+    width: 20%;
+    background-color: #f0f0f0;
+    padding: 20px;
+    overflow-y: auto; /* Enable scrolling if needed */
+  }
+  
+  .profile-section {
+    text-align: center;
+  }
+  
+  .profile-img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+  }
+  
+  .nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav ul li {
+    margin: 10px 0;
+  }
+  
+  .nav-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #e7e7e7;
+    cursor: pointer;
+    text-align: left;
+  }
+  
+  .nav-button:hover {
+    background-color: #d7d7d7;
+  }
+  
+  .main-content {
+    width: 80%;
+    padding: 20px;
+    overflow-y: auto; /* Enable scrolling */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-info h2 {
+    font-size: 1.5em;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    grid-column: span 2;
+    text-align: left; /* Align headers to the left */
+  }
+  
+  .profile-info div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-info p {
+    margin: 0;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  
+  .chat-history h2, .video-chat-history h2, .friends h2 {
+    font-size: 1.5em;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    text-align: left; /* Align headers to the left */
+  }
+  
+  .chat-history ul, .video-chat-history ul, .friends ul {
+    text-align: left; /* Align text to the left */
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  span {
+    color: #999;
+  }
+
+.chat-history, 
+.video-chat-history, 
+.friends {
+  margin-bottom: 30px; /* 섹션 간의 간격 조정 */
+}
+
+  
