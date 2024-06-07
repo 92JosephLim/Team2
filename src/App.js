@@ -8,6 +8,8 @@ import RoomList from "./pages/RoomList";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import FindPassword from "./pages/FindPassword";
+import CustomerService from "./pages/CustomerService";
+import Announcement from "./pages/Announcement";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ReportFriend from "./pages/mypage/ReportFriend";
 
@@ -27,6 +29,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/findpwd" element={<FindPassword />} />
             <Route path="/report" element={<ReportFriend />} />
+            <Route path="/customerService" element={<CustomerService />} />
+            <Route path="/announcement" element={<Announcement />} />
           </Routes>
         </BrowserRouter>
       </div>

@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../css/Mainpage.css"; // CSS 파일을 import
-import logo from "../assets/logo.jpeg"; // 로고 이미지 경로
 import Footer from "../components/Footer";
 import TopNav from "../components/TopNav";
 
