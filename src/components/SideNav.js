@@ -25,12 +25,6 @@ function SideNav() {
               </Link>
             </li>
             <li className="rounded-sm">
-
-              <Link to="/friendMain" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
-                <span>친구</span>
-              </Link>
-
-              <span>친구</span>
               <div className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
                 <div className="dropdown">
                   <button className="dropdown-button">친구</button>
