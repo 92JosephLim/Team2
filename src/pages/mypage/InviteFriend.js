@@ -16,7 +16,6 @@ function InviteFriend() {
         <SideNav />
         <div className="flex flex-col flex-1">
           <AddFriendTitle />
-          {/* 뭐지 왜 searchBar로 컴포넌트 나눴는데 왜 안나와!!! */}
           <div className="searchBar">
             <div className="container mx-auto">
               <form className="p-10">

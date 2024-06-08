@@ -15,18 +15,79 @@ function AddFriendTable() {
             </tr>
             <tr className="border-b hover:bg-orange-100 bg-gray-100">
               <td className="p-3 px-5">
-                <input
-                  type="text"
-                  defaultValue="user.name"
-                  className="bg-transparent"
-                />
+                유저1
               </td>
               <td className="p-3 px-5">
-                <input
-                  type="text"
-                  defaultValue="user.email"
-                  className="bg-transparent"
-                />
+                유저1@test.com
+              </td>
+              {/* dm, delete 버튼 사이즈 키우기 */}
+              <td className="p-3 px-5 text-center">
+                <button
+                  type="button"
+                  className="mr-3 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                >
+                  <TbMessages size={24} />
+                </button>
+                <button
+                  type="button"
+                  className="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                >
+                  <RiDeleteBin5Line size={24} />
+                </button>
+              </td>
+            </tr>
+            <tr className="border-b hover:bg-orange-100 bg-gray-100">
+              <td className="p-3 px-5">
+                유저1
+              </td>
+              <td className="p-3 px-5">
+                유저1@test.com
+              </td>
+              {/* dm, delete 버튼 사이즈 키우기 */}
+              <td className="p-3 px-5 text-center">
+                <button
+                  type="button"
+                  className="mr-3 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                >
+                  <TbMessages size={24} />
+                </button>
+                <button
+                  type="button"
+                  className="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                >
+                  <RiDeleteBin5Line size={24} />
+                </button>
+              </td>
+            </tr>
+            <tr className="border-b hover:bg-orange-100 bg-gray-100">
+              <td className="p-3 px-5">
+                유저1
+              </td>
+              <td className="p-3 px-5">
+                유저1@test.com
+              </td>
+              {/* dm, delete 버튼 사이즈 키우기 */}
+              <td className="p-3 px-5 text-center">
+                <button
+                  type="button"
+                  className="mr-3 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                >
+                  <TbMessages size={24} />
+                </button>
+                <button
+                  type="button"
+                  className="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                >
+                  <RiDeleteBin5Line size={24} />
+                </button>
+              </td>
+            </tr>
+            <tr className="border-b hover:bg-orange-100 bg-gray-100">
+              <td className="p-3 px-5">
+                유저1
+              </td>
+              <td className="p-3 px-5">
+                유저1@test.com
               </td>
               {/* dm, delete 버튼 사이즈 키우기 */}
               <td className="p-3 px-5 text-center">
