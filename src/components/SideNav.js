@@ -12,7 +12,7 @@ function SideNav() {
             <li className="rounded-sm">
               <a href="/ProfileSettings" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
                 <span>상세 프로필 설정</span>
-              </Link>
+              </a>
             </li>
             <li className="rounded-sm">
               <Link to="/chat-history" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
