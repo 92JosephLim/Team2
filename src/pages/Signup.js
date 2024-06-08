@@ -177,6 +177,7 @@ function Signup() {
   const handleCodeChange = (e) => {
     setVerificationCode(e.target.value);
   };
+
   return (
     <>
       <TopNav />
@@ -332,6 +333,7 @@ function Signup() {
                     className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 mt-3 text-2xl"
                   />
                 </div>
+                {/* 모달되는지 안되는지 모르겠음! */}
                 {/* 회원가입 */}
                 <button
                   className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
