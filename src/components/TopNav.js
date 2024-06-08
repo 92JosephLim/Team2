@@ -7,7 +7,7 @@ function TopNav() {
 
   // Video Chat 클릭 시 동작할 함수
   const handleVideoChat = () => {
-    navigate("/friendMain");
+    navigate("/video");
   };
 
   //mypage 클릭시 동작할 함수
