@@ -111,10 +111,6 @@ body {
   transition: background-color 0.3s;
 }
 
-.action-button:hover {
-  background-color: #333;
-}
-
 .login-options {
   display: flex;
   align-items: center;
@@ -133,10 +129,6 @@ body {
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-
-.login-btn:hover {
-  background-color: #333;
 }
 
 .content {

@@ -1,6 +1,7 @@
 import React from "react";
 import newLogo from "../assets/new_logo.png"; // 새로운 로고 이미지 경로
 import { Link, useNavigate } from "react-router-dom";
+import "../css/TopNav.css"; // 스타일 파일 추가
 
 function TopNav() {
   const navigate = useNavigate();
@@ -10,16 +11,16 @@ function TopNav() {
     navigate("/video");
   };
 
-  //mypage 클릭시 동작할 함수
+  // mypage 클릭시 동작할 함수
   const handleMyPage = () => {
     navigate("/mypage");
-  }
+  };
 
   return (
     <header className="header">
       <div className="logo">
         <button className="logo-button">
-          <a href="/" ><img src={newLogo} alt="New Logo" /></a>
+          <a href="/"><img src={newLogo} alt="New Logo" /></a>
         </button>
       </div>
       <nav className="nav">
