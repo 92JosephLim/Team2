@@ -7,7 +7,7 @@ function TopNav() {
 
   // Video Chat 클릭 시 동작할 함수
   const handleVideoChat = () => {
-    navigate("/friendMain");
+    navigate("/video");
   };
 
   //mypage 클릭시 동작할 함수
@@ -27,7 +27,13 @@ function TopNav() {
         <button className="nav-button video-chat-btn" onClick={handleVideoChat}>Video Chat</button>
         <Link to="/cr" className="action-link">방만들기</Link>
         <Link to="/roomList" className="action-link">방목록</Link>
-        <Link to="/about" className="action-link">About</Link>
+        <div className="dropdown">
+          <button className="dropdown-button">About</button>
+          <div className="dropdown-content">
+            <Link to="/announcement">공지사항</Link>
+            <Link to="/customerService">고객센터</Link>
+          </div>
+        </div>
         <button className="action-button" onClick={handleMyPage}>My Page</button>
         <div className="login-options">
           <Link to="/login" className="login-btn">Login</Link>

@@ -8,7 +8,7 @@ function SideNav() {
     <div className="w-64 flex flex-col min-h-screen p-3 bg-gray-800 text-white">
       <div className="space-y-3">
         <div className="flex-1">
-          <ul className="pt-2 pb-4 space-y-1 text-sm">
+          <ul className="pt-2 pb-4 space-y-1">
             <li className="rounded-sm">
               <a href="/ProfileSettings" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
                 <span>상세 프로필 설정</span>
@@ -25,9 +25,21 @@ function SideNav() {
               </Link>
             </li>
             <li className="rounded-sm">
+
               <Link to="/friendMain" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
                 <span>친구</span>
               </Link>
+
+              <span>친구</span>
+              <div className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
+                <div className="dropdown">
+                  <button className="dropdown-button">친구</button>
+                  <div className="dropdown-content">
+                    <Link to="/invite">친구추가</Link>
+                    <Link to="/friendMain">친구목록</Link>
+                  </div>
+                </div>
+              </div>
             </li>
             <li className="rounded-sm">
               <Link to="/settings" className="flex items-center p-2 space-x-3 rounded-md hover:bg-gray-700">
