@@ -15,6 +15,7 @@ import ReportFriend from "./pages/mypage/ReportFriend";
 import InviteFriend from "./pages/mypage/InviteFriend";
 import FriendMain from "./pages/mypage/FriendMain";
 import MyPage from "./pages/MyPage";
+import ProfileSettings from "./pages/mypage/ProfileSettings"; // 새로 추가한 ProfileSettings 컴포넌트
 
 const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
 
@@ -37,10 +38,11 @@ function App() {
             <Route path="/invite" element={<InviteFriend />} />
             <Route path="/friendMain" element={<FriendMain />} />
             <Route path="/mypage" element={<MyPage />} />
+            <Route path="/ProfileSettings" element={<ProfileSettings />} /> {/* 새 경로 추가 */}
           </Routes>
         </BrowserRouter>
       </div>
-    </GoogleOAuthProvider >
+    </GoogleOAuthProvider>
   );
 }
 

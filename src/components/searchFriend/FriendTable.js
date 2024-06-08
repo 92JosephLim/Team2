@@ -45,14 +45,14 @@ function FriendTable() {
                   type="button"
                   className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >
-                  <TbMessages />
+                  <TbMessages size={24} />
                 </button>
                 <button
                   type="button"
                   className="text-sm bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   onClick={openModal}
                 >
-                  <RiDeleteBin5Line />
+                  <RiDeleteBin5Line size={24} />
                 </button>
               </td>
             </tr>

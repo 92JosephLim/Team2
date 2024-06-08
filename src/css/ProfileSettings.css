@@ -1,57 +1,83 @@
-.profile-settings-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    overflow-y: auto; /* 스크롤 가능하도록 설정 */
-    padding: 20px; /* 폼 주변에 여백 추가 */
-  }
-  
-  .profile-settings-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 300px;
-    gap: 20px; /* 요소들 사이의 간격을 20px로 설정 */
-  }
-  
-  .form-group {
-    width: 100%;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input,
-  .form-group select {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-  
-  .form-buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .form-buttons button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .save-button {
-    background-color: #90ee90; /* 연녹색 */
-    color: white;
-  }
-  
-  .cancel-button {
-    background-color: #ffcccb; /* 연붉은 색 */
-    color: white;
-  }
-  
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.profile-settings-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* 폼을 수평 가운데 정렬 */
+  padding: 20px;
+}
+
+.profile-settings-content {
+  position: absolute;
+  right: 0; /* 오른쪽으로 정렬 */
+  top: 0;
+  width: 60%; /* 원하는 너비로 설정 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  background-color: #fff;
+  margin: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.profile-settings-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 500px; /* 원하는 최대 너비로 설정 */
+  gap: 20px;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 5px; /* 버튼 간의 간격을 줄임 */
+}
+
+.form-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-button {
+  background-color: #28a828;
+  color: white;
+}
+
+.cancel-button {
+  background-color: #e35856;
+  color: white;
+}
