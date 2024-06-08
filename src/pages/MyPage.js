@@ -48,10 +48,7 @@ const MyPage = () => {
           </section>
         </main>
       </div>
-<<<<<<< HEAD
-  <Footer />
-=======
->>>>>>> 110697cc1c79813335d6880f5f078a256d23ba28
+      <Footer />
     </div >
   );
 };
