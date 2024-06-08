@@ -44,6 +44,7 @@
 
 .form-group {
   width: 100%;
+  margin-bottom: 30px; /* 위아래 간격 추가 */
 }
 
 .form-group label {
