@@ -37,7 +37,6 @@ function App() {
             <Route path="/invite" element={<InviteFriend />} />
             <Route path="/friendMain" element={<FriendMain />} />
             <Route path="/mypage" element={<MyPage />} />
-
           </Routes>
         </BrowserRouter>
       </div>

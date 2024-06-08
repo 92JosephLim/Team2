@@ -10,21 +10,6 @@ const MyPage = () => {
       <TopNav />
       <div className="content">
         <SideNav />
-        {/* <aside className="sidebar">
-          <div className="profile-section">
-            <img src="profile.jpg" alt="profile" className="profile-img" />
-            <h2>홍길동</h2>
-            <p>@honggildong</p>
-          </div>
-          <nav className="nav">
-            <ul>
-              <li><button className="nav-button">프로필</button></li>
-              <li><button className="nav-button">채팅 내역</button></li>
-              <li><button className="nav-button">화상채팅 내역</button></li>
-              <li><button className="nav-button">친구</button></li>
-            </ul>
-          </nav>
-        </aside> */}
         <main className="main-content">
           <section className="profile-info">
             <h2>프로필</h2>
@@ -63,8 +48,11 @@ const MyPage = () => {
           </section>
         </main>
       </div>
-      <Footer />
-    </div>
+<<<<<<< HEAD
+  <Footer />
+=======
+>>>>>>> 110697cc1c79813335d6880f5f078a256d23ba28
+    </div >
   );
 };
 
