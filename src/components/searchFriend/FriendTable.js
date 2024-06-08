@@ -29,18 +29,18 @@ function FriendTable() {
                 />
               </td>
               {/* dm, delete 버튼 사이즈 키우기 */}
-              <td className="p-3 px-5 flex justify-end">
+              <td className="p-3 px-5 text-center">
                 <button
                   type="button"
-                  className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                  className="mr-3 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                 >
-                  <TbMessages />
+                  <TbMessages size={24} />
                 </button>
                 <button
                   type="button"
-                  className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                  className="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                 >
-                  <RiDeleteBin5Line />
+                  <RiDeleteBin5Line size={24} />
                 </button>
               </td>
             </tr>
