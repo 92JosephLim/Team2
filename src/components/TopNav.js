@@ -11,6 +11,9 @@ function TopNav() {
   };
 
   //mypage 클릭시 동작할 함수
+  const handleMyPage = () => {
+    navigate("/mypage");
+  }
 
   return (
     <header className="header">
@@ -25,7 +28,7 @@ function TopNav() {
         <Link to="/cr" className="action-link">방만들기</Link>
         <Link to="/roomList" className="action-link">방목록</Link>
         <Link to="/about" className="action-link">About</Link>
-        <button className="action-button">My Page</button>
+        <button className="action-button" onClick={handleMyPage}>My Page</button>
         <div className="login-options">
           <Link to="/login" className="login-btn">Login</Link>
         </div>
