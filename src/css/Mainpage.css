@@ -1,5 +1,3 @@
-/* Mainpage.css */
-
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -13,122 +11,9 @@ body {
   color: white;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: grey;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo img {
-  height: 40px;
-  margin-right: 10px;
-}
-
-.logo span {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.nav {
-  display: flex;
-  gap: 20px; /* 링크들 사이의 간격 조정 */
-}
-
-.nav a,
-.nav button {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.5rem; /* 링크 텍스트의 크기 조정 */
-  padding: 8px 12px; /* 링크의 패딩 조정 */
-  margin-right: 12px; /* 링크들 사이의 간격 조정 */
-  display: flex;
-  align-items: center; /* 수직 정렬 */
-}
-
-.nav a:hover,
-.nav button:hover {
-  text-decoration: underline;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: grey;
-  font-size: 16px;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
 .actions {
   display: flex;
   align-items: center;
-}
-
-.action-button {
-  background: none;
-  border: 1px solid white;
-  color: white;
-  padding: 5px 15px;
-  border-radius: 20px;
-  margin-right: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.login-options {
-  display: flex;
-  align-items: center;
-}
-
-.login-options i {
-  font-size: 1.2rem;
-  margin-right: 10px;
-}
-
-.login-btn {
-  background: none;
-  border: 1px solid white;
-  color: white;
-  padding: 5px 15px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 .content {
@@ -209,41 +94,6 @@ body {
   margin: 0;
 }
 
-/* Footer styles */
-.footer {
-  background-color: grey;
-  color: white;
-  padding: 10px; /* 더 작은 패딩 값으로 조정 */
-  text-align: center;
-}
-
-.footer-links a {
-  color: white;
-  text-decoration: none;
-  margin: 0 5px;
-}
-
-.footer-links a:hover {
-  text-decoration: underline;
-}
-
-.footer-info {
-  margin-top: 10px;
-  font-size: 0.9rem;
-}
-
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.store-buttons {
-  display: flex;
-  gap: 10px;
-}
-
 .start-button .rounded-sm {
   background-color: #007bff;
   color: white;
@@ -277,26 +127,4 @@ body {
 
 .vertical-section .start-button {
   margin-top: 20px; /* 원하는 여백으로 조정 */
-}
-
-.logo-button,
-.action-button,
-.login-btn {
-  padding: 0; /* 텍스트만큼의 영역만큼의 패딩 제거 */
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: white; /* 버튼 텍스트 색상 설정 */
-  font-size: inherit; /* 폰트 크기 상속 */
-  font-family: inherit; /* 폰트 패밀리 상속 */
-}
-
-.login-btn:hover,
-.action-button:hover {
-  text-decoration: underline;
-}
-
-/* Video Chat 버튼의 위치 조정 */
-.video-chat-btn {
-  order: -1; /* 다른 버튼들 보다 먼저 표시 */
 }

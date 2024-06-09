@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
+  background-color: #f2f2f2; /* 옅은 회색으로 변경 */
   padding: 10px 20px;
   border-bottom: 1px solid #ddd;
 }
@@ -34,14 +34,18 @@
   transition: color 0.3s ease;
   display: inline-block;
   /* 가로 정렬을 위해 추가 */
+  box-shadow: none; /* 모든 버튼에서 그림자 제거 */
 }
 
 .nav-button:hover,
 .action-link:hover,
 .login-btn:hover,
-.dropdown-button:hover {
+.dropdown-button:hover,
+.action-button:hover {
   color: #007bff;
   /* 커서를 가져다 댔을 때 색상 변경 */
+  text-decoration: underline;
+  /* 커서를 가져다 댔을 때 밑줄 추가 */
 }
 
 /* My Page 버튼 */
@@ -59,6 +63,7 @@
   /* 가로 정렬을 위해 추가 */
   /* hover 스타일 제거 */
   transition: none;
+  box-shadow: none; /* 그림자 제거 */
 }
 
 .dropdown {
@@ -72,7 +77,7 @@
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: none; /* 그림자 삭제 */
   z-index: 1;
 }
 
@@ -88,6 +93,8 @@
 .dropdown-content a:hover,
 .dropdown-content-button:hover {
   background-color: #f1f1f1;
+  text-decoration: underline;
+  /* 커서를 가져다 댔을 때 밑줄 추가 */
 }
 
 .dropdown:hover .dropdown-content {
