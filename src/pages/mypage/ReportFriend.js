@@ -21,7 +21,6 @@ function ReportFriend() {
                   <th className="text-center p-3 px-5">Name</th>
                   <th className="text-center p-3 px-5">Email</th>
                   <th className="text-center p-3 px-5">신고 사유</th>
-                  <th className="text-center p-3 px-5"></th>
                 </tr>
               </thead>
               <tbody>
@@ -44,20 +43,6 @@ function ReportFriend() {
                     </td>
                     <td className="p-3 px-5">
                       우우
-                    </td>
-                    <td className="p-3 px-5 flex justify-end items-center">
-                      <button
-                        type="button"
-                        className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-3 px-4 rounded focus:outline-none focus:shadow-outline mt-3.5"
-                      >
-                        Save
-                      </button>
-                      <button
-                        type="button"
-                        className="text-sm bg-red-500 hover:bg-red-700 text-white py-3 px-4 rounded focus:outline-none focus:shadow-outline mt-3.5"
-                      >
-                        Delete
-                      </button>
                     </td>
                   </tr>
                 ))}
