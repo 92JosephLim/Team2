@@ -4,6 +4,7 @@ import Footer from '../../components/Footer';
 import SideNav from '../../components/SideNav';
 
 function ReportFriend() {
+  //이것도 나중에 서버 연동하기
   return (
     <>
       <TopNav />
@@ -24,6 +25,7 @@ function ReportFriend() {
                 </tr>
               </thead>
               <tbody>
+                {/* 나중에 서버로 가져올거니까 변수 다시 잡아주기 */}
                 {Array(6).fill().map((_, index) => (
                   <tr key={index} className={`border-b hover:bg-orange-100 ${index % 2 === 0 ? 'bg-gray-100' : ''}`}>
                     <td className="p-3 px-5">

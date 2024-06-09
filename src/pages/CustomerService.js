@@ -82,28 +82,28 @@ function CustomerServiceBoard() {
 
   return (
     <>
-    <TopNav />
-    <div className="w-5/6 h-4/6 m-auto pb-10">
-      <div className="align-middle p-5 border">
-        <div className="text-4xl font-bold p-5 m-5 border">고객센터</div>
-        <div className="grid grid-cols-8 p-5 border">
-          <div className="col-start-1 col-span-1">순번</div>
-          <div className="col-start-2 col-span-6">질문</div>
-          <div className="col-start-8 col-span-1">작성일</div>
+      <TopNav />
+      <div className="aboutContent w-5/6 h-4/6 m-auto pb-10">
+        <div className="align-middle p-5 border">
+          <div className="text-4xl font-bold p-5 m-5 border">고객센터</div>
+          <div className="grid grid-cols-8 p-5 border">
+            <div className="col-start-1 col-span-1">순번</div>
+            <div className="col-start-2 col-span-6">질문</div>
+            <div className="col-start-8 col-span-1">작성일</div>
+          </div>
+          {questions1.map((q, index) => (
+            <Question
+              key={index}
+              number={q.number}
+              question={q.question}
+              date={q.date}
+              answer={q.answer}
+            />
+          ))}
         </div>
-        {questions1.map((q, index) => (
-          <Question
-            key={index}
-            number={q.number}
-            question={q.question}
-            date={q.date}
-            answer={q.answer}
-          />
-        ))}
+        <MoveButton />
       </div>
-      <MoveButton />
-    </div>
-    <Footer />
+      <Footer />
     </>
   );
 }

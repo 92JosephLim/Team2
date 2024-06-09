@@ -11,9 +11,9 @@ function SideNav() {
   const toggleFriendsAccordion = () => {
     setIsFriendsOpen(!isFriendsOpen);
   };
-  
+
   return (
-    <div className="w-64 flex flex-col min-h-screen p-3 bg-gray-800 text-white">
+    <div className="sideNav w-64 flex flex-col min-h-screen p-3 bg-gray-800 text-white">
       <div className="space-y-3">
         <div className="flex-1">
           <ul className="pt-2 pb-4 space-y-1">
@@ -33,7 +33,7 @@ function SideNav() {
               </a>
             </li>
             <li className="rounded-sm hover:bg-sky-700">
-            <div
+              <div
                 className="flex items-center p-2 space-x-3 rounded-md cursor-pointer"
                 onClick={toggleFriendsAccordion}
               >
@@ -60,13 +60,13 @@ function SideNav() {
                 </li>
                 <li className="rounded-sm hover:bg-sky-700">
                   <Link
-                    to="/friendMain"
+                    to="/report"
                     className="block p-2 rounded-md text-white"
                   >
                     신고목록
                   </Link>
                 </li>
-              </ul>
+              </ul> 
               )}
             {/* <li className="rounded-sm hover:bg-sky-700">
               <a href="#" className="flex items-center p-2 space-x-3 rounded-md">
