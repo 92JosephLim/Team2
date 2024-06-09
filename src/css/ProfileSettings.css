@@ -1,27 +1,21 @@
-.app-container {
+.profile-settings-page {
+  font-family: Arial, sans-serif;
+}
+
+.content {
+  display: flex;
+  height: calc(100vh - 50px);
+}
+
+.profile-settings-main-content {
+  width: 80%;
+  padding: 20px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-}
-
-.main-content {
-  display: flex;
-  flex: 1;
-  position: relative;
-}
-
-.profile-settings-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center; /* 폼을 수평 가운데 정렬 */
-  padding: 20px;
 }
 
 .profile-settings-content {
-  position: absolute;
-  right: 0; /* 오른쪽으로 정렬 */
-  top: 0;
-  width: 60%; /* 원하는 너비로 설정 */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,13 +32,13 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  max-width: 500px; /* 원하는 최대 너비로 설정 */
+  max-width: 500px;
   gap: 20px;
 }
 
 .form-group {
   width: 100%;
-  margin-bottom: 30px; /* 위아래 간격 추가 */
+  margin-bottom: 30px;
 }
 
 .form-group label {
@@ -57,13 +51,15 @@
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
+  border: 1px solid #ccc; /* Border 설정 */
+  box-shadow: none; /* 그림자 삭제 */
 }
 
 .form-buttons {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  gap: 5px; /* 버튼 간의 간격을 줄임 */
+  gap: 5px;
 }
 
 .form-buttons button {
