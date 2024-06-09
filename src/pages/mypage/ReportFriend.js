@@ -12,10 +12,10 @@ function ReportFriend() {
         <SideNav />
         <div className="flex-grow text-gray-900 white">
           <div className="p-4 flex">
-            <h1 className="text-3xl">Users</h1>
+            <h1 className="text-3xl font-bold">신고 목록</h1>
           </div>
           <div className="px-3 py-4 flex justify-center">
-            <table className="w-full text-md bg-white shadow-md rounded mb-4">
+            <table className="w-full text-md bg-white rounded mb-4">
               <thead>
                 <tr>
                   <th className="text-center p-3 px-5">Name</th>
