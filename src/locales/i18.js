@@ -2,6 +2,8 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import TranslationEn from "./en.json";
 import TranslationKo from "./ko.json";
+import TranslationCh from "./ch.json";
+import TranslationJp from "./jp.json";
 
 const resources = {
   en: {
@@ -9,6 +11,12 @@ const resources = {
   },
   ko: {
     translations: TranslationKo
+  },
+  ch: {
+    translations: TranslationCh
+  },
+  jp: {
+    translations: TranslationJp
   }
 };
 
