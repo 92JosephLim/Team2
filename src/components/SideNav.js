@@ -13,7 +13,7 @@ function SideNav() {
   };
 
   return (
-    <div className="w-64 flex flex-col min-h-screen p-3 bg-gray-800 text-white">
+    <div className="sideNav w-64 flex flex-col min-h-screen p-3 bg-gray-800 text-white">
       <div className="space-y-3">
         <div className="flex-1">
           <ul className="pt-2 pb-4 space-y-1">

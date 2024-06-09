@@ -1,4 +1,22 @@
 {
-  "hello": "안녕하세요",
-  "name": "미그미"
+  "header": {
+    "Video Chat": "Video Chat",
+    "login": "로그인",
+    "logout": "로그아웃",
+    "room": "방 만들기",
+    "list": "방 목록",
+    "About": "About",
+    "announcement": "공지사항",
+    "customerService": "고객센터",
+    "mypage": "마이페이지"
+  },
+  "sideNav": {
+    "profile": "상세 프로필 설정",
+    "chatLog": "채팅 내역",
+    "rtcLog": "화상채팅 내역",
+    "Friend": "친구",
+    "addFriend": "친구추가",
+    "FriendList": "친구목록",
+    "reportFriend": "신고목록"
+  }
 }
