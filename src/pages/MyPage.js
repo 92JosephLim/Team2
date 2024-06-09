@@ -6,11 +6,11 @@ import SideNav from '../components/SideNav';
 
 const MyPage = () => {
   return (
-    <div className="myPage">
+    <div className="flex flex-col min-h-screen">
       <TopNav />
-      <div className="content">
+      <div className="flex flex-1">
         <SideNav />
-        <main className="main-content">
+        <main className="flex-1 p-6">
           <section className="profile-info">
             <h2>프로필</h2>
             <div>
@@ -49,7 +49,7 @@ const MyPage = () => {
         </main>
       </div>
       <Footer />
-    </div >
+    </div>
   );
 };
 
