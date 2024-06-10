@@ -19,6 +19,7 @@ import ProfileSettings from "./pages/mypage/ProfileSettings"; // 새로 추가�
 import Translation from "./components/Translation";
 import KakaoRedirect from "./pages/social/KakaoRedirect";
 import JoinRoom from "./pages/JoinRoom";
+import FindPasswordAfter from "./pages/findPassword/FindPasswordAfter"
 
 const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
 
@@ -45,6 +46,7 @@ function App() {
             <Route path="/translation" element={<Translation />} />
             <Route path="/auth" element={<KakaoRedirect />} />
             <Route path="/joinRoom" element={<JoinRoom />} />
+            <Route path="/findPasswordAfter" element={<FindPasswordAfter />} />
           </Routes>
         </BrowserRouter>
       </div>
