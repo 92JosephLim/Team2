@@ -10,7 +10,7 @@ export const registerUser = async (data) => {
   }
 };
 
-// Function to send email verification code
+// Function to send email verification code + 이메일 중복 확인하기!!!!!!
 export const sendEmailVerification = async (email) => {
   try {
     const response = await axiosInstance.post('/emailSend', { email });
