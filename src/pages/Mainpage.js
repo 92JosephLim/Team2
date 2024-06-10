@@ -39,7 +39,7 @@ function Mainpage() {
             </div>
           </div>
         </div>
-        <div className="right-pane"> {/* 오른쪽 패널 */}
+        <div className="mainContent right-pane"> {/* 오른쪽 패널 */}
           <div className="vertical-section">
             <h1>2조사이트</h1>
             <p>247,584 건의 매칭이 진행 중이에요...</p>
