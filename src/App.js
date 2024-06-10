@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import VideoMeeting from "./pages/VideoMeeting";
@@ -16,7 +16,7 @@ import InviteFriend from "./pages/mypage/InviteFriend";
 import FriendMain from "./pages/mypage/FriendMain";
 import MyPage from "./pages/MyPage";
 import ProfileSettings from "./pages/mypage/ProfileSettings"; // 새로 추가한 ProfileSettings 컴포넌트
-import Translation from "./components/Translation";
+import Translation from "./components/Translation";//testing용 번역
 
 const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
 
@@ -39,8 +39,8 @@ function App() {
             <Route path="/invite" element={<InviteFriend />} />
             <Route path="/friendMain" element={<FriendMain />} />
             <Route path="/mypage" element={<MyPage />} />
-            <Route path="/ProfileSettings" element={<ProfileSettings />} /> {/* 새 경로 추가 */}
-            <Route path="/translation" element={<Translation />} />
+            <Route path="/ProfileSettings" element={<ProfileSettings />} />
+            <Route path="/translate" element={<Translation />} />
           </Routes>
         </BrowserRouter>
       </div>

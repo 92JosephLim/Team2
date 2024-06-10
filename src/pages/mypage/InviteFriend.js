@@ -32,7 +32,6 @@ function InviteFriend() {
               </form>
             </div>
           </div>
-          {/* 아니 hr 태그 왜 안먹지 */}
           <hr />
           <AddFriendTable />
         </div>

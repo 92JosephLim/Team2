@@ -3,7 +3,7 @@ import newLogo from "../assets/new_logo.png"; // 새로운 로고 이미지 경�
 import { Link, useNavigate } from "react-router-dom";
 import "../css/TopNav.css"; // 스타일 파일 추가
 //다국어 지원모드 추가
-import i18next from "../locales/i18";
+import i18next from "../locales/i18n";
 import { useTranslation } from "react-i18next";
 import { MdOutlineLanguage } from "react-icons/md";
 
@@ -23,10 +23,8 @@ function TopNav() {
   };
 
   //클릭시 언어 변경
-  const clickHandler = () => {
-    i18next.language === "ko"
-      ? i18next.changeLanguage("en")
-      : i18next.changeLanguage("ko");
+  const clickHandler = (lang) => {
+    i18next.changeLanguage(lang);
   };
 
   return (
@@ -43,6 +41,7 @@ function TopNav() {
         <Link to="/roomList" className="action-link">방목록</Link>
         {/* About 드롭다운 */}
         <div className="dropdown">
+          {/* About : 고객지원으로 네이밍 변경 */}
           <button className="dropdown-button">About</button>
           <div className="dropdown-content">
             <Link to="/announcement">공지사항</Link>
@@ -55,8 +54,10 @@ function TopNav() {
           <button className="dropdown-button"><MdOutlineLanguage /></button>
           {/* 한국어/영어 */}
           <div className="dropdown-content">
-            <button className="dropdown-content-button" onClick={() => clickHandler("ko")}>KO</button>
-            <button className="dropdown-content-button" onClick={() => clickHandler("en")}>EN</button>
+            <button className="dropdown-content-button" onClick={() => clickHandler("ko")}>KOREAN</button>
+            <button className="dropdown-content-button" onClick={() => clickHandler("en")}>ENGLISH</button>
+            <button className="dropdown-content-button" onClick={() => clickHandler("zh")}>CHINESE</button>
+            <button className="dropdown-content-button" onClick={() => clickHandler("ja")}>JAPANESE</button>
           </div>
         </div>
         <button className="action-button" onClick={handleMyPage}>My Page</button>
