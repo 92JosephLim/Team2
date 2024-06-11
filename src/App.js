@@ -20,36 +20,39 @@ import Translation from "./components/Translation";
 import KakaoRedirect from "./pages/social/KakaoRedirect";
 import JoinRoom from "./pages/JoinRoom";
 import FindPasswordAfter from "./pages/findPassword/FindPasswordAfter"
+import { AuthProvider } from "./pages/social/Authcontext";
 
 const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
 
 function App() {
   return (
     <GoogleOAuthProvider clientId={clientId}>
-      <div className="App">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Mainpage />} />
-            <Route path="/video" element={<VideoMeeting />} />
-            <Route path="/createroom" element={<CreateRoom />} />
-            <Route path="/roomList" element={<RoomList />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/findpwd" element={<FindPassword />} />
-            <Route path="/report" element={<ReportFriend />} />
-            <Route path="/customerService" element={<CustomerService />} />
-            <Route path="/announcement" element={<Announcement />} />
-            <Route path="/invite" element={<InviteFriend />} />
-            <Route path="/friendMain" element={<FriendMain />} />
-            <Route path="/mypage" element={<MyPage />} />
-            <Route path="/ProfileSettings" element={<ProfileSettings />} />
-            <Route path="/translation" element={<Translation />} />
-            <Route path="/auth" element={<KakaoRedirect />} />
-            <Route path="/joinRoom" element={<JoinRoom />} />
-            <Route path="/findPasswordAfter" element={<FindPasswordAfter />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <AuthProvider>
+        <div className="App">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Mainpage />} />
+              <Route path="/video" element={<VideoMeeting />} />
+              <Route path="/createroom" element={<CreateRoom />} />
+              <Route path="/roomList" element={<RoomList />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/findpwd" element={<FindPassword />} />
+              <Route path="/report" element={<ReportFriend />} />
+              <Route path="/customerService" element={<CustomerService />} />
+              <Route path="/announcement" element={<Announcement />} />
+              <Route path="/invite" element={<InviteFriend />} />
+              <Route path="/friendMain" element={<FriendMain />} />
+              <Route path="/mypage" element={<MyPage />} />
+              <Route path="/ProfileSettings" element={<ProfileSettings />} />
+              <Route path="/translation" element={<Translation />} />
+              <Route path="/auth" element={<KakaoRedirect />} />
+              <Route path="/joinRoom" element={<JoinRoom />} />
+              <Route path="/findPasswordAfter" element={<FindPasswordAfter />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </AuthProvider>
     </GoogleOAuthProvider>
   );
 }

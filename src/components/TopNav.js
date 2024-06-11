@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import newLogo from "../assets/new_logo.png"; // 새로운 로고 이미지 경로
 import { Link, useNavigate } from "react-router-dom";
 import "../css/TopNav.css"; // 스타일 파일 추가
@@ -6,11 +6,16 @@ import "../css/TopNav.css"; // 스타일 파일 추가
 import i18next from "../locales/i18n";
 import { useTranslation } from "react-i18next";
 import { MdOutlineLanguage } from "react-icons/md";
+//authContextimport
+import AuthContext from "../pages/social/Authcontext";
 
 function TopNav() {
   const navigate = useNavigate();
   //다국어 지원 모드
   const { t } = useTranslation();
+
+  //AuthContext에서 인증 상태랑 로그아웃 가져오기
+  const { user, logout } = useContext(AuthContext);
 
   // Video Chat 클릭 시 동작할 함수
   const handleVideoChat = () => {

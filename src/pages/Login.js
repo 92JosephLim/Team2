@@ -4,7 +4,6 @@ import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import Kakao from "./social/Kakao";
-import GoogleLogin from "./social/GoogleLogin";
 import GoogleLoginButton from "./social/GoogleLoginButton";
 
 function Login() {
