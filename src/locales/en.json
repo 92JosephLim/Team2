@@ -1,4 +1,6 @@
 {
+  "hello": "hello",
+  "name": "Name",
   "header": {
     "Video Chat": "Video Chat",
     "login": "Login",

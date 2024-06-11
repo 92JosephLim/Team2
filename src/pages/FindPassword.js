@@ -2,13 +2,24 @@
 import React from "react";
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
-import teamlogo from "../assets/lizard.jpg";
 
 function FindPassword() {
   //이메일 유효성 검사
+  const onChangeEmail = (e) => {
+    const currentEmail = e.target.value;
+    setEmail(currentEmail);
+    //이메일 정규식
+    const emailRegTest = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
+    //이메일 형식이 맞지 않으면 메세지 띄우기
+    if (!emailRegTest.test(currentEmail)) {
+      setEmailMessage("이메일의 형식이 올바르지 않습니다!");
+      setIsEmail(false);
+    } else {
+      setEmailMessage("사용 가능한 이메일 입니다!");
+      setIsEmail(true);
+    }
+  };
 
-  // 비밀번호 찾기 다하고 다음 페이지로 넘어가야 함
-  // 이메일 유효성 검사 관련 코드 작성하기
   return (
     <>
       <TopNav />
@@ -30,10 +41,12 @@ function FindPassword() {
                     Email
                   </label>
                   <input
-                    type=""
-                    name="Eamil"
-                    id="Eamil"
-                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full text-2xl"
+                    type="email"
+                    name="eamil"
+                    id="eamil"
+                    // value={email}
+                    onChange={onChangeEmail}
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full text-2xl"
                     placeholder="Eamil"
                   />
                 </div>

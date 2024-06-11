@@ -1,4 +1,6 @@
 {
+  "hello": "你好",
+  "name": "名字",
   "header": {
     "Video Chat": "Video Chat",
     "login": "登录",

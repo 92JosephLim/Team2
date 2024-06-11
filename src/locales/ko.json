@@ -1,6 +1,8 @@
 {
+  "hello": "안녕",
+  "name": "이름",
   "header": {
-    "Video Chat": "Video Chat",
+    "VideoChat": "Video Chat",
     "login": "로그인",
     "logout": "로그아웃",
     "room": "방 만들기",

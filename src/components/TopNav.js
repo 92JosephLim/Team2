@@ -53,6 +53,7 @@ function TopNav() {
         <Link to="/roomList" className="action-link">방목록</Link>
         {/* About 드롭다운 */}
         <div className="dropdown">
+          {/* About : 고객지원으로 네이밍 변경 */}
           <button className="dropdown-button">About</button>
           <div className="dropdown-content">
             <Link to="/announcement">공지사항</Link>
@@ -63,8 +64,10 @@ function TopNav() {
         <div className="dropdown">
           <button className="dropdown-button"><MdOutlineLanguage /></button>
           <div className="dropdown-content">
-            <button className="dropdown-content-button" onClick={() => clickHandler("ko")}>KO</button>
-            <button className="dropdown-content-button" onClick={() => clickHandler("en")}>EN</button>
+            <button className="dropdown-content-button" onClick={() => clickHandler("ko")}>KOREAN</button>
+            <button className="dropdown-content-button" onClick={() => clickHandler("en")}>ENGLISH</button>
+            <button className="dropdown-content-button" onClick={() => clickHandler("zh")}>CHINESE</button>
+            <button className="dropdown-content-button" onClick={() => clickHandler("ja")}>JAPANESE</button>
           </div>
         </div>
         <button className="action-button" onClick={handleMyPage}>My Page</button>
