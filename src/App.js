@@ -20,7 +20,6 @@ import Translation from "./components/Translation";
 import KakaoRedirect from "./pages/social/KakaoRedirect";
 import FindPasswordAfter from "./pages/findPassword/FindPasswordAfter"
 import { AuthProvider } from "./pages/social/Authcontext";
-import KakaoRedirect from "./pages/social/KakaoRedirect";
 import JoinRoom from "./pages/JoinRoom";
 
 const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
