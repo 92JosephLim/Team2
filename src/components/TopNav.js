@@ -75,12 +75,9 @@ function TopNav() {
           </div>
         </div>
         <button className="action-button" onClick={handleMyPage}>My Page</button>
-        <button
-          className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
-          type="submit"
-        >
-          Login
-        </button>
+        <div className="login-options">
+          <Link to="/login" className="login-btn">Login</Link>
+        </div>
         {/* <div className="login-options">
           {token ? (
             <>
