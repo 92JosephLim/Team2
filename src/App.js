@@ -19,15 +19,9 @@ import ProfileSettings from "./pages/mypage/ProfileSettings"; // 새로 추가�
 import Translation from "./components/Translation";
 import KakaoRedirect from "./pages/social/KakaoRedirect";
 import FindPasswordAfter from "./pages/findPassword/FindPasswordAfter"
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { AuthProvider } from "./pages/social/Authcontext";
-=======
 import KakaoRedirect from "./pages/social/KakaoRedirect";
-=======
->>>>>>> 87144dd4de6fae805f75958d9b01a9c76ebecdde
 import JoinRoom from "./pages/JoinRoom";
->>>>>>> 8a815fcbe30b0ef93eb8e717ac4ba895deabf7e2
 
 const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
 
