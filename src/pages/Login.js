@@ -150,7 +150,7 @@ function Login() {
                 계정이 없으신가요?{" "}
                 <a href="/signup" className="text-blue-800 font-semibold">
                   {" "}
-                  회원가입하기{" "}
+                  회원가입하기!{" "}
                 </a>
               </p>
             </div>

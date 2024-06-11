@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import "../css/Login.css";
-import "../css/Login.css";
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
-import { registerUser, sendEmailVerification, confirmEmailVerification } from "../api/apiService";
 import { registerUser, sendEmailVerification, confirmEmailVerification } from "../api/apiService"; // Import API service functions
 
 function Signup() {
@@ -20,24 +18,7 @@ function Signup() {
     profilePicture: null,
   });
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    passwordCheck: "",
-    phoneNumber: "",
-    gender: "none",
-    language: "korean",
-    profilePicture: null,
-  });
-
   const [verificationCode, setVerificationCode] = useState("");
-
-  const [messages, setMessages] = useState({
-    emailMessage: "",
-    passwordMessage: "",
-    passwordCheckMessage: "",
-    phoneNumberMessage: "",
-  });
 
   const [messages, setMessages] = useState({
     emailMessage: "",
@@ -62,20 +43,18 @@ function Signup() {
     setFormData({ ...formData, profilePicture: e.target.files[0] });
   };
 
-  const onChangeEmail = (e) => {
+  // onChangeEmail 함수에 async 추가
+  const onChangeEmail = async (e) => {
     const currentEmail = e.target.value;
-    setFormData({ ...formData, email: currentEmail });
-
     setFormData({ ...formData, email: currentEmail });
 
     const emailRegTest = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
     if (!emailRegTest.test(currentEmail)) {
       setMessages({ ...messages, emailMessage: "이메일의 형식이 올바르지 않습니다!" });
       setValidity({ ...validity, isEmail: false });
-      setMessages({ ...messages, emailMessage: "이메일의 형식이 올바르지 않습니다!" });
-      setValidity({ ...validity, isEmail: false });
     } else {
       try {
+        // await 사용 시 메서드 호출 방식 수정
         const response = await sendEmailVerification(currentEmail);
         if (response === "동일한 이메일이 존재합니다.") {
           setMessages({ ...messages, emailMessage: "이메일이 중복입니다!" });
