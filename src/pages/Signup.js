@@ -108,14 +108,15 @@ function Signup() {
 
     try {
       const response = await registerUser(data);
-      if (response.success) {
-        navigate("/login");
+      if (response.success) { // 서버 응답의 success 필드 확인
+        navigate("/login"); // 성공 시 로그인 페이지로 이동
       } else {
-        alert(response.message);
+        alert(response.message); // 실패 시 메시지 알림
       }
     } catch (error) {
-      console.error("error : ", error);
+      console.error("error : ", error); // 오류 발생 시 콘솔에 출력
     }
+    
   };
 
   const handleEmailSubmit = async (e) => {

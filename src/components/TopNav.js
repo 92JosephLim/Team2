@@ -36,6 +36,9 @@ function TopNav() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
+    localStorage.removeItem('phoneNumber');
+    localStorage.removeItem('gender');
+    localStorage.removeItem('profileImage');
     navigate('/');
   };
 

@@ -1,10 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/MyPage.css';
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import SideNav from '../components/SideNav';
 
 const MyPage = () => {
+  const [userInfo, setUserInfo] = useState({
+    email: '',
+    gender: '',
+    profileImage: '',
+    phoneNumber: ''
+  });
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const email = localStorage.getItem('email');
+      const gender = localStorage.getItem('gender');
+      const profileImage = localStorage.getItem('profileImage');
+      const phoneNumber = localStorage.getItem('phoneNumber');
+
+      setUserInfo({
+        email: email || '', //존재하지 않으면 공백
+        gender: gender || '',//존재하지 않으면 공백
+        profileImage: profileImage || '',//존재하지 않으면 공백
+        phoneNumber: phoneNumber || ''//존재하지 않으면 공백
+      });
+    }
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <TopNav />
@@ -14,12 +38,10 @@ const MyPage = () => {
           <section className="profile-info">
             <h2>프로필</h2>
             <div>
-              <p>사용자 이름: @honggildong</p>
-              <p>이메일: honggildong@example.com</p>
-            </div>
-            <div>
-              <p>상태: 온라인</p>
-              <p>가입일: 2023년 6월 1일</p>
+              <img src={userInfo.profileImage} alt="Profile" className="profile-image" />
+              <p>이메일: {userInfo.email}</p>
+              <p>성별: {userInfo.gender}</p>
+              <p>전화번호: {userInfo.phoneNumber}</p>
             </div>
           </section>
           <section className="chat-history">

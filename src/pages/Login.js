@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Kakao from "./social/Kakao";
 import GoogleLoginButton from "./social/GoogleLoginButton";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode"; // Named import로 수정
 
 function Login() {
   const navigate = useNavigate();
@@ -50,8 +51,12 @@ function Login() {
     axios.post("http://localhost:8080/api/login", formData)
       .then(response => {
         if (response.data.token) {
-          localStorage.setItem('token', response.data.token); // JWT 토큰을 로컬 스토리지에 저장
-          localStorage.setItem('email', email); // 이메일을 로컬 스토리지에 저장
+          const decodedToken = jwtDecode(response.data.token); // 토큰 디코드
+          localStorage.setItem('token', response.data.token); // JWT토큰 localStorage 저장
+          localStorage.setItem('email', decodedToken.email); // localStorage에 이메일 저장
+          localStorage.setItem('phoneNumber', decodedToken.phoneNumber); // localStorage에 전화번호 저장
+          localStorage.setItem('gender', decodedToken.gender); // localStorage에 성별 저장
+          localStorage.setItem('profileImage', decodedToken.profileImage); // localStorage에 프로필이미지 경로 저장
           navigate('/');
         }
       })
