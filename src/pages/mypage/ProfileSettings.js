@@ -1,10 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import TopNav from '../../components/TopNav'; // 올바른 경로로 수정
 import SideNav from '../../components/SideNav'; // 올바른 경로로 수정
 import Footer from '../../components/Footer'; // 올바른 경로로 수정
 import '../../css/ProfileSettings.css'; // CSS 파일의 경로를 확인해주세요
 
 function ProfileSettings() {
+  const navigate = useNavigate();
+
+  const handleCancel = () => {
+    navigate('/mypage');
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <TopNav />
@@ -32,7 +39,9 @@ function ProfileSettings() {
               </div>
               <div className="form-buttons">
                 <button type="submit" className="save-button">변경 사항 저장</button>
-                <button type="reset" className="cancel-button">변경 사항 취소</button>
+                <button type="button" className="cancel-button" onClick={handleCancel}>
+                  변경 사항 취소
+                </button>
               </div>
             </form>
           </div>

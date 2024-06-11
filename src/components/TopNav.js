@@ -43,11 +43,16 @@ function TopNav() {
     navigate('/');
   };
 
+  // 로고 클릭 시 메인 페이지로 이동
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
   return (
     <header className="header">
       <div className="logo">
-        <button className="logo-button">
-          <a href="/"><img src={newLogo} alt="New Logo" /></a>
+        <button className="logo-button" onClick={handleLogoClick}>
+          <img src={newLogo} alt="New Logo" />
         </button>
       </div>
       <nav className="nav">
