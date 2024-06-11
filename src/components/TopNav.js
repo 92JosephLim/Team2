@@ -73,7 +73,9 @@ function TopNav() {
             <button className="dropdown-content-button" onClick={() => clickHandler("ja")}>JAPANESE</button>
           </div>
         </div>
-        <button className="action-button" onClick={handleMyPage}>My Page</button>
+        {token && (
+          <button className="action-button" onClick={handleMyPage}>My Page</button>
+        )}
         <div className="login-options">
           {token ? (
             <>

@@ -29,3 +29,14 @@ export const confirmEmailVerification = async (email, code) => {
     throw error;
   }
 };
+
+// Function to update user information
+export const updateUserInfo = async (formData) => {
+  try {
+    const response = await axiosInstance.post('/api/update', formData);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating user info:', error);
+    throw error;
+  }
+};

@@ -3,6 +3,7 @@ import '../css/MyPage.css';
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import SideNav from '../components/SideNav';
+import ProfileCard from '../components/ProfileCard';
 
 const MyPage = () => {
   const [userInfo, setUserInfo] = useState({
@@ -13,20 +14,28 @@ const MyPage = () => {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
+    const loadUserInfo = () => {
       const email = localStorage.getItem('email');
       const gender = localStorage.getItem('gender');
       const profileImage = localStorage.getItem('profileImage');
       const phoneNumber = localStorage.getItem('phoneNumber');
 
       setUserInfo({
-        email: email || '', //존재하지 않으면 공백
-        gender: gender || '',//존재하지 않으면 공백
-        profileImage: profileImage || '',//존재하지 않으면 공백
-        phoneNumber: phoneNumber || ''//존재하지 않으면 공백
+        email: email || '',
+        gender: gender || '',
+        profileImage: profileImage || '',
+        phoneNumber: phoneNumber || ''
       });
-    }
+    };
+
+    loadUserInfo();
+
+    // Listen for changes in localStorage
+    window.addEventListener('storage', loadUserInfo);
+
+    return () => {
+      window.removeEventListener('storage', loadUserInfo);
+    };
   }, []);
 
   return (
@@ -37,12 +46,7 @@ const MyPage = () => {
         <main className="flex-1 p-6">
           <section className="profile-info">
             <h2>프로필</h2>
-            <div>
-              <img src={userInfo.profileImage} alt="Profile" className="profile-image" />
-              <p>이메일: {userInfo.email}</p>
-              <p>성별: {userInfo.gender}</p>
-              <p>전화번호: {userInfo.phoneNumber}</p>
-            </div>
+            <ProfileCard userInfo={userInfo} />
           </section>
           <section className="chat-history">
             <h2>채팅 내역</h2>
