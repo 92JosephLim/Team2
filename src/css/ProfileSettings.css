@@ -1,12 +1,15 @@
+/* 전체 페이지 스타일 */
 .profile-settings-page {
   font-family: Arial, sans-serif;
 }
 
+/* 콘텐츠 영역 스타일 */
 .content {
   display: flex;
   height: calc(100vh - 50px);
 }
 
+/* 메인 콘텐츠 스타일 */
 .profile-settings-main-content {
   width: 80%;
   padding: 20px;
@@ -15,6 +18,7 @@
   flex-direction: column;
 }
 
+/* 프로필 설정 콘텐츠 스타일 */
 .profile-settings-content {
   display: flex;
   flex-direction: column;
@@ -27,6 +31,12 @@
   border-radius: 8px;
 }
 
+/* 제목과 첫 번째 폼 그룹 사이 간격 추가 */
+.profile-settings-content h1 {
+  margin-bottom: 40px; /* 간격을 원하는 만큼 조정하세요 */
+}
+
+/* 프로필 설정 폼 스타일 */
 .profile-settings-form {
   display: flex;
   flex-direction: column;
@@ -36,6 +46,7 @@
   gap: 20px;
 }
 
+/* 폼 그룹 스타일 */
 .form-group {
   width: 100%;
   margin-bottom: 30px;
@@ -55,6 +66,7 @@
   box-shadow: none;
 }
 
+/* 폼 버튼 그룹 스타일 */
 .form-buttons {
   display: flex;
   justify-content: space-between;
@@ -79,7 +91,7 @@
   color: white;
 }
 
-/* 추가된 CSS */
+/* 사이드 네비게이션 스타일 */
 .sidenav {
   width: 20%;
   background-color: #f8f8f8;
@@ -89,14 +101,13 @@
   height: 100%;
 }
 
+/* 메인 콘텐츠 스타일 */
 .main-content {
   margin-left: 20%;
   width: 80%;
   padding: 20px;
-  overflow-y: auto;
+  overflow-y: visible; /* 스크롤 제거를 위해 auto를 visible로 변경 */
   display: flex;
   flex-direction: column;
   height: calc(100vh - 50px);
 }
-
-/* Footer 관련 스타일 제거됨 */

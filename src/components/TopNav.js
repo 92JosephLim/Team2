@@ -27,11 +27,14 @@ function TopNav() {
   };
 
   // 클릭 시 언어 변경
-  const clickHandler = () => {
-    i18next.language === "ko"
-      ? i18next.changeLanguage("en")
-      : i18next.changeLanguage("ko");
+  const clickHandler = (lang) => {
+    i18next.changeLanguage(lang);
   };
+  // const clickHandler = () => {
+  //   i18next.language === "ko"
+  //     ? i18next.changeLanguage("en")
+  //     : i18next.changeLanguage("ko");
+  // };
 
   // 로그아웃 함수
   // const handleLogout = () => {
@@ -40,11 +43,16 @@ function TopNav() {
   //   navigate('/');
   // };
 
+  // 로고 클릭 시 메인 페이지로 이동
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
   return (
     <header className="header">
       <div className="logo">
-        <button className="logo-button">
-          <a href="/"><img src={newLogo} alt="New Logo" /></a>
+        <button className="logo-button" onClick={handleLogoClick}>
+          <img src={newLogo} alt="New Logo" />
         </button>
       </div>
       <nav className="nav">

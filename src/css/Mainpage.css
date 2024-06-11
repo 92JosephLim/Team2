@@ -1,3 +1,5 @@
+/* Mainpage.css */
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -127,4 +129,82 @@ body {
 
 .vertical-section .start-button {
   margin-top: 20px; /* 원하는 여백으로 조정 */
+}
+
+/* 애니메이션 부분 */
+
+.profile-delay-1 {
+  animation-duration: 8s; /* 애니메이션 지속 시간 */
+  animation-timing-function: ease-in-out; /* 애니메이션 타이밍 함수 */
+  animation-iteration-count: infinite;
+}
+
+.profile-delay-2 {
+  animation-duration: 8s; /* 애니메이션 지속 시간 */
+  animation-timing-function: ease-in-out; /* 애니메이션 타이밍 함수 */
+  animation-iteration-count: infinite;
+}
+
+.profile-delay-3 {
+  animation-duration: 8s; /* 애니메이션 지속 시간 */
+  animation-timing-function: ease-in-out; /* 애니메이션 타이밍 함수 */
+  animation-iteration-count: infinite;
+}
+
+.profile-delay-4 {
+  animation-duration: 8s; /* 애니메이션 지속 시간 */
+  animation-timing-function: ease-in-out; /* 애니메이션 타이밍 함수 */
+  animation-iteration-count: infinite;
+}
+
+.animate__infinite {
+  animation-iteration-count: infinite;
+}
+
+.start-button {
+  display: flex;
+  align-items: center;
+  border: 5px solid transparent; /* 기본 테두리 설정 */
+  position: relative;
+}
+
+.flash-border {
+  animation: rainbow-border 2s infinite; /* 무지개 테두리 애니메이션 설정 */
+}
+
+@keyframes rainbow-border {
+  0% { border-color: red; }
+  14% { border-color: orange; }
+  28% { border-color: yellow; }
+  42% { border-color: green; }
+  57% { border-color: blue; }
+  71% { border-color: indigo; }
+  85% { border-color: violet; }
+  100% { border-color: red; }
+}
+
+@keyframes slideInUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate__slideInUp {
+  animation-name: slideInUp;
+}
+
+.animate__slideInDown {
+  animation-name: slideInDown;
 }
