@@ -6,6 +6,7 @@ import SideNav from '../components/SideNav';
 
 const MyPage = () => {
   return (
+    // 이거 사용자 이름, 이메일, 채팅 내역, 친구목록 전부 다 {}로 처리하기
     <div className="flex flex-col min-h-screen">
       <TopNav />
       <div className="flex flex-1">

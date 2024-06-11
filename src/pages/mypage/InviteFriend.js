@@ -18,12 +18,14 @@ function InviteFriend() {
           <AddFriendTitle />
           <div className="searchBar">
             <div className="container mx-auto">
-              <form className="p-10">
+              <form className="p-10" onSubmit={searchFriend}>
                 <div className="mb-4 flex items-center">
                   <input
                     type="text"
+                    placeholder="이메일을 입력해주세요"
+                    // value={value}
+                    // onChange={onChange}
                     className="flex-grow rounded-lg border border-gray-400 p-4"
-                    placeholder="닉네임을 입력해주세요"
                   />
                   <button className="ml-2 rounded-lg bg-blue-500 p-5 text-white hover:bg-blue-600">
                     검색
@@ -32,7 +34,6 @@ function InviteFriend() {
               </form>
             </div>
           </div>
-          {/* 아니 hr 태그 왜 안먹지 */}
           <hr />
           <AddFriendTable />
         </div>

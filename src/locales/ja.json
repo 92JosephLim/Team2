@@ -1,4 +1,6 @@
 {
+  "hello": "こんにちは",
+  "name": "名前",
   "header": {
     "Video Chat": "Video Chat",
     "login": "ログイン",
