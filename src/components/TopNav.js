@@ -27,11 +27,14 @@ function TopNav() {
   };
 
   // 클릭 시 언어 변경
-  const clickHandler = () => {
-    i18next.language === "ko"
-      ? i18next.changeLanguage("en")
-      : i18next.changeLanguage("ko");
+  const clickHandler = (lang) => {
+    i18next.changeLanguage(lang);
   };
+  // const clickHandler = () => {
+  //   i18next.language === "ko"
+  //     ? i18next.changeLanguage("en")
+  //     : i18next.changeLanguage("ko");
+  // };
 
   // 로그아웃 함수
   const handleLogout = () => {
@@ -72,10 +75,16 @@ function TopNav() {
           </div>
         </div>
         <button className="action-button" onClick={handleMyPage}>My Page</button>
-        <div className="login-options">
+        <button
+          className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
+          type="submit"
+        >
+          Login
+        </button>
+        {/* <div className="login-options">
           {token ? (
             <>
-              {/* 로그인 된 상태에서는 환영 메시지와 로그아웃 버튼 표시 */}
+              로그인 된 상태에서는 환영 메시지와 로그아웃 버튼 표시
               <span className="mr-4">Welcome, {email}</span>
               <button onClick={handleLogout} className="bg-red-500 px-3 py-2 rounded-md hover:bg-red-700">Logout</button>
             </>
@@ -83,7 +92,7 @@ function TopNav() {
             // 로그인되지 않은 상태에서는 로그인 버튼 표시
             <Link to="/login" className="login-btn">Login</Link>
           )}
-        </div>
+        </div> */}
       </nav>
     </header>
   );
