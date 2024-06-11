@@ -34,11 +34,11 @@ function TopNav() {
   };
 
   // 로그아웃 함수
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('email');
-    navigate('/');
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('email');
+  //   navigate('/');
+  // };
 
   return (
     <header className="header">
@@ -73,9 +73,13 @@ function TopNav() {
         </div>
         <button className="action-button" onClick={handleMyPage}>My Page</button>
         <div className="login-options">
+          <Link to="/login" className="login-btn">Login</Link>
+        </div>
+        {/* <div className="login-options">
+        
           {token ? (
             <>
-              {/* 로그인 된 상태에서는 환영 메시지와 로그아웃 버튼 표시 */}
+              로그인 된 상태에서는 환영 메시지와 로그아웃 버튼 표시
               <span className="mr-4">Welcome, {email}</span>
               <button onClick={handleLogout} className="bg-red-500 px-3 py-2 rounded-md hover:bg-red-700">Logout</button>
             </>
@@ -83,7 +87,7 @@ function TopNav() {
             // 로그인되지 않은 상태에서는 로그인 버튼 표시
             <Link to="/login" className="login-btn">Login</Link>
           )}
-        </div>
+        </div> */}
       </nav>
     </header>
   );

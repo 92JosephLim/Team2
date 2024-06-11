@@ -124,7 +124,7 @@ function Signup() {
       if (response.success) {
         navigate("/login");
       } else {
-        alert(response.message);
+        alert("회원가입 실패하였습니다.");
       }
     } catch (error) {
       console.error("error : ", error);
