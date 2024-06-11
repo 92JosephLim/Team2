@@ -28,8 +28,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Mainpage />} />
             <Route path="/video" element={<VideoMeeting />} />
-            <Route path="/createroom" element={<CreateRoom />} />
-            <Route path="/findroom" element={<RoomList />} />
+            <Route path="/cr" element={<CreateRoom />} />
+            <Route path="/roomlist" element={<RoomList />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/findpwd" element={<FindPassword />} />
