@@ -3,11 +3,12 @@ import "../css/Login.css";
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
-import { registerUser, sendEmailVerification, confirmEmailVerification } from "../api/apiService"; // Import API service functions
+import { registerUser, sendEmailVerification, confirmEmailVerification } from "../api/apiService"; // API 서비스 함수들 가져오기
 
 function Signup() {
   const navigate = useNavigate();
 
+  // 회원가입 폼 데이터 초기 상태 설정
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,8 +19,10 @@ function Signup() {
     profilePicture: null,
   });
 
+  // 인증 코드 상태
   const [verificationCode, setVerificationCode] = useState("");
 
+  // 각 입력 필드에 대한 메시지 상태
   const [messages, setMessages] = useState({
     emailMessage: "",
     passwordMessage: "",
@@ -27,6 +30,7 @@ function Signup() {
     phoneNumberMessage: "",
   });
 
+  // 각 입력 필드의 유효성 상태
   const [validity, setValidity] = useState({
     isEmail: false,
     isPassword: false,
@@ -34,15 +38,18 @@ function Signup() {
     isPhoneNumber: false,
   });
 
+  // 입력 필드 변경 핸들러
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // 파일 입력 필드 변경 핸들러
   const handleFileChange = (e) => {
     setFormData({ ...formData, profilePicture: e.target.files[0] });
   };
 
+  // 이메일 입력 필드 변경 핸들러
   const onChangeEmail = (e) => {
     const currentEmail = e.target.value;
     setFormData({ ...formData, email: currentEmail });
@@ -52,11 +59,12 @@ function Signup() {
       setMessages({ ...messages, emailMessage: "이메일의 형식이 올바르지 않습니다!" });
       setValidity({ ...validity, isEmail: false });
     } else {
-      setMessages({ ...messages, emailMessage: "사용 가능한 이메일 입니다!" });
+      setMessages({ ...messages, emailMessage: "" }); // 메시지 초기화
       setValidity({ ...validity, isEmail: true });
     }
   };
 
+  // 비밀번호 입력 필드 변경 핸들러
   const onChangePassword = (e) => {
     const currentPassword = e.target.value;
     setFormData({ ...formData, password: currentPassword });
@@ -66,11 +74,12 @@ function Signup() {
       setMessages({ ...messages, passwordMessage: "영어 대소문자, 특수문자, 숫자를 조합해 8자리 이상 20자리 이하로 입력해주세요!" });
       setValidity({ ...validity, isPassword: false });
     } else {
-      setMessages({ ...messages, passwordMessage: "사용 가능한 비밀번혼 입니다!" });
+      setMessages({ ...messages, passwordMessage: "사용 가능한 비밀번호 입니다!" });
       setValidity({ ...validity, isPassword: true });
     }
   };
 
+  // 비밀번호 확인 입력 필드 변경 핸들러
   const onChangePasswordCheck = (e) => {
     const currentPasswordCheck = e.target.value;
     setFormData({ ...formData, passwordCheck: currentPasswordCheck });
@@ -84,6 +93,7 @@ function Signup() {
     }
   };
 
+  // 전화번호 입력 필드 변경 핸들러
   const onChangePhone = (e) => {
     const currentPhoneNumber = e.target.value;
     setFormData({ ...formData, phoneNumber: currentPhoneNumber });
@@ -98,6 +108,7 @@ function Signup() {
     }
   };
 
+  // 회원가입 폼 제출 핸들러
   const handleSUSubmit = async (e) => {
     e.preventDefault();
 
@@ -116,20 +127,29 @@ function Signup() {
     } catch (error) {
       console.error("error : ", error); // 오류 발생 시 콘솔에 출력
     }
-    
   };
 
+  // 이메일 인증번호 받기 핸들러
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await sendEmailVerification(formData.email);
-      alert(response);
+      if (response === "동일한 이메일이 존재합니다.") {
+        setMessages({ ...messages, emailMessage: "이미 존재하는 이메일입니다!" });
+        setValidity({ ...validity, isEmail: false });
+      } else {
+        setMessages({ ...messages, emailMessage: "인증 이메일이 전송되었습니다!" });
+        setValidity({ ...validity, isEmail: true });
+      }
     } catch (error) {
       console.error("error : ", error);
+      setMessages({ ...messages, emailMessage: "서버 오류로 이메일을 확인할 수 없습니다." });
+      setValidity({ ...validity, isEmail: false });
     }
   };
 
+  // 인증번호 확인 핸들러
   const handleCodeSubmit = async (e) => {
     e.preventDefault();
 
@@ -141,6 +161,7 @@ function Signup() {
     }
   };
 
+  // 인증번호 입력 필드 변경 핸들러
   const handleCodeChange = (e) => {
     setVerificationCode(e.target.value);
   };
