@@ -1,0 +1,86 @@
+{
+  "hello": "こんにちは",
+  "name": "名前",
+  "header": {
+    "Video Chat": "Video Chat",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "room": "部屋を作成",
+    "list": "部屋のリスト",
+    "About": "About",
+    "announcement": "お知らせ",
+    "customerService": "カスタマーサービス",
+    "mypage": "マイページ"
+  },
+  "sideNav": {
+    "profile": "詳細プロフィール設定",
+    "chatLog": "チャット履歴",
+    "rtcLog": "ビデオチャット履歴",
+    "Friend": "友達",
+    "addFriend": "友達追加",
+    "FriendList": "友達リスト",
+    "reportFriend": "通報リスト"
+  },
+  "mainContent": {
+    "Video Chat": "Video Chat"
+  },
+  "aboutContent": {
+    "customerCenter": "カスタマーサービス",
+    "number": "番号",
+    "question": "質問",
+    "date": "作成日"
+  },
+  "announcement": {
+    "notice": "お知らせ",
+    "number": "番号",
+    "question": "質問",
+    "date": "作成日"
+  },
+  "myPageContent": {
+    "myProfile": "プロフィール"
+  },
+  "reportFriend": {
+    "name": "名前",
+    "email": "メールアドレス",
+    "report": "通報理由"
+  },
+  "profileSettings": {
+    "customerCenter": "カスタマーサービス",
+    "picture": "プロフィール写真",
+    "addEmail": "追加メール",
+    "phoneCall": "電話番号",
+    "password": "パスワード",
+    "checkPassword": "パスワード確認",
+    "language": "言語",
+    "languageChoice": "言語選択",
+    "korean": "韓国語",
+    "english": "英語",
+    "chinese": "中国語",
+    "japanese": "日本語",
+    "vietnamese": "ベトナム語",
+    "indonesian": "インドネシア語",
+    "russian": "ロシア語",
+    "french": "フランス語",
+    "changeSave": "変更を保存",
+    "cancleChange": "変更をキャンセル"
+  },
+  "inviteFriend": {
+    "writeNickname": "ニックネームを入力してください",
+    "search": "検索"
+  },
+  "addFriendTable": {
+    "name": "名前",
+    "email": "メールアドレス"
+  },
+  "friendList": {
+    "list": "友達リスト"
+  },
+  "friendTable": {
+    "name": "名前",
+    "email": "メールアドレス"
+  },
+  "friendDelete": {
+    "wannaDelete": "この友達をリストから削除しますか？",
+    "delete": "削除"
+  }
+}

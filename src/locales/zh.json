@@ -1,0 +1,86 @@
+{
+  "hello": "你好",
+  "name": "名字",
+  "header": {
+    "Video Chat": "Video Chat",
+    "login": "登录",
+    "logout": "登出",
+    "room": "创建房间",
+    "list": "房间列表",
+    "About": "About",
+    "announcement": "公告",
+    "customerService": "客户服务",
+    "mypage": "我的页面"
+  },
+  "sideNav": {
+    "profile": "详细个人资料设置",
+    "chatLog": "聊天记录",
+    "rtcLog": "视频聊天记录",
+    "Friend": "朋友",
+    "addFriend": "添加朋友",
+    "FriendList": "朋友列表",
+    "reportFriend": "举报列表"
+  },
+  "mainContent": {
+    "Video Chat": "Video Chat"
+  },
+  "aboutContent": {
+    "customerCenter": "客户服务",
+    "number": "编号",
+    "question": "问题",
+    "date": "日期"
+  },
+  "announcement": {
+    "notice": "公告",
+    "number": "编号",
+    "question": "问题",
+    "date": "日期"
+  },
+  "myPageContent": {
+    "myProfile": "个人资料"
+  },
+  "reportFriend": {
+    "name": "姓名",
+    "email": "电子邮件",
+    "report": "举报理由"
+  },
+  "profileSettings": {
+    "customerCenter": "客户服务",
+    "picture": "个人资料照片",
+    "addEmail": "添加电子邮件",
+    "phoneCall": "电话号码",
+    "password": "密码",
+    "checkPassword": "确认密码",
+    "language": "语言",
+    "languageChoice": "选择语言",
+    "korean": "韩语",
+    "english": "英语",
+    "chinese": "中文",
+    "japanese": "日语",
+    "vietnamese": "越南语",
+    "indonesian": "印度尼西亚语",
+    "russian": "俄语",
+    "french": "法语",
+    "changeSave": "保存更改",
+    "cancleChange": "取消更改"
+  },
+  "inviteFriend": {
+    "writeNickname": "请输入昵称",
+    "search": "搜索"
+  },
+  "addFriendTable": {
+    "name": "姓名",
+    "email": "电子邮件"
+  },
+  "friendList": {
+    "list": "朋友列表"
+  },
+  "friendTable": {
+    "name": "姓名",
+    "email": "电子邮件"
+  },
+  "friendDelete": {
+    "wannaDelete": "您确定要从列表中删除此朋友吗？",
+    "delete": "删除"
+  }
+}
