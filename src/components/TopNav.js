@@ -30,11 +30,6 @@ function TopNav() {
   const clickHandler = (lang) => {
     i18next.changeLanguage(lang);
   };
-  // const clickHandler = () => {
-  //   i18next.language === "ko"
-  //     ? i18next.changeLanguage("en")
-  //     : i18next.changeLanguage("ko");
-  // };
 
   // 로그아웃 함수
   const handleLogout = () => {
@@ -58,7 +53,7 @@ function TopNav() {
       <nav className="nav">
         {/* Video Chat 버튼 */}
         <button className="nav-button video-chat-btn" onClick={handleVideoChat}>Video Chat</button>
-        <Link to="/cr" className="action-link">방만들기</Link>
+        <Link to="/createroom" className="action-link">방만들기</Link>
         <Link to="/roomList" className="action-link">방목록</Link>
         {/* About 드롭다운 */}
         <div className="dropdown">
@@ -79,7 +74,16 @@ function TopNav() {
             <button className="dropdown-content-button" onClick={() => clickHandler("ja")}>JAPANESE</button>
           </div>
         </div>
-        <button className="action-button" onClick={handleMyPage}>My Page</button>
+        {/* My Page 드롭다운 */}
+        <div className="dropdown">
+          <button className="dropdown-button" onClick={handleMyPage}>My Page</button>
+          <div className="dropdown-content">
+            <Link to="/ProfileSettings">상세 프로필 설정</Link>
+            <Link to="/chatHistory">채팅 내역</Link>
+            <Link to="/videoHistory">화상채팅 내역</Link>
+            <Link to="/friends">친구</Link>
+          </div>
+        </div>
         <div className="login-options">
           <Link to="/login" className="login-btn">Login</Link>
         </div>
