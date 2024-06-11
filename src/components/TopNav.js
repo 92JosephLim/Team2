@@ -3,7 +3,7 @@ import newLogo from "../assets/new_logo.png"; // 새로운 로고 이미지 경�
 import { Link, useNavigate } from "react-router-dom";
 import "../css/TopNav.css"; // 스타일 파일 추가
 // 다국어 지원 모드 추가
-import i18next from "../locales/i18";
+import i18next from "../locales/i18n";
 import { useTranslation } from "react-i18next";
 import { MdOutlineLanguage } from "react-icons/md";
 
