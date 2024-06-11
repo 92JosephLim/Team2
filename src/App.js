@@ -1,28 +1,29 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
-import VideoMeeting from "./pages/VideoMeeting";
-import Mainpage from "./pages/Mainpage";
-import CreateRoom from "./pages/CreateRoom";
-import RoomList from "./pages/RoomList";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import FindPassword from "./pages/FindPassword";
-import CustomerService from "./pages/CustomerService";
-import Announcement from "./pages/Announcement";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import ReportFriend from "./pages/mypage/ReportFriend";
-import InviteFriend from "./pages/mypage/InviteFriend";
-import FriendMain from "./pages/mypage/FriendMain";
-import MyPage from "./pages/MyPage";
-import ProfileSettings from "./pages/mypage/ProfileSettings"; // 새로 추가한 ProfileSettings 컴포넌트
-import Translation from "./components/Translation";
-import KakaoRedirect from "./pages/social/KakaoRedirect";
-import FindPasswordAfter from "./pages/findPassword/FindPasswordAfter"
-import { AuthProvider } from "./pages/social/Authcontext";
-import JoinRoom from "./pages/JoinRoom";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './App.css';
+import VideoMeeting from './pages/VideoMeeting';
+import Mainpage from './pages/Mainpage';
+import CreateRoom from './pages/CreateRoom';
+import RoomList from './pages/RoomList';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import FindPassword from './pages/FindPassword';
+import CustomerService from './pages/CustomerService';
+import Announcement from './pages/Announcement';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import ReportFriend from './pages/mypage/ReportFriend';
+import InviteFriend from './pages/mypage/InviteFriend';
+import FriendMain from './pages/mypage/FriendMain';
+import MyPage from './pages/MyPage';
+import ProfileSettings from './pages/mypage/ProfileSettings';
+import Translation from './components/Translation';
+import KakaoRedirect from './pages/social/KakaoRedirect';
+import FindPasswordAfter from './pages/findPassword/FindPasswordAfter';
+import { AuthProvider } from './pages/social/Authcontext';
+import JoinRoom from './pages/JoinRoom';
+import MessageChat from './pages/mypage/MessageChat'; // MessageChat 컴포넌트 임포트
 
-const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
+const clientId = '233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
               <Route path="/auth" element={<KakaoRedirect />} />
               <Route path="/joinRoom" element={<JoinRoom />} />
               <Route path="/findPasswordAfter" element={<FindPasswordAfter />} />
+              <Route path="/messageChat" element={<MessageChat />} /> {/* MessageChat 라우트 추가 */}
             </Routes>
           </BrowserRouter>
         </div>

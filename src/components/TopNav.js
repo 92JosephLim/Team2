@@ -57,7 +57,6 @@ function TopNav() {
         <Link to="/roomList" className="action-link">방목록</Link>
         {/* About 드롭다운 */}
         <div className="dropdown">
-          {/* About : 고객지원으로 네이밍 변경 */}
           <button className="dropdown-button">About</button>
           <div className="dropdown-content">
             <Link to="/announcement">공지사항</Link>
@@ -79,7 +78,7 @@ function TopNav() {
           <button className="dropdown-button" onClick={handleMyPage}>My Page</button>
           <div className="dropdown-content">
             <Link to="/ProfileSettings">상세 프로필 설정</Link>
-            <Link to="/chatHistory">채팅 내역</Link>
+            <Link to="/messageChat">채팅 내역</Link> {/* 경로 수정 */}
             <Link to="/videoHistory">화상채팅 내역</Link>
             <Link to="/friends">친구</Link>
           </div>
@@ -87,18 +86,6 @@ function TopNav() {
         <div className="login-options">
           <Link to="/login" className="login-btn">Login</Link>
         </div>
-        {/* <div className="login-options">
-          {token ? (
-            <>
-              로그인 된 상태에서는 환영 메시지와 로그아웃 버튼 표시
-              <span className="mr-4">Welcome, {email}</span>
-              <button onClick={handleLogout} className="bg-red-500 px-3 py-2 rounded-md hover:bg-red-700">Logout</button>
-            </>
-          ) : (
-            // 로그인되지 않은 상태에서는 로그인 버튼 표시
-            <Link to="/login" className="login-btn">Login</Link>
-          )}
-        </div> */}
       </nav>
     </header>
   );
