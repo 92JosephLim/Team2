@@ -14,7 +14,7 @@ function TopNav() {
   const { t } = useTranslation();
 
   //AuthContext에서 인증 상태랑 로그아웃 가져오기
-  const { user, logout } = useContext(AuthContext);
+  // const { user, logout } = useContext(AuthContext);
 
   // Video Chat 클릭 시 동작할 함수
   const handleVideoChat = () => {
