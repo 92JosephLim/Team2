@@ -9,11 +9,11 @@ import { jwtDecode } from "jwt-decode"; // Named import로 수정
 
 function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [emailMessage, setEmailMessage] = useState('');
-  const [passwordMessage, setPasswordMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [emailMessage, setEmailMessage] = useState("");
+  const [passwordMessage, setPasswordMessage] = useState("");
   const [isEmail, setIsEmail] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
 
@@ -48,19 +48,21 @@ function Login() {
 
     const formData = { email, password };
 
-    axios.post("http://localhost:8080/api/login", formData)
-      .then(response => {
+    axios
+      .post("http://localhost:8080/api/login", formData)
+      .then((response) => {
         if (response.data.token) {
           const decodedToken = jwtDecode(response.data.token); // 토큰 디코드
-          localStorage.setItem('token', response.data.token); // JWT토큰 localStorage 저장
-          localStorage.setItem('email', decodedToken.email); // localStorage에 이메일 저장
-          localStorage.setItem('phoneNumber', decodedToken.phoneNumber); // localStorage에 전화번호 저장
-          localStorage.setItem('gender', decodedToken.gender); // localStorage에 성별 저장
-          localStorage.setItem('profileImage', decodedToken.profileImage); // localStorage에 프로필이미지 경로 저장
-          navigate('/');
+          console.log(decodedToken);
+          localStorage.setItem("token", response.data.token); // JWT토큰 localStorage 저장
+          localStorage.setItem("email", decodedToken.email); // localStorage에 이메일 저장
+          localStorage.setItem("phoneNumber", decodedToken.phoneNumber); // localStorage에 전화번호 저장
+          localStorage.setItem("gender", decodedToken.gender); // localStorage에 성별 저장
+          localStorage.setItem("profileImage", decodedToken.profileImage); // localStorage에 프로필이미지 경로 저장
+          navigate("/");
         }
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response) {
           setErrorMessage(error.response.data.message);
         } else {
@@ -75,14 +77,15 @@ function Login() {
       <TopNav />
       <div className="relative min-h-screen flex">
         <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
-          <div className="sm:w-1/2 xl:w-3/5 h-full md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative">
-          </div>
+          <div className="sm:w-1/2 xl:w-3/5 h-full md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative"></div>
           <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 mt-40">
             <div className="py-8 px-8 rounded-xl">
               <h1 className="font-medium text-2xl mt-3 text-center">Login</h1>
               <form onSubmit={handleLISubmit} className="mt-6">
                 <div className="my-5">
-                  <label htmlFor="email" className="block text-black text-left">Email</label>
+                  <label htmlFor="email" className="block text-black text-left">
+                    Email
+                  </label>
                   <input
                     type="email"
                     name="email"
@@ -95,7 +98,9 @@ function Login() {
                   <p className="errorMsg text-red-600 mt-2 text-xl">{emailMessage}</p>
                 </div>
                 <div className="my-5 text-sm">
-                  <label htmlFor="password" className="block text-black text-left">Password</label>
+                  <label htmlFor="password" className="block text-black text-left">
+                    Password
+                  </label>
                   <input
                     type="password"
                     name="password"
@@ -111,7 +116,10 @@ function Login() {
                   </div>
                 </div>
                 {errorMessage && <p className="text-red-600 mt-4 text-xl">{errorMessage}</p>}
-                <button className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full" type="submit">
+                <button
+                  className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
+                  type="submit"
+                >
                   Login
                 </button>
               </form>
@@ -128,7 +136,14 @@ function Login() {
                   <GoogleLoginButton />
                 </div>
               </div>
-              <p className="mt-12 text-xl text-center font-light text-gray-400"> 계정이 없으신가요? <a href="/signup" className="text-blue-800 font-semibold"> 회원가입하기 </a></p>
+              <p className="mt-12 text-xl text-center font-light text-gray-400">
+                {" "}
+                계정이 없으신가요?{" "}
+                <a href="/signup" className="text-blue-800 font-semibold">
+                  {" "}
+                  회원가입하기{" "}
+                </a>
+              </p>
             </div>
           </div>
         </div>

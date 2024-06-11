@@ -17,6 +17,8 @@ import FriendMain from "./pages/mypage/FriendMain";
 import MyPage from "./pages/MyPage";
 import ProfileSettings from "./pages/mypage/ProfileSettings"; // 새로 추가한 ProfileSettings 컴포넌트
 import Translation from "./components/Translation";
+import KakaoRedirect from "./pages/social/KakoRedirect";
+import JoinRoom from "./pages/JoinRoom";
 
 const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
 
@@ -41,6 +43,8 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/ProfileSettings" element={<ProfileSettings />} /> {/* 새 경로 추가 */}
             <Route path="/translation" element={<Translation />} />
+            <Route path="/auth" element={<KakaoRedirect />} />
+            <Route path="/joinRoom" element={<JoinRoom />} />
           </Routes>
         </BrowserRouter>
       </div>
