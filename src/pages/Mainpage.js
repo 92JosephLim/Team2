@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../css/Mainpage.css"; // CSS 파일을 import
 import Footer from "../components/Footer";
 import TopNav from "../components/TopNav";
+import mainback from "../assets/mainback.jpg";
 
 function Mainpage() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function Mainpage() {
     <div className="main-page">
       <TopNav />
       <div className="content">
+      <img src={mainback} alt="Main BackGround" className="background-image" />
         <div className="left-pane"> {/* 왼쪽 패널 */}
           <div className="profile-grid">
             <div className="profile animate__animated animate__slideInUp animate__infinite profile-delay-1">

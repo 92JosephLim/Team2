@@ -16,7 +16,7 @@ function Question({ number, question, date, answer }) {
         <div className="col-start-8 col-span-1">{date}</div>
       </div>
       {isOpen && (
-        <div className="m-5 p-5 border-t">
+        <div className="m-5 py-16 border-t">
           <div>{answer}</div>
         </div>
       )}

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import up from "../assets/up.png";
-import down from "../assets/down.png";
+import { GoChevronUp } from "react-icons/go";
+import { GoChevronDown } from "react-icons/go";
 
 const Container = styled.div`
   position: fixed;
@@ -38,10 +38,10 @@ function MoveButton({ opacity }) {
   return (
     <Container>
       <GotoTop opacity={opacity} onClick={MoveToTop}>
-        <img src={up} alt="up" />
+        <GoChevronUp size={36}/>
       </GotoTop>
       <GotoDown opacity={opacity} onClick={MoveToDown}>
-        <img src={down} alt="down" />
+        <GoChevronDown size={36} />
       </GotoDown>
 
     </Container>

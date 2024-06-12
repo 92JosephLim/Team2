@@ -25,23 +25,29 @@ function AddFriendTable() {
   return (
     <>
       <div className="py-4 flex justify-center ml-100">
-        <table className="min-w-full text-md bg-white rounded mb-4">
-          <tbody>
-            <tr className="border-b">
-              <th className="text-center p-3 px-5">Name</th>
-              <th className="text-center p-3 px-5">Email</th>
-              <th />
+        <table className="w-11/12 text-md bg-white rounded mb-4">
+          <tbody className="grid grid-cols-2">
+            <tr className="border-b grid grid-cols-3">
+              <th className="text-center p-3 px-5 col-start-1 col-span-1">Name</th>
+              <th className="text-center p-3 px-5 col-start-2 col-span-1">Email</th>
+              <th className="text-center p-3 px-5 col-start-3 col-span-1">추가 / 삭제</th>
+            </tr>
+            <tr className="border-b grid grid-cols-3">
+              <th className="text-center p-3 px-5 col-start-1 col-span-1">Name</th>
+              <th className="text-center p-3 px-5 col-start-2 col-span-1">Email</th>
+              <th className="text-center p-3 px-5 col-start-3 col-span-1">추가 / 삭제</th>
             </tr>
             {/* 나중에 백엔드랑 연동되면 map으로 데이터 가져오기 : friends.map(friend => ()으로 반복문 돌리기 */}
-            <tr className="border-b hover:bg-orange-100 bg-gray-100">
-              <td className="p-3 px-5">
+            <div className=" border-r-4 border-white">
+            <tr className="border-b hover:bg-orange-100 bg-gray-100 grid grid-cols-3">
+              <td className="p-3 px-5 col-start-1 col-span-1">
                 유저1
               </td>
-              <td className="p-3 px-5">
+              <td className="p-3 px-5 col-start-2 col-span-1">
                 유저1@test.com
               </td>
               {/* dm, delete 버튼 사이즈 키우기 */}
-              <td className="p-3 px-5 text-center">
+              <td className="p-3 px-5 text-center col-start-3 col-span-1">
                 <button
                   type="button"
                   className="mr-3 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
@@ -56,15 +62,15 @@ function AddFriendTable() {
                 </button>
               </td>
             </tr>
-            <tr className="border-b hover:bg-orange-100 bg-gray-100">
-              <td className="p-3 px-5">
+            <tr className="border-b hover:bg-orange-100 bg-gray-100 grid grid-cols-3">
+              <td className="p-3 px-5 col-start-1 col-span-1">
                 유저2
               </td>
-              <td className="p-3 px-5">
+              <td className="p-3 px-5 col-start-2 col-span-1">
                 유저2@test.com
               </td>
               {/* dm, delete 버튼 사이즈 키우기 */}
-              <td className="p-3 px-5 text-center">
+              <td className="p-3 px-5 text-center col-start-3 col-span-1">
                 <button
                   type="button"
                   className="mr-3 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
@@ -79,15 +85,15 @@ function AddFriendTable() {
                 </button>
               </td>
             </tr>
-            <tr className="border-b hover:bg-orange-100 bg-gray-100">
-              <td className="p-3 px-5">
+            <tr className="border-b hover:bg-orange-100 bg-gray-100 grid grid-cols-3">
+              <td className="p-3 px-5 col-start-1 col-span-1">
                 유저3
               </td>
-              <td className="p-3 px-5">
+              <td className="p-3 px-5 col-start-2 col-span-1">
                 유저3@test.com
               </td>
               {/* dm, delete 버튼 사이즈 키우기 */}
-              <td className="p-3 px-5 text-center">
+              <td className="p-3 px-5 text-center col-start-3 col-span-1">
                 <button
                   type="button"
                   className="mr-3 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
@@ -102,15 +108,15 @@ function AddFriendTable() {
                 </button>
               </td>
             </tr>
-            <tr className="border-b hover:bg-orange-100 bg-gray-100">
-              <td className="p-3 px-5">
+            <tr className="border-b hover:bg-orange-100 bg-gray-100 grid grid-cols-3">
+              <td className="p-3 px-5 col-start-1 col-span-1">
                 유저4
               </td>
-              <td className="p-3 px-5">
+              <td className="p-3 px-5 col-start-2 col-span-1">
                 유저4@test.com
               </td>
               {/* dm, delete 버튼 사이즈 키우기 */}
-              <td className="p-3 px-5 text-center">
+              <td className="p-3 px-5 text-center col-start-3 col-span-1">
                 <button
                   type="button"
                   className="mr-3 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
@@ -125,7 +131,9 @@ function AddFriendTable() {
                 </button>
               </td>
             </tr>
-            <tr className="border-b hover:bg-orange-100 bg-gray-100">
+            </div>
+            <div>
+            <tr className="border-b hover:bg-orange-100 bg-gray-100 grid grid-cols-3">
               <td className="p-3 px-5">
                 유저5
               </td>
@@ -148,7 +156,7 @@ function AddFriendTable() {
                 </button>
               </td>
             </tr>
-            <tr className="border-b hover:bg-orange-100 bg-gray-100">
+            <tr className="border-b hover:bg-orange-100 bg-gray-100 grid grid-cols-3">
               <td className="p-3 px-5">
                 유저6
               </td>
@@ -171,7 +179,7 @@ function AddFriendTable() {
                 </button>
               </td>
             </tr>
-            <tr className="border-b hover:bg-orange-100 bg-gray-100">
+            <tr className="border-b hover:bg-orange-100 bg-gray-100 grid grid-cols-3">
               <td className="p-3 px-5">
                 유저7
               </td>
@@ -194,7 +202,7 @@ function AddFriendTable() {
                 </button>
               </td>
             </tr>
-            <tr className="border-b hover:bg-orange-100 bg-gray-100">
+            <tr className="border-b hover:bg-orange-100 bg-gray-100 grid grid-cols-3">
               <td className="p-3 px-5">
                 유저8
               </td>
@@ -217,6 +225,7 @@ function AddFriendTable() {
                 </button>
               </td>
             </tr>
+            </div>
           </tbody>
         </table>
       </div>

@@ -24,7 +24,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 20px;
+  padding: 40px;
   background-color: #fff;
   margin: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -49,18 +49,18 @@
 /* 폼 그룹 스타일 */
 .form-group {
   width: 100%;
-  margin-bottom: 30px;
+  display: flex;
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 5px;
+  width: 30%;
+  display: flex-left;
 }
 
 .form-group input,
 .form-group select {
-  width: 100%;
-  padding: 8px;
+  width: 70%;
+  height: 4vh;
   box-sizing: border-box;
   border: 1px solid #ccc;
   box-shadow: none;
@@ -103,7 +103,8 @@
 
 /* 메인 콘텐츠 스타일 */
 .main-content {
-  margin-left: 20%;
+  margin-top: 5%;
+  margin-left: 5%;
   width: 80%;
   padding: 20px;
   overflow-y: visible; /* 스크롤 제거를 위해 auto를 visible로 변경 */

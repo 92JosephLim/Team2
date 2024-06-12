@@ -1,14 +1,18 @@
-.header {
+.top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f2f2f2; /* 옅은 회색으로 변경 */
+  background-color: lightsteelblue; /* 옅은 하늘색으로 변경 */
   padding: 10px 20px;
   border-bottom: 1px solid #ddd;
+  z-index: 2;
 }
 
 .logo img {
-  height: 40px;
+  height: 36px;
+  width: auto;
+  text-align: center;
+  margin-left: 1%;
 }
 
 .nav {

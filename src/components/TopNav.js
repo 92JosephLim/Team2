@@ -44,7 +44,7 @@ function TopNav() {
   };
 
   return (
-    <header className="header">
+    <div className="top">
       <div className="logo">
         <button className="logo-button" onClick={handleLogoClick}>
           <img src={newLogo} alt="New Logo" />
@@ -54,7 +54,7 @@ function TopNav() {
         {/* Video Chat 버튼 */}
         <button className="nav-button video-chat-btn" onClick={handleVideoChat}>Video Chat</button>
         <Link to="/createroom" className="action-link">방만들기</Link>
-        <Link to="/roomList" className="action-link">방목록</Link>
+        <Link to="/roomList" className="action-link">방 목록</Link>
         {/* About 드롭다운 */}
         <div className="dropdown">
           <button className="dropdown-button">About</button>
@@ -79,15 +79,15 @@ function TopNav() {
           <div className="dropdown-content">
             <Link to="/ProfileSettings">상세 프로필 설정</Link>
             <Link to="/messageChat">채팅 내역</Link> {/* 경로 수정 */}
-            <Link to="/videoHistory">화상채팅 내역</Link>
-            <Link to="/friends">친구</Link>
+            <Link to="/invite">친구추가</Link>
+            <Link to="/friendMain">친구목록</Link>
           </div>
         </div>
         <div className="login-options">
           <Link to="/login" className="login-btn">Login</Link>
         </div>
       </nav>
-    </header>
+    </div>
   );
 }
 

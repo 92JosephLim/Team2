@@ -9,6 +9,12 @@ import AddFriendTable from "../../components/searchFriend/AddFriendTable";
 //이거 친구 추가 수락/거절 할건지???
 function InviteFriend() {
   //검색 결과 post로 서버에 보내주기
+  const searchFriend = (e) => {
+    e.preventDefault();
+    // 여기에 검색 로직을 추가하세요.
+    console.log('검색 실행');
+  };
+  
   return (
     <>
       <TopNav />

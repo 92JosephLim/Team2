@@ -1,6 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom"; // Import useLocation
+import Footer from "../components/Footer";
+import TopNav from "../components/TopNav";
+import we2 from "../assets/we2.jpg";
 
 function initjanus() {
   if (!Janus.isWebrtcSupported()) {
@@ -329,23 +332,23 @@ function JoinRoom() {
 
   return (
     <div>
-      <nav className="navbar navbar-default navbar-static-top"></nav>
-      <div className="container">
+      <TopNav />
+      <img src={we2} className="absolute w-full cover z-0"/>
+      <div className="container h-screen">
         <div className="row">
           <div className="col-md-12">
             <div className="page-header">
-              <h1>
-                방참여하기
-                <button className="btn btn-default" autoComplete="off" id="start" onClick={initjanus}>
-                  클릭!
+              <div>
+                <button className="btn btn-default my-10" autoComplete="off" id="start" onClick={initjanus}>
+                  방 참여하기
                 </button>
-              </h1>
+              </div>
             </div>
             <div className="container" id="details">
               <div className="row">
                 <div className="col-md-12">
-                  <h3>버튼을 눌러서 방에 참가하세요</h3>
-                  <h4>대화명은 영어만 가능합니다.</h4>
+                  <div className=" text-4xl font-bold mb-10">버튼을 눌러서 방에 참가하세요</div>
+                  <div className=" text-3xl font-bold">대화명은 영어만 가능합니다.</div>
                 </div>
               </div>
             </div>
@@ -504,10 +507,11 @@ function JoinRoom() {
                 </div>
               </div>
             </div>
+      
           </div>
         </div>
-        <hr />
       </div>
+      <Footer />
     </div>
   );
 }

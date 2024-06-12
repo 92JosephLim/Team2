@@ -3,11 +3,13 @@
   flex-direction: column; /* 높이를 줄이기 위해 플렉스 방향을 변경 */
   justify-content: center;
   align-items: center;
-  background-color: #f2f2f2; /* TopNav와 동일한 배경색 */
+  background-color: lightsteelblue; /* TopNav와 동일한 배경색 */
   padding: 5px 20px; /* 패딩 값을 줄여 높이를 낮춤 */
   border-top: 1px solid #ddd; /* 상단 경계선 추가 */
   color: #000; /* 텍스트 색상을 검은색으로 설정 */
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .footer-links {

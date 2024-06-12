@@ -2,6 +2,7 @@
 import React from "react";
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
+import people from "../assets/people.jpg";
 
 function FindPassword() {
   //이메일 유효성 검사
@@ -25,11 +26,10 @@ function FindPassword() {
       <TopNav />
       <div className="relative min-h-screen flex ">
         <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
-          <div className="sm:w-1/2 xl:w-3/5 h-full md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative">
-            {/* 애니메이션 */}
-            {/* <img src={teamlogo} alt="this is our team logo" /> */}
+          <div className="sm:w-1/2 xl:w-3/5 h-full md:flex flex-auto items-center justify-center overflow-hidden text-white bg-no-repeat bg-cover relative">
+            <img src={people} alt="side background" className="h-svh z-0" />
           </div>
-          <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 mt-40">
+          <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 mt-40 z-1">
             <div className="py-8 px-8 rounded-xl">{/* 이거 위치 조금만 더 내리기 */}
               <h1 className="font-medium text-2xl mt-3 text-center">비밀번호 찾기</h1>
               {/* form 태그 POST로 email, password 넘겨주기 */}

@@ -19,7 +19,7 @@ function ProfileSettings() {
         <SideNav className="sidenav" />
         <main className="main-content">
           <div className="profile-settings-content">
-            <h1 className="text-3xl font-bold">상세 프로필 설정</h1>
+            <h1 className="text-4xl font-bold">상세 프로필 설정</h1>
             <form className="profile-settings-form">
               <div className="form-group">
                 <label>프로필 사진</label>
