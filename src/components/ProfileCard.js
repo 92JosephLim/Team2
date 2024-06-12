@@ -48,6 +48,15 @@ function ProfileCard() {
     return phoneNumber;
   };
 
+  const handleProfileSettings = () => {
+    const loginType = localStorage.getItem('loginType');
+    if (loginType === 'LOCAL') {
+      navigate('/ProfileSettings');
+    } else if (loginType === 'KAKAO' || loginType === 'GOOGLE') {
+      navigate('/SocialProfileSettings');
+    }
+  };
+
   return (
     <div className="flex items-center justify-center pt-7">
       <div className="relative flex flex-col w-full max-w-lg rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
@@ -77,7 +86,7 @@ function ProfileCard() {
             className="text-xl select-none rounded-lg bg-pink-500 py-3 px-6 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             type="button"
             data-ripple-light="true"
-            onClick={() => navigate('/ProfileSettings')}
+            onClick={handleProfileSettings}
           >
             정보 수정하기
           </button>
