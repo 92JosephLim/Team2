@@ -1,0 +1,104 @@
+/* Login.css */
+
+.login-page {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .logo-container {
+    margin-bottom: 20px;
+  }
+  
+  .logo {
+    width: 100px; /* 로고 크기 조정 */
+  }
+  
+  .login-title {
+    font-size: 24px; /* 제목 글자 크기 */
+    margin-bottom: 20px; /* 제목 아래 여백 */
+  }
+  
+  .form-group {
+    margin-bottom: 20px; /* 입력 필드 간격 조정 */
+  }
+  
+  label {
+    display: block; /* 라벨을 블록 요소로 표시하여 위 아래 여백 추가 */
+    font-size: 18px; /* 라벨 글자 크기 */
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 20%; /* 입력 필드 너비 100%로 설정 */
+    padding: 10px; /* 입력 필드 패딩 설정 */
+    font-size: 16px; /* 입력 필드 글자 크기 */
+  }
+  
+  .login-button {
+    width: 20%; /* 로그인 버튼 너비 100%로 설정 */
+    padding: 10px; /* 로그인 버튼 패딩 설정 */
+    font-size: 18px; /* 로그인 버튼 글자 크기 */
+    background-color: #007bff; /* 로그인 버튼 배경색 */
+    color: #fff; /* 로그인 버튼 글자색 */
+    border: none; /* 로그인 버튼 테두리 없애기 */
+    cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 상태 표시 */
+  }
+  
+  .login-button:hover {
+    background-color: #0056b3; /* 마우스 호버 시 배경색 변경 */
+  }
+
+  /* Login.css */
+
+/* 이전 스타일은 여기에 포함 */
+
+.social-login-options {
+    margin-top: 20px; /* 소셜 로그인 옵션과 로그인 버튼 사이 여백 추가 */
+  }
+  
+  .social-login-options p {
+    margin-bottom: 10px; /* 소셜 로그인 옵션 위쪽 여백 추가 */
+  }
+  
+  .social-login-button {
+    margin-right: 10px; /* 소셜 로그인 버튼 간격 조정 */
+    padding: 10px 20px; /* 소셜 로그인 버튼 패딩 설정 */
+    font-size: 16px; /* 소셜 로그인 버튼 글자 크기 */
+    border: none; /* 소셜 로그인 버튼 테두리 없애기 */
+    cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 상태 표시 */
+  }
+  
+  .social-login-button:hover {
+    opacity: 0.8; /* 마우스 호버 시 투명도 조절 */
+  }
+  
+  .kakao {
+    background-color: #f7e317; /* 카카오 버튼 배경색 */
+    color: #3c1e1e; /* 카카오 버튼 글자색 */
+  }
+  
+  .naver {
+    background-color: #1ec800; /* 네이버 버튼 배경색 */
+    color: #fff; /* 네이버 버튼 글자색 */
+  }
+  
+  .google {
+    background-color: #db4437; /* 구글 버튼 배경색 */
+    color: #fff; /* 구글 버튼 글자색 */
+  }
+  
+  .register-link {
+    margin-top: 20px; /* 회원가입 링크와 소셜 로그인 옵션 사이 여백 추가 */
+  }
+  
+  .register-link a {
+    font-weight: bold; /* 회원가입 링크 글씨 굵게 설정 */
+    color: #007bff; /* 회원가입 링크 색상 설정 */
+    text-decoration: none; /* 밑줄 제거 */
+  }
+  
+  .register-link a:hover {
+    text-decoration: underline; /* 마우스 호버 시 밑줄 추가 */
+  }
+  
+  
