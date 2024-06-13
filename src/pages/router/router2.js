@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import Loading from "../../components/loading/Loading"
 
 const MyPage = lazy(() => import("../mypage/MyPage"));
 const ProfileSettings = lazy(() => import("../mypage/ProfileSettings"));
@@ -16,7 +17,7 @@ const router2 = createBrowserRouter([
     //mypage
     path: "/mypage",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <MyPage />
       </Suspense>
     )
@@ -25,7 +26,7 @@ const router2 = createBrowserRouter([
     //mypage
     path: "/ProfileSettings",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <ProfileSettings />
       </Suspense>
     )
@@ -34,7 +35,7 @@ const router2 = createBrowserRouter([
     //mypage
     path: "/SocialProfileSettings",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <SocialProfileSettings />
       </Suspense>
     )
@@ -43,7 +44,7 @@ const router2 = createBrowserRouter([
     //customerService
     path: "/customerService",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <CustomerService />
       </Suspense>
     )
@@ -52,7 +53,7 @@ const router2 = createBrowserRouter([
     //announcement
     path: "/announcement",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <Announcement />
       </Suspense>
     )
@@ -61,7 +62,7 @@ const router2 = createBrowserRouter([
     //invite
     path: "/invite",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <InviteFriend />
       </Suspense>
     )
@@ -70,7 +71,7 @@ const router2 = createBrowserRouter([
     //friendMain
     path: "/friendMain",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <FriendMain />
       </Suspense>
     )

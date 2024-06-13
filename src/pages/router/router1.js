@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import Loading from "../../components/loading/Loading"
 
 const VideoMeeting = lazy(() => import("../webRtc/VideoMeeting"));
 const CreateRoom = lazy(() => import("../webRtc/CreateRoom"));
@@ -13,7 +14,7 @@ const router1 = createBrowserRouter([
     //videoMeeting
     path: "/video",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <VideoMeeting />
       </Suspense>
     )
@@ -22,7 +23,7 @@ const router1 = createBrowserRouter([
     //방 생성
     path: "/cr",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <CreateRoom />
       </Suspense>
     )
@@ -31,7 +32,7 @@ const router1 = createBrowserRouter([
     //방 목록
     path: "/roomlist",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <RoomList />
       </Suspense>
     )
@@ -40,7 +41,7 @@ const router1 = createBrowserRouter([
     //JoinRoom
     path: "/joinRoom",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <JoinRoom />
       </Suspense>
     )

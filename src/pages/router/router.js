@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
-
+import Loading from "../../components/loading/Loading"
 import router1 from "./router1";//webRtc관련 router
 import router2 from "./router2";
 
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     //main page
     path: "/",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <Mainpage />
       </Suspense>
     )
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     //로그인
     path: "/login",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <Login />
       </Suspense>
     )
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
     //카카오
     path: "/auth",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <KakaoRedirect />
       </Suspense>
     )
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
     //회원가입
     path: "/signup",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <Signup />
       </Suspense>
     )
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
     //비밀번호 찾기
     path: "/findpwd",
     element: (
-      <Suspense>
+      <Suspense fallback={<Loading />}>
         <FindPassword />
       </Suspense>
     )
