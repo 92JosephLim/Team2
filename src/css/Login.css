@@ -101,7 +101,9 @@
     text-decoration: underline; /* 마우스 호버 시 밑줄 추가 */
   }
   
-<<<<<<< HEAD
+  /*애니메이션 부분*/
+
+  
   .modal-container {
     position: fixed;
     top: 0;
@@ -132,9 +134,4 @@
     border-radius: 5px;
     cursor: pointer;
   }
-=======
-  /*애니메이션 부분*/
-
-  
->>>>>>> 9728d2a6b92c2a953c3208515ff41b47c5cedb53
   

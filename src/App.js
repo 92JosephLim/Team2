@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import "./App.css";
 import VideoMeeting from "./pages/VideoMeeting";
 import Mainpage from "./pages/Mainpage";
@@ -19,7 +20,6 @@ import ProfileSettings from "./pages/mypage/ProfileSettings"; // 새로 추가�
 import Translation from "./components/Translation";
 import KakaoRedirect from "./pages/social/KakaoRedirect";
 import FindPasswordAfter from "./pages/findPassword/FindPasswordAfter"
-import { AuthProvider } from "./pages/social/Authcontext";
 import JoinRoom from "./pages/JoinRoom";
 
 const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
@@ -27,7 +27,6 @@ const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleuserc
 function App() {
   return (
     <GoogleOAuthProvider clientId={clientId}>
-      <AuthProvider>
         <div className="App">
           <BrowserRouter>
             <Routes>
@@ -52,7 +51,6 @@ function App() {
             </Routes>
           </BrowserRouter>
         </div>
-      </AuthProvider>
     </GoogleOAuthProvider>
   );
 }

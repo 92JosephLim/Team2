@@ -1,54 +1,72 @@
-/* RoomList.css */
-.room-list-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-.room-list-container h1 {
-  text-align: center;
-  color: #3a3a3a;
-  font-size: 2.5rem;
+.header-container {
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center;
+  position: relative;
   margin-bottom: 20px;
+  width: 100%;
 }
 
-.room-list-container ul {
-  list-style-type: none;
+.header-container h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.search-button {
+  position: absolute;
+  right: -100px; /* 오른쪽 여백 추가 */
+}
+
+.room-list-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.room-list-container {
+  width: 80%; /* 필요에 따라 조정하세요 */
+  padding: 20px;
+  padding-bottom: 150px; /* Footer 높이만큼 여백 추가 */
+}
+
+.room-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.room-item {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: calc(50% - 20px); /* 가로폭 조정 (50% - 20px) */
+  box-sizing: border-box;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
   padding: 0;
 }
 
-.room-list-container li {
-  background: #f9f9f9;
-  margin-bottom: 15px;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.room-list-container li h2 {
-  margin: 0;
-  font-size: 1.5rem;
-  color: #333;
-}
-
-.room-list-container li p {
-  margin: 10px 0 20px;
-  font-size: 1rem;
-  color: #666;
-}
-
-.room-list-container li button {
-  background: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
+.pagination li {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s;
 }
 
-.room-list-container li button:hover {
-  background: #0056b3;
+.pagination li.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.dots {
+  padding: 5px 10px;
 }

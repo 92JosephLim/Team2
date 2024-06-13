@@ -8,6 +8,11 @@
   border-top: 1px solid #ddd; /* 상단 경계선 추가 */
   color: #000; /* 텍스트 색상을 검은색으로 설정 */
   text-align: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000; /* 다른 요소 위에 표시되도록 z-index 추가 */
 }
 
 .footer-links {

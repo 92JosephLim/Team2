@@ -1,54 +1,11 @@
-<<<<<<< HEAD
-import React, { useState, useRef } from "react";
-=======
 import React, { useState } from "react";
->>>>>>> 9728d2a6b92c2a953c3208515ff41b47c5cedb53
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
-import { useNavigate } from "react-router-dom";
 import Kakao from "./social/Kakao";
 import GoogleLoginButton from "./social/GoogleLoginButton";
-<<<<<<< HEAD
-import axios from 'axios';
-import PropTypes from 'prop-types';
-
-const CorrectionComplete = ({ modalOpen, setModalOpen }) => {
-  const modalBackground = useRef();
-
-  return (
-    <>
-      {modalOpen && (
-        <div
-          className="modal-container"
-          ref={modalBackground}
-          onClick={(e) => {
-            if (e.target === modalBackground.current) {
-              setModalOpen(false);
-            }
-          }}
-        >
-          <div className="modal-content">
-            <p className="text-xl mb-4">로그인 실패</p>
-            <button
-              className="modal-close-btn"
-              onClick={() => setModalOpen(false)}
-            >
-              닫기
-            </button>
-          </div>
-        </div>
-      )}
-    </>
-  );
-};
-
-CorrectionComplete.propTypes = {
-  modalOpen: PropTypes.bool.isRequired,
-  setModalOpen: PropTypes.func.isRequired,
-};
-=======
-import axios from "axios";
->>>>>>> 9728d2a6b92c2a953c3208515ff41b47c5cedb53
+import { useNavigate } from "react-router-dom";
+import axios from 'axios'; // axios 추가
+import CorrectionComplete from '../components/modal/CorrectionComplete'; 
 
 function Login() {
   const navigate = useNavigate();
@@ -99,36 +56,19 @@ function Login() {
       password
     };
 
-<<<<<<< HEAD
     axios.post("엔드포인트 주소", formData)
-      .then(response => {
-        if (response.data.success) {
+      .then(reponse => {
+        if (reponse.data.success) {
           navigate('/');
         } else {
-          setModalOpen(true);
+          //에러 메세지 있으면 표시하기
+          alert(reponse.data.message);
         }
       })
       .catch(error => {
         console.error("error : ", error);
-        setModalOpen(true);
-=======
-    axios.post("http://localhost:8080/api/login", formData)
-      .then(response => {
-        if (response.data.token) {
-          localStorage.setItem('token', response.data.token); // JWT 토큰을 로컬 스토리지에 저장
-          localStorage.setItem('email', email); // 이메일을 로컬 스토리지에 저장
-          navigate('/');
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          setErrorMessage(error.response.data.message);
-        } else {
-          console.error("error : ", error);
-          setErrorMessage("로그인 중 오류가 발생했습니다. 다시 시도해 주세요.");
-        }
->>>>>>> 9728d2a6b92c2a953c3208515ff41b47c5cedb53
       });
+
   };
 
   return (
@@ -175,10 +115,7 @@ function Login() {
                     <a href="/findpwd">비밀번호가 생각나지 않는다면?</a>
                   </div>
                 </div>
-<<<<<<< HEAD
-=======
-                {errorMessage && <p className="text-red-600 mt-4 text-xl">{errorMessage}</p>}
->>>>>>> 9728d2a6b92c2a953c3208515ff41b47c5cedb53
+                {/* main page로 넘어가야 한다. */}
                 <button
                   className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
                   type="submit"
@@ -226,8 +163,4 @@ function Login() {
   );
 }
 
-<<<<<<< HEAD
 export default Login;
-=======
-export default Login;
->>>>>>> 9728d2a6b92c2a953c3208515ff41b47c5cedb53

@@ -5,37 +5,6 @@ import FriendDelete from "../../components/modal/FriendDelete"; // 올바른 경
 
 
 function FriendTable() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-<<<<<<< HEAD
-=======
-  // 나중에 백이랑 연동되면
-  // 친구 데이터 저장 상태
-  // const [friends, setFriends] = useState([]);
-
-  // 서버에서 데이터 get으로 가져오기
-  // useEffect(() => {
-  //   const fetchFriends = async () => {
-  //     try {
-  //       const response = await axios.get("서버 엔드포인트 주소");
-  //       setFriends(response.data);
-  //     } catch (error) {
-  //       console.error("Error : ", error);
-  //     }
-  //   };
-
-  //   fetchFriends();
-  // }, []);
-
->>>>>>> 9728d2a6b92c2a953c3208515ff41b47c5cedb53
   return (
     <>
       <div className="py-4 flex justify-center ml-100">
