@@ -1,13 +1,23 @@
-# 빌드 스테이지
-FROM node:14 as build-stage
+# Base image
+FROM node:14-alpine
+
+# Working directory
 WORKDIR /app
-COPY package*.json ./
+
+# Install dependencies
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
+
+# Copy project files
 COPY . .
+
+# Build the project
 RUN npm run build
 
-# 프로덕션 스테이지
-FROM nginx:alpine
-COPY --from=build-stage /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Serve the build files using a simple HTTP server
+RUN npm install -g serve
+CMD ["serve", "-s", "build"]
+
+# Expose port
+EXPOSE 3000

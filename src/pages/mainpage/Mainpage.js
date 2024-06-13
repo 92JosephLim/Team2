@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "../css/Mainpage.css"; // CSS 파일을 import
-import Footer from "../components/Footer";
-import TopNav from "../components/TopNav";
+import "./Mainpage.css"; // CSS 파일을 import
+import Footer from "../../components/footer/Footer";
+import TopNav from "../../components/topnav/TopNav";
 
 function Mainpage() {
   const navigate = useNavigate();

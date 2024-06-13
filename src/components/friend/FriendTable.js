@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { TbMessages } from "react-icons/tb";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import FriendDelete from "../../components/modal/FriendDelete"; // 올바른 경로 설정
-
+import FriendDelete from "../modal/FriendDelete"; // 올바른 경로 설정
 
 function FriendTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);

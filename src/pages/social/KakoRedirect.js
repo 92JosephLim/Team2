@@ -13,7 +13,7 @@ function KakaoRedirect() {
     console.log(code);
     if (code) {
       axios
-        .get(`http://localhost:8080/oauth/kakao?code=${code}`)
+        .get(`https://js2.jsflux.co.kr/api/oauth/kakao?code=${code}`)
         .then((response) => {
           // 백엔드로부터 응답을 받은 후 처리할 로직
           console.log(response.data);
@@ -23,6 +23,9 @@ function KakaoRedirect() {
           localStorage.setItem("email", decodedToken.email);
           localStorage.setItem("profileImage", decodedToken.profileImage);
           localStorage.setItem("loginType", decodedToken.loginType);
+          localStorage.setItem("phoneNumber", decodedToken.phoneNumber);
+          localStorage.setItem("gender", decodedToken.gender);
+          localStorage.setItem("nickName", decodedToken.nickName);
           navigate("/");
         })
         .catch((error) => {

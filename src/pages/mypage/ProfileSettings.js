@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TopNav from '../../components/TopNav'; // Update with correct path
-import SideNav from '../../components/SideNav'; // Update with correct path
-import Footer from '../../components/Footer'; // Update with correct path
-import '../../css/ProfileSettings.css'; // Update with correct path
-import { updateUserInfo } from '../../api/apiService'; // Import your API service function
+import TopNav from '../../components/TopNav'; // 올바른 경로로 업데이트
+import SideNav from '../../components/SideNav'; // 올바른 경로로 업데이트
+import Footer from '../../components/Footer'; // 올바른 경로로 업데이트
+import '../../css/ProfileSettings.css'; // 올바른 경로로 업데이트
+import { updateUserInfo } from '../../api/apiService'; // API 서비스 함수 임포트
 
 function ProfileSettings() {
   const [userInfo, setUserInfo] = useState({
@@ -13,6 +13,7 @@ function ProfileSettings() {
     password: '',
     newPassword: '',
     newPasswordCheck: '',
+    gender: "none",
     profileImage: null
   });
 
@@ -30,11 +31,13 @@ function ProfileSettings() {
 
   const navigate = useNavigate();
 
+  // 컴포넌트가 마운트될 때 로컬 스토리지에서 유저 정보를 가져옴
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       const email = localStorage.getItem('email');
       const phoneNumber = localStorage.getItem('phoneNumber');
+      const gender = localStorage.getItem('gender');
 
       setUserInfo({
         email: email || '',
@@ -42,20 +45,27 @@ function ProfileSettings() {
         password: '',
         newPassword: '',
         newPasswordCheck: '',
+        gender: gender || '',
         profileImage: null
       });
+
+      // 초기 전화번호 유효성 검사
+      validatePhoneNumber(phoneNumber);
     }
   }, []);
 
+  // 입력 필드 변경 핸들러
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
   };
 
+  // 파일 입력 필드 변경 핸들러
   const handleFileChange = (e) => {
     setUserInfo({ ...userInfo, profileImage: e.target.files[0] });
   };
 
+  // 새 비밀번호 유효성 검사 핸들러
   const validateNewPassword = (e) => {
     const newPassword = e.target.value;
     setUserInfo({ ...userInfo, newPassword });
@@ -73,6 +83,7 @@ function ProfileSettings() {
     }
   };
 
+  // 새 비밀번호 확인 유효성 검사 핸들러
   const validateNewPasswordCheck = (e) => {
     const newPasswordCheck = e.target.value;
     setUserInfo({ ...userInfo, newPasswordCheck });
@@ -92,9 +103,9 @@ function ProfileSettings() {
     }
   };
 
-  const validatePhoneNumber = (e) => {
-    const phoneNumber = e.target.value;
-    setUserInfo({ ...userInfo, phoneNumber });
+  // 전화번호 유효성 검사 핸들러
+  const validatePhoneNumber = (phoneNumber) => {
+    if (!phoneNumber) return;
 
     const phoneRegTest = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
     if (!phoneRegTest.test(phoneNumber)) {
@@ -109,19 +120,30 @@ function ProfileSettings() {
     }
   };
 
+  // 전화번호 변경 핸들러
+  const handlePhoneNumberChange = (e) => {
+    const phoneNumber = e.target.value;
+    setUserInfo({ ...userInfo, phoneNumber });
+    validatePhoneNumber(phoneNumber);
+  };
+
+  // 폼 제출 핸들러
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 새 비밀번호와 확인 비밀번호가 일치하지 않을 때
     if (userInfo.newPassword !== userInfo.newPasswordCheck) {
       alert('새 비밀번호가 일치하지 않습니다.');
       return;
     }
 
+    // 전화번호가 유효하지 않을 때
     if (!validity.isPhoneNumberValid) {
       alert('올바른 전화번호 형식이 아닙니다.');
       return;
     }
 
+    // 새 비밀번호가 유효하지 않을 때
     if (!validity.isNewPasswordValid || !validity.isNewPasswordCheckValid) {
       alert('올바르지 않은 비밀번호 형식입니다.');
       return;
@@ -132,24 +154,30 @@ function ProfileSettings() {
     formData.append('phoneNumber', userInfo.phoneNumber);
     formData.append('password', userInfo.password);
     formData.append('newPassword', userInfo.newPassword);
+    formData.append('gender', userInfo.gender);
     if (userInfo.profileImage) {
       formData.append('profileImage', userInfo.profileImage);
     }
 
     try {
       const response = await updateUserInfo(formData);
-      console.log(response); // Debug log to see the response
+      console.log(response); // 응답 로그 확인
       if (response.success) {
         alert('정보가 성공적으로 업데이트되었습니다.');
-        // Update localStorage with new profile image URL
+        // 로컬 스토리지에 새로운 프로필 이미지 URL 업데이트
         if (response.profileImage) {
           localStorage.setItem('profileImage', response.profileImage);
-          console.log('Updated profileImage in localStorage:', response.profileImage); // Debug log
+          console.log('Updated profileImage in localStorage:', response.profileImage); // 로그 확인
         }
-        // Update localStorage with new phone number
+        // 로컬 스토리지에 새로운 전화번호 업데이트
         if (response.phoneNumber) {
           localStorage.setItem('phoneNumber', response.phoneNumber);
-          console.log('Updated phoneNumber in localStorage:', response.phoneNumber); // Debug log
+          console.log('Updated phoneNumber in localStorage:', response.phoneNumber); // 로그 확인
+        }
+        // 로컬 스토리지에 새로운 성별 업데이트
+        if (response.gender) {
+          localStorage.setItem('gender', response.gender);
+          console.log('Updated gender in localStorage:', response.gender); // 로그 확인
         }
         navigate('/mypage');
       } else {
@@ -161,6 +189,7 @@ function ProfileSettings() {
     }
   };
 
+  // 취소 버튼 핸들러
   const handleCancel = () => {
     navigate('/mypage');
   };
@@ -184,7 +213,7 @@ function ProfileSettings() {
                   type="text"
                   name="phoneNumber"
                   value={userInfo.phoneNumber}
-                  onChange={validatePhoneNumber}
+                  onChange={handlePhoneNumberChange}
                   placeholder="010-1234-5678"
                 />
                 <p className="errorMsg mt-2 text-xl text-red-600">{messages.phoneNumberMessage}</p>
@@ -203,6 +232,26 @@ function ProfileSettings() {
                 <input type="password" name="newPasswordCheck" value={userInfo.newPasswordCheck} onChange={validateNewPasswordCheck} placeholder="새 비밀번호 확인" />
                 <p className="errorMsg mt-2 text-xl text-red-600">{messages.newPasswordCheckMessage}</p>
               </div>
+              {/* 성별 */}
+              <div className="my-5 text-sm">
+                <label htmlFor="gender" className="block text-black text-left">Gender</label>
+                <div className="flex items-center mt-4">
+                  <label className="inline-flex items-center mr-4">
+                    <input type="radio" name="gender" value="none" className="mr-2" defaultChecked onChange={handleChange} />
+                    선택안함
+                  </label>
+                  <label className="inline-flex items-center mr-4">
+                    <input type="radio" name="gender" value="male" className="mr-2" onChange={handleChange} />
+                    남성
+                  </label>
+                  <label className="inline-flex items-center">
+                    <input type="radio" name="gender" value="female" className="mr-2" onChange={handleChange} />
+                    여성
+                  </label>
+                </div>
+              </div>
+              {/* 성별 끝 */}
+
               <div className="form-buttons">
                 <button
                   type="submit"

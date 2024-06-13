@@ -8,7 +8,7 @@ const GoogleLoginButton = () => {
   const navigate = useNavigate();
   const handleLoginSuccess = (response) => {
     console.log(response);
-    fetch("http://localhost:8080/api/auth/google", {
+    fetch("https://js2.jsflux.co.kr/api/auth/google", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,6 +27,9 @@ const GoogleLoginButton = () => {
         localStorage.setItem("email", decodedToken.email);
         localStorage.setItem("profileImage", decodedToken.pictureUrl);
         localStorage.setItem("loginType", decodedToken.loginType);
+        localStorage.setItem("phoneNumber", decodedToken.phoneNumber);
+        localStorage.setItem("gender", decodedToken.gender);
+        localStorage.setItem("nickName", decodedToken.nickName);
         navigate("/");
       })
       .catch((error) => {

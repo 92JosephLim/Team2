@@ -1,10 +1,9 @@
 import React from "react";
-import TopNav from "../../components/TopNav";
-import SideNav from "../../components/SideNav";
-import Footer from "../../components/Footer";
-import FriendTable from "../../components/searchFriend/FriendTable";
-import FriendTitle from "../../components/searchFriend/FriendTitle";
-
+import Footer from "../../components/footer/Footer";
+import TopNav from "../../components/topnav/TopNav";
+import SideNav from '../../components/sidenav/SideNav';
+import FriendTable from "../../components/friend/FriendTable";
+import FriendTitle from "../../components/friend/FriendTitle";
 //친구 목록 창 => dm, 친구 삭제 가능
 function FriendMain() {
   return (

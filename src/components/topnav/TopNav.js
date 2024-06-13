@@ -1,9 +1,9 @@
 import React from "react";
-import newLogo from "../assets/new_logo.png"; // 새로운 로고 이미지 경로
+import newLogo from "../../assets/new_logo.png"; // 새로운 로고 이미지 경로
 import { Link, useNavigate } from "react-router-dom";
-import "../css/TopNav.css"; // 스타일 파일 추가
+import "./TopNav.css"; // 스타일 파일 추가
 // 다국어 지원 모드 추가
-import i18next from "../locales/i18";
+import i18next from "../../locales/i18n";
 import { useTranslation } from "react-i18next";
 import { MdOutlineLanguage } from "react-icons/md";
 
@@ -24,12 +24,9 @@ function TopNav() {
   const handleMyPage = () => {
     navigate("/mypage");
   };
-
   // 클릭 시 언어 변경
-  const clickHandler = () => {
-    i18next.language === "ko"
-      ? i18next.changeLanguage("en")
-      : i18next.changeLanguage("ko");
+  const clickHandler = (lang) => {
+    i18next.changeLanguage(lang);
   };
 
   // 로그아웃 함수
@@ -39,6 +36,9 @@ function TopNav() {
     localStorage.removeItem('phoneNumber');
     localStorage.removeItem('gender');
     localStorage.removeItem('profileImage');
+    localStorage.removeItem('loginType');
+    localStorage.removeItem('gender');
+    localStorage.removeItem('nickName');
     navigate('/');
   };
 
@@ -46,21 +46,21 @@ function TopNav() {
     <header className="header">
       <div className="logo">
         <button className="logo-button">
-          <a href="/"><img src={newLogo} alt="New Logo" /></a>
+          <Link to="/"><img src={newLogo} alt="New Logo" /></Link>
         </button>
       </div>
       <nav className="nav">
         {/* Video Chat 버튼 */}
         <button className="nav-button video-chat-btn" onClick={handleVideoChat}>Video Chat</button>
-        <Link to="/cr" className="action-link">방만들기</Link>
-        <Link to="/roomList" className="action-link">방목록</Link>
+        <Link to="/cr" className="action-link">{t("room")}</Link>
+        <Link to="/roomList" className="action-link">{t("list")}</Link>
         {/* About 드롭다운 */}
         <div className="dropdown">
           {/* About : 고객지원으로 네이밍 변경 */}
-          <button className="dropdown-button">About</button>
+          <button className="dropdown-button">{t("About")}</button>
           <div className="dropdown-content">
-            <Link to="/announcement">공지사항</Link>
-            <Link to="/customerService">고객센터</Link>
+            <Link to="/announcement">{t("notice")}</Link>
+            <Link to="/customerService">{t("customerCenter")}</Link>
           </div>
         </div>
         {/* 다국어 지원 */}
@@ -74,18 +74,18 @@ function TopNav() {
           </div>
         </div>
         {token && (
-          <button className="action-button" onClick={handleMyPage}>My Page</button>
+          <button className="action-button" onClick={handleMyPage}>{t("mypage")}</button>
         )}
         <div className="login-options">
           {token ? (
             <>
               {/* 로그인 된 상태에서는 환영 메시지와 로그아웃 버튼 표시 */}
               <span className="mr-4">Welcome, {email}</span>
-              <button onClick={handleLogout} className="bg-red-500 px-3 py-2 rounded-md hover:bg-red-700">Logout</button>
+              <button onClick={handleLogout} className="bg-red-500 px-3 py-2 rounded-md hover:bg-red-700">{t("logout")}</button>
             </>
           ) : (
             // 로그인되지 않은 상태에서는 로그인 버튼 표시
-            <Link to="/login" className="login-btn">Login</Link>
+            <Link to="/login" className="login-btn">{t("login")}</Link>
           )}
         </div>
       </nav>

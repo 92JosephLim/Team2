@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import "./App.css";
 import VideoMeeting from "./pages/VideoMeeting";
 import Mainpage from "./pages/Mainpage";
@@ -19,6 +19,7 @@ import ProfileSettings from "./pages/mypage/ProfileSettings"; // 새로 추가�
 import Translation from "./components/Translation";
 import KakaoRedirect from "./pages/social/KakoRedirect";
 import JoinRoom from "./pages/JoinRoom";
+import SocialProfileSettings from "./pages/mypage/SocialProfileSettings";
 
 const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
 
@@ -42,6 +43,7 @@ function App() {
             <Route path="/friendMain" element={<FriendMain />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/ProfileSettings" element={<ProfileSettings />} /> {/* 새 경로 추가 */}
+            <Route path="/SocialProfileSettings" element={<SocialProfileSettings />} /> {/* 새 경로 추가 */}
             <Route path="/translation" element={<Translation />} />
             <Route path="/auth" element={<KakaoRedirect />} />
             <Route path="/joinRoom" element={<JoinRoom />} />

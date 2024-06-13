@@ -1,9 +1,9 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import TranslationEn from "./en.json";
-import TranslationKo from "./ko.json";
-import TranslationCh from "./ch.json";
-import TranslationJp from "./jp.json";
+import TranslationEn from "./json/en.json";
+import TranslationKo from "./json/ko.json";
+import TranslationZh from "./json/zh.json";
+import TranslationJa from "./json/ja.json";
 
 const resources = {
   en: {
@@ -12,11 +12,11 @@ const resources = {
   ko: {
     translations: TranslationKo
   },
-  ch: {
-    translations: TranslationCh
+  zh: {
+    translations: TranslationZh
   },
-  jp: {
-    translations: TranslationJp
+  ja: {
+    translations: TranslationJa
   }
 };
 

@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import "../css/RoomList.css";
+import "./RoomList.css";
 import { useNavigate } from "react-router-dom";
 function RoomList() {
   const navigate = useNavigate();

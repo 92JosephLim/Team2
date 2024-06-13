@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
-import Kakao from "./social/Kakao";
-import GoogleLoginButton from "./social/GoogleLoginButton";
+import Kakao from "../social/Kakao";
+import GoogleLoginButton from "../social/GoogleLoginButton";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode"; // Named import로 수정
 
@@ -49,7 +49,7 @@ function Login() {
     const formData = { email, password };
 
     axios
-      .post("http://localhost:8080/api/login", formData)
+      .post("https://js2.jsflux.co.kr/api/login", formData)
       .then((response) => {
         if (response.data.token) {
           const decodedToken = jwtDecode(response.data.token); // 토큰 디코드
@@ -59,6 +59,8 @@ function Login() {
           localStorage.setItem("phoneNumber", decodedToken.phoneNumber); // localStorage에 전화번호 저장
           localStorage.setItem("gender", decodedToken.gender); // localStorage에 성별 저장
           localStorage.setItem("profileImage", decodedToken.profileImage); // localStorage에 프로필이미지 경로 저장
+          localStorage.setItem("loginType", decodedToken.loginType); // localStorage에 프로필이미지 경로 저장
+          localStorage.setItem("nickName", decodedToken.nickName);
           navigate("/");
         }
       })
@@ -112,7 +114,12 @@ function Login() {
                   />
                   <p className="errorMsg text-red-600 mt-2 text-xl">{passwordMessage}</p>
                   <div className="flex justify-end mt-5 text-lg text-blue-800 font-semibold">
-                    <a href="/findpwd">비밀번호가 생각나지 않는다면?</a>
+                  <span
+                  onClick={() => navigate("/findpwd")}
+                  className="text-blue-800 font-semibold cursor-pointer"
+                >
+                  비밀번호가 생각나지 않는다면?
+                </span>
                   </div>
                 </div>
                 {errorMessage && <p className="text-red-600 mt-4 text-xl">{errorMessage}</p>}
@@ -139,10 +146,13 @@ function Login() {
               <p className="mt-12 text-xl text-center font-light text-gray-400">
                 {" "}
                 계정이 없으신가요?{" "}
-                <a href="/signup" className="text-blue-800 font-semibold">
+                <span
+                  onClick={() => navigate("/signup")}
+                  className="text-blue-800 font-semibold cursor-pointer"
+                >
                   {" "}
                   회원가입하기{" "}
-                </a>
+                </span>
               </p>
             </div>
           </div>

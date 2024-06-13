@@ -5,7 +5,7 @@ function Kakao() {
     //rest api key : 이거 현재 내 rest api key
     const REST_API_KEY = "42134d426dda29defa30ce0badcf5b20"
     //redirect uri
-    const REDIRECT_URI = "http://localhost:3000/auth"
+    const REDIRECT_URI = "https://js2.jsflux.co.kr/auth"
 
     //oauth 요청 url
     const Kakao_Oauth_Url = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;

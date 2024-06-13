@@ -3,7 +3,7 @@ import "../css/Login.css";
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
-import { registerUser, sendEmailVerification, confirmEmailVerification } from "../api/apiService"; // API 서비스 함수들 가져오기
+import { registerUser, sendEmailVerification, confirmEmailVerification } from "../../api/apiService"; // API 서비스 함수들 가져오기
 
 function Signup() {
   const navigate = useNavigate();
@@ -308,9 +308,14 @@ function Signup() {
                 </button>
               </form>
               <p className="mt-12 text-xl text-center font-light text-gray-400">
-                {" "}계정이 있으신가요?{" "}
-                <a href="/login" className="text-blue-800 font-semibold"> 로그인하기 </a>
-              </p>
+      계정이 있으신가요?{" "}
+      <span
+        onClick={() => navigate("/login")}
+        className="text-blue-800 font-semibold cursor-pointer"
+      >
+        로그인하기
+      </span>
+    </p>
             </div>
           </div>
         </div>
