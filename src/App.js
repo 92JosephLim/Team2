@@ -1,56 +1,60 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
-import Register from './components/Register';
-import Login from './components/Login';
-import ChatRooms from './components/ChatRooms';
-import ChatRoom from './components/ChatRoom';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import VideoMeeting from "./pages/VideoMeeting";
+import Mainpage from "./pages/Mainpage";
+import CreateRoom from "./pages/CreateRoom";
+import RoomList from "./pages/RoomList";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import FindPassword from "./pages/FindPassword";
+import CustomerService from "./pages/CustomerService";
+import Announcement from "./pages/Announcement";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import ReportFriend from "./pages/mypage/ReportFriend";
+import InviteFriend from "./pages/mypage/InviteFriend";
+import FriendMain from "./pages/mypage/FriendMain";
+import MyPage from "./pages/MyPage";
+import ProfileSettings from "./pages/mypage/ProfileSettings"; // 새로 추가한 ProfileSettings 컴포넌트
+import Translation from "./components/Translation";
+import KakaoRedirect from "./pages/social/KakaoRedirect";
+import FindPasswordAfter from "./pages/findPassword/FindPasswordAfter"
+import { AuthProvider } from "./pages/social/Authcontext";
+import JoinRoom from "./pages/JoinRoom";
 
-const App = () => {
-  const [currentRoomId, setCurrentRoomId] = useState(null);
-  const navigate = useNavigate();
+const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
 
-  const handleRegister = () => {
-    navigate('/login'); // 회원가입 후 로그인 페이지로 이동
-  };
-
-  const handleLogin = () => {
-    navigate('/chatrooms'); // 로그인 후 채팅방 목록 페이지로 이동
-  };
-
-  const handleEnterRoom = (roomId) => {
-    setCurrentRoomId(roomId);
-    navigate(`/chatroom/${roomId}`); // 방에 들어갈 때 해당 방 페이지로 이동
-  };
-
+function App() {
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/chatrooms">Chat Rooms</Link>
-          </li>
-        </ul>
-      </nav>
-      <Routes>
-        <Route path="/register" element={<Register onRegister={handleRegister} />} />
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/chatrooms" element={<ChatRooms onEnterRoom={handleEnterRoom} />} />
-        <Route path="/chatroom/:roomId" element={<ChatRoom />} />
-      </Routes>
-    </div>
+    <GoogleOAuthProvider clientId={clientId}>
+      <AuthProvider>
+        <div className="App">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Mainpage />} />
+              <Route path="/video" element={<VideoMeeting />} />
+              <Route path="/createroom" element={<CreateRoom />} />
+              <Route path="/roomList" element={<RoomList />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/findpwd" element={<FindPassword />} />
+              <Route path="/report" element={<ReportFriend />} />
+              <Route path="/customerService" element={<CustomerService />} />
+              <Route path="/announcement" element={<Announcement />} />
+              <Route path="/invite" element={<InviteFriend />} />
+              <Route path="/friendMain" element={<FriendMain />} />
+              <Route path="/mypage" element={<MyPage />} />
+              <Route path="/ProfileSettings" element={<ProfileSettings />} />
+              <Route path="/translation" element={<Translation />} />
+              <Route path="/auth" element={<KakaoRedirect />} />
+              <Route path="/joinRoom" element={<JoinRoom />} />
+              <Route path="/findPasswordAfter" element={<FindPasswordAfter />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </AuthProvider>
+    </GoogleOAuthProvider>
   );
-};
+}
 
-const AppWithRouter = () => (
-  <Router>
-    <App />
-  </Router>
-);
-
-export default AppWithRouter;
+export default App;

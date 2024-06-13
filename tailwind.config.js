@@ -2,8 +2,12 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: {
-    extend: {},
+    extend: {
+      flexGrow: {
+        '2': 2,
+        '8': 8,
+      }
+    },
   },
   plugins: [],
 }
-

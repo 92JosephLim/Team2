@@ -1,6 +1,13 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom"; // Import useLocation
+
+import SockJS from 'sockjs-client'; //추가 
+import { Stomp } from '@stomp/stompjs'; //추가
 
 function initjanus() {
+
+
   if (!Janus.isWebrtcSupported()) {
     bootbox.alert("No WebRTC support... ");
     return;
@@ -312,49 +319,85 @@ function initjanus() {
   });
 }
 
-function getRoomList() {
-  var body = { request: "list" };
-  sfutest.send({
-    message: body,
-    success: function (result) {
-      if (result && result.list) {
-        var rooms = result.list;
-        console.log("Rooms list: ", rooms);
-        var roomListElement = $("#roomlist");
-        roomListElement.empty(); // Clear any previous list
-        for (var i = 0; i < rooms.length; i++) {
-          var room = rooms[i];
-          roomListElement.append("<li>Room ID: " + room.room + ", Description: " + room.description + "</li>");
-        }
-      }
-    },
-  });
-}
+function JoinRoom() {
 
-function VideoMeeting() {
+
+  const [messages, setMessages] = useState([]); // 추가
+  const [input, setInput] = useState(''); // 추가
+  const [userId, setUserId] = useState(''); // 사용자 ID를 저장하는 상태 변수 // 추가
+  const [stompClient, setStompClient] = useState(null); // 추가
+  const [isConnected, setIsConnected] = useState(false);// 추가
+
+  const location = useLocation(); // Initialize useLocation
+  const queryParams = new URLSearchParams(location.search);
+  const roomId = queryParams.get("roomId");
+  const [roomName, setRoomName] = useState("");
+
+  useEffect(() => {
+    if (roomId) {
+      setRoomName(roomId);
+
+      const socket = new SockJS('http://localhost:80/chat');
+      const client = Stomp.over(socket);
+
+      client.connect({}, () => {
+        client.subscribe(`/topic/rooms/${roomId}`, (message) => {
+          setMessages((prevMessages) => [...prevMessages, message.body]);
+        });
+        setIsConnected(true);
+      });
+
+      client.onclose = () => {
+        setIsConnected(false);
+      };
+
+      setStompClient(client);
+
+      return () => {
+        if (client) {
+          client.disconnect();
+        }
+      };
+    }
+  }, [roomId]);
+  
+
+
+  const sendMessage = () => {
+    if (isConnected && input.trim() !== '' && userId.trim() !== '') {
+      const message = { content: `${userId}: ${input}` }; // 메시지 형식 설정
+      stompClient.send(`/app/rooms/${roomId}/message`, {}, JSON.stringify(message));
+      setInput('');
+    }
+  };
+
+
   return (
-    <div>
+    <>
+
+
+    <div className="flex">
+
+
+    <div className="flex-grow-8 flex justify-between items-center p-4">
+
       <nav className="navbar navbar-default navbar-static-top"></nav>
       <div className="container">
         <div className="row">
           <div className="col-md-12">
             <div className="page-header">
               <h1>
-                화상회의
+                방참여하기
                 <button className="btn btn-default" autoComplete="off" id="start" onClick={initjanus}>
-                  Start
-                </button>
-                <button className="roomlist" autoComplete="off" id="list" onClick={getRoomList}>
-                  방목록조회
+                  클릭!
                 </button>
               </h1>
             </div>
             <div className="container" id="details">
               <div className="row">
                 <div className="col-md-12">
-                  <h3>Start 버튼을 누르고 데모를 시작하세요</h3>
-                  <h4>채팅방 ID로 기존 채팅방을 연결하거나 새로 생성합니다.</h4>
-                  <h4>* ID는 영문 또는 숫자로 입력해야 합니다.</h4>
+                  <h3>버튼을 눌러서 방에 참가하세요</h3>
+                  <h4>대화명은 영어만 가능합니다.</h4>
                 </div>
               </div>
             </div>
@@ -371,6 +414,8 @@ function VideoMeeting() {
                         type="text"
                         placeholder="방번호를 입력하세요"
                         id="roomname"
+                        value={roomName}
+                        readOnly
                       />
                     </div>
                     <span className="label label-info" id="you"></span>
@@ -386,28 +431,9 @@ function VideoMeeting() {
                           if (e.key === "Enter") checkEnter(e.target, e);
                         }}
                       />
-
-                      {/* <span className="input-group-btn">
-                        <button className="btn btn-success" autoComplete="off" id="register">
-                          대화방 참여
-                        </button>
-                      </span> */}
-                    </div>
-                    <div className="input-group margin-bottom-md">
-                      <span className="input-group-addon">방제목</span>
-                      <input
-                        autoComplete="off"
-                        className="form-control"
-                        type="text"
-                        placeholder="방제목"
-                        id="description"
-                        onKeyPress={(e) => {
-                          if (e.key === "Enter") checkEnter(e.target, e);
-                        }}
-                      />
                       <span className="input-group-btn">
                         <button className="btn btn-success" autoComplete="off" id="register">
-                          대화방 만들기
+                          대화방 참여
                         </button>
                       </span>
                     </div>
@@ -534,7 +560,45 @@ function VideoMeeting() {
         </div>
         <hr />
       </div>
+      </div>
+
+
+      <div className="flex-grow-2 flex justify-between items-center p-4">
+                      
+    
+      </div>
+      <div>
+      <h2>Chat Room {roomId}</h2>
+      <ul style={{ listStyleType: 'none', padding: 0 }}>
+        {messages.map((msg, index) => (
+          <li key={index}>{msg}</li>
+        ))}
+      </ul>
+      <input
+        type="text"
+        placeholder="Enter your ID" // 사용자 ID 입력 필드
+        value={userId}
+        onChange={(e) => setUserId(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Enter your message"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') sendMessage();
+        }}
+      />
+      <button onClick={sendMessage}>Send</button>
     </div>
+
+
+
+</div>
+  
+
+
+    </>
   );
 }
 
@@ -544,4 +608,4 @@ const checkEnter = (target, event) => {
   }
 };
 
-export default VideoMeeting;
+export default JoinRoom;

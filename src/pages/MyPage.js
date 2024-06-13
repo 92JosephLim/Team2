@@ -2,30 +2,16 @@ import React from 'react';
 import '../css/MyPage.css';
 import TopNav from "../components/TopNav";
 import Footer from "../components/Footer";
+import SideNav from '../components/SideNav';
 
 const MyPage = () => {
   return (
-    <div className="myPage">
-      <header className="header">
-        
-      </header>
-      <div className="content">
-        <aside className="sidebar">
-          <div className="profile-section">
-            <img src="profile.jpg" alt="profile" className="profile-img" />
-            <h2>홍길동</h2>
-            <p>@honggildong</p>
-          </div>
-          <nav className="nav">
-            <ul>
-              <li><button className="nav-button">프로필</button></li>
-              <li><button className="nav-button">채팅 내역</button></li>
-              <li><button className="nav-button">화상채팅 내역</button></li>
-              <li><button className="nav-button">친구</button></li>
-            </ul>
-          </nav>
-        </aside>
-        <main className="main-content">
+    // 이거 사용자 이름, 이메일, 채팅 내역, 친구목록 전부 다 {}로 처리하기
+    <div className="flex flex-col min-h-screen">
+      <TopNav />
+      <div className="flex flex-1">
+        <SideNav />
+        <main className="flex-1 p-6">
           <section className="profile-info">
             <h2>프로필</h2>
             <div>
@@ -63,6 +49,7 @@ const MyPage = () => {
           </section>
         </main>
       </div>
+      <Footer />
     </div>
   );
 };
