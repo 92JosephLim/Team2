@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import TopNav from "../components/TopNav";
-import Footer from "../components/Footer";
+import Footer from "../../components/footer/Footer";
+import TopNav from "../../components/topnav/TopNav";
 import { useNavigate } from "react-router-dom";
 import Kakao from "../social/Kakao";
 import GoogleLoginButton from "../social/GoogleLoginButton";
@@ -49,7 +49,7 @@ function Login() {
     const formData = { email, password };
 
     axios
-      .post("https://js2.jsflux.co.kr/api/login", formData)
+      .post(`${process.env.REACT_APP_BASE_URL}/api/login"`, formData)
       .then((response) => {
         if (response.data.token) {
           const decodedToken = jwtDecode(response.data.token); // 토큰 디코드

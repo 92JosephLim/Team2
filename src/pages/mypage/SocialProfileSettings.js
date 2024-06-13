@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import TopNav from '../../components/TopNav'; // Update with correct path
 import SideNav from '../../components/SideNav'; // Update with correct path
 import Footer from '../../components/Footer'; // Update with correct path
-import '../../css/ProfileSettings.css'; // Update with correct path
+import './ProfileSettings.css'; // Update with correct path
 import { SocialupdateUserInfo } from '../../api/apiService';
 
 const SocialProfileSettings = () => {

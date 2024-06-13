@@ -1,5 +1,5 @@
 import React from "react";
-import '../../components/footer/Footer.css'; // css 폴더 안의 Footer.css 파일을 import
+import './Footer.css'; // css 폴더 안의 Footer.css 파일을 import
 
 function Footer() {
   return (

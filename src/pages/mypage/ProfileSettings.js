@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TopNav from "../../components/topnav/TopNav";
 import Footer from "../../components/footer/Footer";
+import TopNav from "../../components/topnav/TopNav";
 import SideNav from '../../components/sidenav/SideNav';
-import '../../css/ProfileSettings.css'; // 올바른 경로로 업데이트
+import './ProfileSettings.css'; // 올바른 경로로 업데이트
 import { updateUserInfo } from '../../api/apiService'; // API 서비스 함수 임포트
 // 다국어 지원 모드 추가
 import i18next from "../../locales/i18n";
