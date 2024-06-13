@@ -1,32 +1,56 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
-import VideoMeeting from "./pages/VideoMeeting";
-import Mainpage from "./pages/Mainpage";
-import CreateRoom from "./pages/CreateRoom";
-import RoomList from "./pages/RoomList";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import FindPassword from "./pages/FindPassword";
-import MyPage from "./pages/MyPage"; // MyPage 컴포넌트 import
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import Register from './components/Register';
+import Login from './components/Login';
+import ChatRooms from './components/ChatRooms';
+import ChatRoom from './components/ChatRoom';
 
-function App() {
+const App = () => {
+  const [currentRoomId, setCurrentRoomId] = useState(null);
+  const navigate = useNavigate();
+
+  const handleRegister = () => {
+    navigate('/login'); // 회원가입 후 로그인 페이지로 이동
+  };
+
+  const handleLogin = () => {
+    navigate('/chatrooms'); // 로그인 후 채팅방 목록 페이지로 이동
+  };
+
+  const handleEnterRoom = (roomId) => {
+    setCurrentRoomId(roomId);
+    navigate(`/chatroom/${roomId}`); // 방에 들어갈 때 해당 방 페이지로 이동
+  };
+
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Mainpage />} />
-          <Route path="/video" element={<VideoMeeting />} />
-          <Route path="/createroom" element={<CreateRoom />} />
-          <Route path="/findroom" element={<RoomList />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/findpwd" element={<FindPassword />} />
-          <Route path="/mypage" element={<MyPage />} /> {/* MyPage 경로 추가 */}
-        </Routes>
-      </BrowserRouter>
+    <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/chatrooms">Chat Rooms</Link>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/register" element={<Register onRegister={handleRegister} />} />
+        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/chatrooms" element={<ChatRooms onEnterRoom={handleEnterRoom} />} />
+        <Route path="/chatroom/:roomId" element={<ChatRoom />} />
+      </Routes>
     </div>
   );
-}
+};
 
-export default App;
+const AppWithRouter = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default AppWithRouter;
