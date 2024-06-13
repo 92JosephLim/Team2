@@ -1,14 +1,19 @@
 import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode"; // Named import로 수정
+import jwtDecode from "jwt-decode"; // Named import로 수정
 import { useNavigate } from "react-router-dom";
 const GoogleLoginButton = () => {
-  const clientId = "528171389749-uito6rm8as4mtaflock5hb96lruna0vu.apps.googleusercontent.com";
+
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
   const navigate = useNavigate();
+
   const handleLoginSuccess = (response) => {
+
     console.log(response);
-    fetch("https://js2.jsflux.co.kr/api/auth/google", {
+    // .env 파일에서 선언한 변수로 변경하기
+    fetch(process.env.REACT_APP_GOOGLE_OAUTH_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

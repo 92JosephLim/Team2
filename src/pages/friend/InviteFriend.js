@@ -17,6 +17,7 @@ function InviteFriend() {
   const handleSearch = async (event) => {
     event.preventDefault();
     try {
+      // .env 파일에서 선언한 변수로 변경하기
       const response = await axios.post("http://localhost:8080/api/members/search", { nickName });
       console.log(response.data);
       setResults(response.data);
@@ -40,6 +41,7 @@ function InviteFriend() {
     }
 
     try {
+      // .env 파일에서 선언한 변수로 변경하기
       const response = await axios.post("http://localhost:8080/api/friends/add", { senderEmail, receiverEmail });
       console.log(response.data);
       alert("친구 추가 요청을 보냈습니다.");
@@ -106,13 +108,6 @@ function InviteFriend() {
                         >
                           <FaCheck size={24} />
                         </button>
-                        {/* <button
-                          type="button"
-                          className="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                          onClick={() => handleReject(result.email)}
-                        >
-                          <RiDeleteBin5Line size={24} />
-                        </button> */}
                       </td>
                     </tr>
                   ))

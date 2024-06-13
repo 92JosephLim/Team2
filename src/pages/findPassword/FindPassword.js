@@ -28,6 +28,7 @@ function FindPassword() {
     }
 
     try {
+      // .env 에서 process.env 이거로 변경하기
       const response = await axios.post("http://localhost:8080/api/findpassword", { email });
       if (response) {
         setMessage("비밀번호 재설정 이메일을 보냈습니다.");

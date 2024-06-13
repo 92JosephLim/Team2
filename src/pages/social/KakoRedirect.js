@@ -1,11 +1,10 @@
 import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode"; // Named import로 수정
+import jwtDecode from "jwt-decode"; // Named import로 수정
 
 function KakaoRedirect() {
   const navigate = useNavigate();
-  // const { login } = useContext(AuthContext);
 
   useEffect(() => {
     let params = new URL(document.URL).searchParams;
@@ -13,7 +12,7 @@ function KakaoRedirect() {
     console.log(code);
     if (code) {
       axios
-        .get(`https://js2.jsflux.co.kr/oauth/kakao?code=${code}`)
+        .get(`${process.env.REACT_APP_KAKAO_OAUTH_URL}?code=${code}`)
         .then((response) => {
           // 백엔드로부터 응답을 받은 후 처리할 로직
           console.log(response.data);

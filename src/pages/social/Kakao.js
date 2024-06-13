@@ -3,15 +3,15 @@ import React from "react";
 function Kakao() {
 
     //rest api key : 이거 현재 내 rest api key
-    const REST_API_KEY = "42134d426dda29defa30ce0badcf5b20"
+    const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
     //redirect uri
-    const REDIRECT_URI = "https://js2.jsflux.co.kr/auth"
+    const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
 
     //oauth 요청 url
     const Kakao_Oauth_Url = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
     //내 Client secret code
-    const CLIENT_SECRET = "q1DqlwnC353miLNq0gV3Hs46OKpjCAnc";
+    const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 
     const handleKakaoLogin = () => {
         window.location.href = Kakao_Oauth_Url;

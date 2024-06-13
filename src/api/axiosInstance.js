@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL // 환경 변수 사용
+  baseURL: process.env.REACT_APP_PRODUCTION_URL, // 기본 URL 설정
 });
 
 // 요청 인터셉터

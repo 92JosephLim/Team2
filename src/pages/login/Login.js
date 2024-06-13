@@ -49,7 +49,8 @@ function Login() {
     const formData = { email, password };
 
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/api/login"`, formData)
+      // .env 파일에서 선언한 변수로 변경하기
+      .post(`https://loaclhost:3000/api/login"`, formData)
       .then((response) => {
         if (response.data.token) {
           const decodedToken = jwtDecode(response.data.token); // 토큰 디코드
