@@ -1,7 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import VideoMeeting from './pages/VideoMeeting';
+import RoomSetting from './pages/Settings/RoomSetting'; // RoomSetting 컴포넌트 임포트
+import VideoAudioSetting from './pages/Settings/VideoAudioSetting'; // VideoAudioSetting 컴포넌트 임포트
+import ChatSetting from './pages/Settings/ChatSetting'; // ChatSetting 컴포넌트 임포트
+import OtherSetting from './pages/Settings/OtherSetting'; // OtherSetting 컴포넌트 임포트
 import Mainpage from './pages/Mainpage';
 import CreateRoom from './pages/CreateRoom';
 import RoomList from './pages/RoomList';
@@ -33,7 +36,10 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Mainpage />} />
-              <Route path="/video" element={<VideoMeeting />} />
+              <Route path="/settings/room-setting" element={<RoomSetting />} /> {/* RoomSetting 라우트 추가 */}
+              <Route path="/settings/video-audio-setting" element={<VideoAudioSetting />} /> {/* VideoAudioSetting 라우트 추가 */}
+              <Route path="/settings/chat-setting" element={<ChatSetting />} /> {/* ChatSetting 라우트 추가 */}
+              <Route path="/settings/other-setting" element={<OtherSetting />} /> {/* OtherSetting 라우트 추가 */}
               <Route path="/createroom" element={<CreateRoom />} />
               <Route path="/roomList" element={<RoomList />} />
               <Route path="/login" element={<Login />} />

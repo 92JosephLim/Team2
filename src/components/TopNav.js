@@ -26,6 +26,23 @@ function TopNav() {
     navigate("/mypage");
   };
 
+  // 설정 옵션 클릭 시 동작할 함수
+  const handleRoomSettings = () => {
+    navigate("/settings/room-setting");
+  };
+
+  const handleVideoAudioSettings = () => {
+    navigate("/settings/video-audio-setting");
+  };
+
+  const handleChatSettings = () => {
+    navigate("/settings/chat-setting");
+  };
+
+  const handleOtherSettings = () => {
+    navigate("/settings/other-setting");
+  };
+
   // 클릭 시 언어 변경
   const clickHandler = (lang) => {
     i18next.changeLanguage(lang);
@@ -79,15 +96,24 @@ function TopNav() {
           <div className="dropdown-content">
             <Link to="/ProfileSettings">상세 프로필 설정</Link>
             <Link to="/messageChat">채팅 내역</Link> {/* 경로 수정 */}
-            <Link to="/videoHistory">화상채팅 내역</Link>
+            <Link to="/videoHistory">화상채팅</Link>
             <Link to="/friends">친구</Link>
+          </div>
+        </div>
+        {/* 설정 드롭다운 */}
+        <div className="dropdown">
+          <button className="dropdown-button">Settings</button>
+          <div className="dropdown-content">
+            <button className="dropdown-content-button" onClick={handleRoomSettings}>방 설정</button>
+            <button className="dropdown-content-button" onClick={handleVideoAudioSettings}>비디오 및 오디오 설정</button>
+            <button className="dropdown-content-button" onClick={handleChatSettings}>채팅 설정</button>
+            <button className="dropdown-content-button" onClick={handleOtherSettings}>기타 설정</button>
           </div>
         </div>
         <div className="login-options">
           <Link to="/login" className="login-btn">Login</Link>
         </div>
         {/* <div className="login-options">
-        
           {token ? (
             <>
               로그인 된 상태에서는 환영 메시지와 로그아웃 버튼 표시
@@ -105,3 +131,4 @@ function TopNav() {
 }
 
 export default TopNav;
+
