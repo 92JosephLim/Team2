@@ -5,7 +5,9 @@ function Kakao() {
     //rest api key : 이거 현재 내 rest api key
     const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
     //redirect uri
-    const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+    const REDIRECT_URI = "http://localhost:3000/auth";
+    // 배포환경
+    // const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
 
     //oauth 요청 url
     const Kakao_Oauth_Url = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;

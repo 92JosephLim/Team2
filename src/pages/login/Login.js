@@ -48,9 +48,10 @@ function Login() {
 
     const formData = { email, password };
 
+    //배포환경으로 변경해주기
     axios
-      // .env 파일에서 선언한 변수로 변경하기
-      .post(`https://loaclhost:3000/api/login"`, formData)
+      .post("http://localhost:8080/api/login", formData)
+      // .post("http://localhost:8080/api/login", formData) 이거 로컬환경
       .then((response) => {
         if (response.data.token) {
           const decodedToken = jwtDecode(response.data.token); // 토큰 디코드
@@ -60,8 +61,6 @@ function Login() {
           localStorage.setItem("phoneNumber", decodedToken.phoneNumber); // localStorage에 전화번호 저장
           localStorage.setItem("gender", decodedToken.gender); // localStorage에 성별 저장
           localStorage.setItem("profileImage", decodedToken.profileImage); // localStorage에 프로필이미지 경로 저장
-          localStorage.setItem("loginType", decodedToken.loginType); // localStorage에 프로필이미지 경로 저장
-          localStorage.setItem("nickName", decodedToken.nickName);
           navigate("/");
         }
       })

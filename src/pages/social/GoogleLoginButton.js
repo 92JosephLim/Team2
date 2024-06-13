@@ -1,7 +1,7 @@
 import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import jwtDecode from "jwt-decode"; // Named import로 수정
+import { jwtDecode } from 'jwt-decode'; // Named import로 수정
 import { useNavigate } from "react-router-dom";
 const GoogleLoginButton = () => {
 
@@ -13,7 +13,8 @@ const GoogleLoginButton = () => {
 
     console.log(response);
     // .env 파일에서 선언한 변수로 변경하기
-    fetch(process.env.REACT_APP_GOOGLE_OAUTH_URL, {
+    // fetch(process.env.REACT_APP_GOOGLE_OAUTH_URL, {
+    fetch("http://localhost:8080/api/auth/google", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
