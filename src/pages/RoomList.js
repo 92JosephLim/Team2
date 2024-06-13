@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/RoomList.css";
-import Footer from "../components/Footer"; // Footer 컴포넌트를 import
-import TopNav from "../components/TopNav"; // TopNav 컴포넌트를 import
-import SideNav from "../components/SideNav"; // SideNav 컴포넌트를 import
+import Footer from "../components/Footer";
+import TopNav from "../components/TopNav";
+import SideNav from "../components/SideNav";
 
 function RoomList() {
   const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [roomsPerPage] = useState(4); // 한 페이지에 표시할 방 수
+  const [roomsPerPage] = useState(8); // 한 페이지에 표시할 방 수
+  const [isSearchBoxOpen, setIsSearchBoxOpen] = useState(false); // 검색 박스 상태 관리
+  const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 관리
 
   function getRoomList() {
     var body = { request: "list" };
@@ -43,7 +45,14 @@ function RoomList() {
 
   const handleSearch = () => {
     console.log("Search button clicked");
-    // 검색 동작을 여기에 추가하세요.
+    setIsSearchBoxOpen(true); // 검색 박스 열기
+  };
+
+  const closeSearchBox = () => {
+    setIsSearchBoxOpen(false); // 검색 박스 닫기
+    if (searchTerm) {
+      navigate(`/joinRoom?roomId=${searchTerm}`);
+    }
   };
 
   // 현재 페이지에 표시할 방 목록 계산
@@ -122,7 +131,8 @@ function RoomList() {
             <div className="header-container">
               <h1>방 목록</h1>
               {/* 방 목록 검색 */}
-              <button className="search-button" onClick={handleSearch}>검색</button>
+              <button className="search-button" onClick={handleSearch}>아이디 검색</button>
+              <button className="search-button" onClick={handleSearch}>방 번호 입장</button>
             </div>
             <ul className="room-list">
               {currentRooms.map((room) => (
@@ -142,6 +152,23 @@ function RoomList() {
           <Footer /> {/* Footer 컴포넌트를 추가 */}
         </div>
       </div>
+
+      {/* 검색 박스 */}
+      {isSearchBoxOpen && (
+        <div className="search-box-overlay" onClick={closeSearchBox}>
+          <div className="search-box" onClick={(e) => e.stopPropagation()}>
+            <h2>방 번호를 입력하세요</h2>
+            <input
+              type="text"
+              placeholder="입력"
+              style={{ width: '80%' }}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button onClick={closeSearchBox}>이동</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -348,7 +375,7 @@ function initjanus() {
                 toastr.warning("Our audio stream has been rejected, viewers won't hear us");
               }
               var video = msg["video_codec"];
-              if (mystream && mystream.getVideoTracks() && mystream.getVideoTracks().length > 0 && !video) {
+              if (mystream.getVideoTracks() && mystream.getVideoTracks().length > 0 && !video) {
                 toastr.warning("Our video stream has been rejected, viewers won't see us");
                 $("#myvideo").hide();
                 $("#videolocal").append(
