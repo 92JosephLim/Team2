@@ -3,7 +3,7 @@ import './MyPage.css';
 import TopNav from "../../components/topnav/TopNav";
 import Footer from "../../components/footer/Footer";
 import SideNav from '../../components/sidenav/SideNav';
-import ProfileCard from '../../components/ProfileCard';
+import ProfileCard from '../../components/mypage/ProfileCard';
 
 const MyPage = () => {
   const [userInfo, setUserInfo] = useState({

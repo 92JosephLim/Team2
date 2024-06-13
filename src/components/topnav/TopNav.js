@@ -46,7 +46,7 @@ function TopNav() {
     <header className="header">
       <div className="logo">
         <button className="logo-button">
-          <a href="/"><img src={newLogo} alt="New Logo" /></a>
+          <Link to="/"><img src={newLogo} alt="New Logo" /></Link>
         </button>
       </div>
       <nav className="nav">

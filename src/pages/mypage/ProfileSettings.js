@@ -10,9 +10,6 @@ import i18next from "../../locales/i18n";
 import { useTranslation } from "react-i18next";
 
 function ProfileSettings() {
-
-  const { t } = useTranslation();
-
   const [userInfo, setUserInfo] = useState({
     email: '',
     phoneNumber: '',

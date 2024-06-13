@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080' // 기본 URL 설정
+  baseURL: 'https://js2.jsflux.co.kr' // 기본 URL 설정
 
 });
 

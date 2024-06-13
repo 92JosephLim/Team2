@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // 다국어 지원 모드 추가
 import { useTranslation } from "react-i18next";
-
 // SVG 아이콘 정의
 const MaleIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="blue" xmlns="http://www.w3.org/2000/svg">
@@ -26,9 +25,7 @@ const NeutralIcon = () => (
 
 
 function ProfileCard() {
-
   const { t } = useTranslation();
-
   const [userInfo, setUserInfo] = useState({
     email: '',
     gender: '',
@@ -122,7 +119,7 @@ function ProfileCard() {
             성별: {userInfo.gender} {renderGenderIcon()}
           </h3>
           <h3 className="block font-sans text-2xl font-light leading-relaxed text-inherit antialiased">
-            {t("phonecall")}: {formatPhoneNumber(userInfo.phoneNumber)}
+            전화번호: {formatPhoneNumber(userInfo.phoneNumber)}
           </h3>
         </div>
         <div className="p-8 pt-0">

@@ -17,19 +17,19 @@ function SideNav() {
         <div className="flex-1">
           <ul className="pt-2 pb-4 space-y-1">
             <li className="rounded-sm hover:bg-sky-700">
-              <a href="/ProfileSettings" className="flex items-center p-2 space-x-3 rounded-md">
+              <Link to="/ProfileSettings" className="flex items-center p-2 space-x-3 rounded-md">
                 <span className="text-white">{t("profile")}</span>
-              </a>
+              </Link>
             </li>
             <li className="rounded-sm hover:bg-sky-700">
-              <a href="#" className="flex items-center p-2 space-x-3 rounded-md">
+              <Link to="#" className="flex items-center p-2 space-x-3 rounded-md">
                 <span className="text-white">{t("chatLog")}</span>
-              </a>
+              </Link>
             </li>
             <li className="rounded-sm hover:bg-sky-700">
-              <a href="#" className="flex items-center p-2 space-x-3 rounded-md">
+              <Link to="#" className="flex items-center p-2 space-x-3 rounded-md">
                 <span className="text-white">{t("rtcLog")}</span>
-              </a>
+              </Link>
             </li>
             <li className="rounded-sm hover:bg-sky-700">
               <div

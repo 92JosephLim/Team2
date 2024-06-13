@@ -8,7 +8,7 @@ const GoogleLoginButton = () => {
   const navigate = useNavigate();
   const handleLoginSuccess = (response) => {
     console.log(response);
-    fetch("http://localhost:8080/api/auth/google", {
+    fetch("https://js2.jsflux.co.kr/api/auth/google", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

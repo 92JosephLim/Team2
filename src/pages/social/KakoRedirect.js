@@ -13,7 +13,7 @@ function KakaoRedirect() {
     console.log(code);
     if (code) {
       axios
-        .get(`http://localhost:8080/oauth/kakao?code=${code}`)
+        .get(`https://js2.jsflux.co.kr/oauth/kakao?code=${code}`)
         .then((response) => {
           // 백엔드로부터 응답을 받은 후 처리할 로직
           console.log(response.data);

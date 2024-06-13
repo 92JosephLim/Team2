@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Footer from "../../components/footer/Footer";
 import TopNav from "../../components/topnav/TopNav";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
 
 function FindPassword() {
   //이메일 유효성 검사
@@ -84,15 +84,15 @@ function FindPassword() {
               </form>
               <p className="mt-12 text-xl text-center font-light text-gray-400">
                 계정이 있으신가요?{" "}
-                <a href="/login" className="text-blue-800 font-semibold">
+                <Link to="/login" className="text-blue-800 font-semibold">
                   로그인하기
-                </a>
+                </Link>
               </p>
               <p className="mt-2 text-xl text-center font-light text-gray-400">
                 계정이 없으신가요?{" "}
-                <a href="/signup" className="text-blue-800 font-semibold">
+                <Link to="/signup" className="text-blue-800 font-semibold">
                   회원가입하기
-                </a>
+                </Link>
               </p>
             </div>
           </div>
