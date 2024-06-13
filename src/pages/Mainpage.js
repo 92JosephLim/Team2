@@ -43,7 +43,7 @@ function Mainpage() {
         </div>
         <div className="mainContent right-pane"> {/* 오른쪽 패널 */}
           <div className="vertical-section">
-            <h1>2조사이트</h1>
+            <div>2조사이트</div>
             <p className="animate__animated animate__pulse animate__infinite">247,584 건의 매칭이 진행 중이에요...</p>
             <button 
               className="start-button flash-border"

@@ -73,8 +73,8 @@ function CreateRoom() {
 
   return (
     <div className="flex flex-col min-h-screen">
-    <TopNav />
-    <div className=" bg-gray-100 items-center justify-center z-10 h-60 flex-grow relative w-full">
+    <TopNav className="top" />
+    <div className=" bg-gray-100 items-center justify-center h-60 flex-grow relative w-full">
     <img src={we2} className="absolute top-0 left-0 w-full h-full object-cover z-0"/>
       <div className="bg-white p-10 mt-10 rounded shadow-md w-full max-w-lg absolute left-1/2 transform -translate-x-1/2">
         <div className="text-2xl font-bold mb-6 text-center">Create a New Room</div>
