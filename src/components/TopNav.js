@@ -6,7 +6,7 @@ import "../css/TopNav.css"; // 스타일 파일 추가
 import i18next from "../locales/i18n";
 import { useTranslation } from "react-i18next";
 import { MdOutlineLanguage } from "react-icons/md";
-//authContextimport
+//authContext import
 import AuthContext from "../pages/social/Authcontext";
 
 function TopNav() {
@@ -14,7 +14,7 @@ function TopNav() {
   const { t } = useTranslation();
 
   //AuthContext에서 인증 상태랑 로그아웃 가져오기
-  // const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   // Video Chat 클릭 시 동작할 함수
   const handleVideoChat = () => {
@@ -49,11 +49,11 @@ function TopNav() {
   };
 
   // 로그아웃 함수
-  // const handleLogout = () => {
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('email');
-  //   navigate('/');
-  // };
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    navigate('/');
+  };
 
   // 로고 클릭 시 메인 페이지로 이동
   const handleLogoClick = () => {
@@ -111,24 +111,18 @@ function TopNav() {
           </div>
         </div>
         <div className="login-options">
-          <Link to="/login" className="login-btn">Login</Link>
-        </div>
-        {/* <div className="login-options">
-          {token ? (
+          {user ? (
             <>
-              로그인 된 상태에서는 환영 메시지와 로그아웃 버튼 표시
-              <span className="mr-4">Welcome, {email}</span>
+              <span className="mr-4">Welcome, {user.email}</span>
               <button onClick={handleLogout} className="bg-red-500 px-3 py-2 rounded-md hover:bg-red-700">Logout</button>
             </>
           ) : (
-            // 로그인되지 않은 상태에서는 로그인 버튼 표시
             <Link to="/login" className="login-btn">Login</Link>
           )}
-        </div> */}
+        </div>
       </nav>
     </header>
   );
 }
 
 export default TopNav;
-
