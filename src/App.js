@@ -2,6 +2,7 @@ import React from "react";
 import { RouterProvider } from "react-router-dom";
 import "./App.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import router from "./pages/router/router";
 
 const clientId = "233505782576-acmbig2ssomblm8c8spashbrj6004jdl.apps.googleusercontent.com";
 

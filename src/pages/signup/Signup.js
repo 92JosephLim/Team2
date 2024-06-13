@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import "../css/Login.css";
-import TopNav from "../components/TopNav";
-import Footer from "../components/Footer";
+import TopNav from "../../components/topnav/TopNav";
+import Footer from "../../components/footer/Footer";
 import { useNavigate } from "react-router-dom";
 import { registerUser, sendEmailVerification, confirmEmailVerification } from "../../api/apiService"; // API 서비스 함수들 가져오기
 

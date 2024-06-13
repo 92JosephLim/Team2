@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TopNav from '../../components/TopNav'; // Update with correct path
-import SideNav from '../../components/SideNav'; // Update with correct path
-import Footer from '../../components/Footer'; // Update with correct path
+import TopNav from '../../components/topnav/TopNav'; // Update with correct path
+import SideNav from '../../components/sidenav/SideNav'; // Update with correct path
+import Footer from '../../components/footer/Footer'; // Update with correct path
 import './ProfileSettings.css'; // Update with correct path
 import { SocialupdateUserInfo } from '../../api/apiService';
 

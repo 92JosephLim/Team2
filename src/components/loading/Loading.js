@@ -1,5 +1,5 @@
 import React from "react";
-import loading from "../assets/"
+import loading from "../../assets/loading.gif"
 
 const Loading = () => {
   return (
@@ -9,3 +9,5 @@ const Loading = () => {
     </div>
   )
 }
+
+export default Loading;
