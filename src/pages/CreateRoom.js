@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import Janus from "janus-gateway"; // Ensure you have imported Janus correctly
 
 const server = "https://janus.jsflux.co.kr/janus"; // Janus server URL
 
@@ -19,7 +18,6 @@ function CreateRoom() {
   const [roomId, setRoomId] = useState(null);
 
   const createRoom = () => {
-    // Initialize the session and attach to the VideoRoom plugin
     const janusInstance = new Janus({
       server: server,
       success: () => {
@@ -71,19 +69,34 @@ function CreateRoom() {
   };
 
   return (
-    <div>
-      <input type="text" placeholder="Enter room name" value={roomName} onChange={(e) => setRoomName(e.target.value)} />
-      <button className="createroom" onClick={createRoom}>
-        방 만들기
-      </button>
-      <button className="check" onClick={checkTextRoomPlugin}>
-        체크
-      </button>
-      {roomId && (
-        <div>
-          <p>Created Room ID: {roomId}</p>
-        </div>
-      )}
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-6 text-center">Create a New Room</h1>
+        <input
+          type="text"
+          placeholder="Enter room name"
+          value={roomName}
+          onChange={(e) => setRoomName(e.target.value)}
+          className="w-full p-2 mb-4 border border-gray-300 rounded"
+        />
+        <button
+          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          onClick={createRoom}
+        >
+          Create Room
+        </button>
+        <button
+          className="w-full bg-gray-500 text-white p-2 rounded hover:bg-gray-600 mt-2"
+          onClick={checkTextRoomPlugin}
+        >
+          Check Plugins
+        </button>
+        {roomId && (
+          <div className="mt-4 p-4 border border-green-500 text-green-500 rounded">
+            <p>Created Room ID: {roomId}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
