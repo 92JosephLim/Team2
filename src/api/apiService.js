@@ -10,7 +10,7 @@ export const registerUser = async (data) => {
   }
 };
 
-// Function to send email verification code + 이메일 중복 확인하기!!!!!!
+// Function to send email verification code
 export const sendEmailVerification = async (email) => {
   try {
     const response = await axiosInstance.post('/emailSend', { email });
@@ -30,3 +30,24 @@ export const confirmEmailVerification = async (email, code) => {
   }
 };
 
+// Function to update user information
+export const updateUserInfo = async (formData) => {
+  try {
+    const response = await axiosInstance.post('/api/update', formData);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating user info:', error);
+    throw error;
+  }
+};
+
+// Function to update user information
+export const SocialupdateUserInfo = async (formData) => {
+  try {
+    const response = await axiosInstance.post('/api/socialupdate', formData);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating user info:', error);
+    throw error;
+  }
+}

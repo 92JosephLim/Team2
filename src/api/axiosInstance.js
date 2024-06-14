@@ -1,10 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080', // 기본 URL 설정
-  // headers: {
-  //   'Content-Type': 'application/json', // 공통 헤더 설정
-  // },
+  baseURL: "http://localhost:8080", // 기본 URL 설정
 });
 
 // 요청 인터셉터
