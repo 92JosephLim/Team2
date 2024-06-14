@@ -1,5 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import SockJS from 'sockjs-client';
+import { Stomp } from '@stomp/stompjs';
+import TopNav from "../../components/topnav/TopNav";
+import "../../components/topnav/TopNav"; // TopNav CSS 
+import "../../components/footer/Footer"; // Footer CSS
 
 function initjanus() {
   if (!Janus.isWebrtcSupported()) {
@@ -276,7 +281,7 @@ function initjanus() {
               $("#videolocal").append(
                 '<div class="no-video-container">' +
                 '<i class="fa fa-video-camera fa-5 no-video-icon"></i>' +
-                '<span class="no-video-text">No webcam available</span>' +
+                '<span className="no-video-text">No webcam available</span>' +
                 "</div>"
               );
             }
@@ -318,195 +323,303 @@ function VideoMeeting() {
     initjanus();
   }, []);
 
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+  const [username, setUsername] = useState('');
+  const [userId, setUserId] = useState('');
+  const [roomName, setRoomName] = useState("");
+  const [stompClient, setStompClient] = useState(null);
+  const [isConnected, setIsConnected] = useState(false);
+
+  const messagesEndRef = useRef(null);
+
   const navigate = useNavigate();
+
+  const connectToChat = (roomId) => {
+    const socket = new SockJS('http://localhost:80/chat');
+    const client = Stomp.over(socket);
+
+    client.connect({}, () => {
+      client.subscribe(`/topic/rooms/${roomId}`, (message) => {
+        setMessages((prevMessages) => [...prevMessages, message.body]);
+      });
+      setIsConnected(true);
+    });
+
+    client.onclose = () => {
+      setIsConnected(false);
+    };
+
+    setStompClient(client);
+
+    return () => {
+      if (client) {
+        client.disconnect();
+      }
+    };
+  };
+
   const destroytest = () => {
     janus.destroy();
     navigate("/roomList");
   };
 
+  const handleRegisterClick = () => {
+    setUserId(username);
+    connectToChat(roomName); // 방 이름으로 채팅 연결
+  };
+
+  const sendMessage = () => {
+    if (isConnected && input.trim() !== '' && userId.trim() !== '') {
+      const message = { content: `${userId}: ${input}` };
+      stompClient.send(`/app/rooms/${roomName}/message`, {}, JSON.stringify(message));
+      setInput('');
+    }
+  };
+
+  useEffect(() => {
+    // 새 메시지가 추가될 때마다 스크롤을 아래로 이동
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+    }
+  }, [messages]);
+
   return (
-    <div>
-      <nav className="navbar navbar-default navbar-static-top"></nav>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <div className="page-header">
-              <h1>화상회의</h1>
-              <button className="btn btn-default" autoComplete="off" id="des" onClick={destroytest}>
-                방나가기
-              </button>
-            </div>
-            <div className="container hide" id="videojoin">
-              <div className="row">
-                <div className="col-md-12" id="controls">
-                  <div id="registernow">
-                    <span className="label label-info" id="room"></span>
-                    <div className="input-group margin-bottom-md" style={{ width: "100% !important" }}>
-                      <span className="input-group-addon">방번호</span>
-                      <input
-                        autoComplete="off"
-                        className="form-control"
-                        type="text"
-                        placeholder="방번호를 입력하세요"
-                        id="roomname"
-                      />
-                    </div>
-                    <span className="label label-info" id="you"></span>
-                    <div className="input-group margin-bottom-md">
-                      <span className="input-group-addon">대화명</span>
-                      <input
-                        autoComplete="off"
-                        className="form-control"
-                        type="text"
-                        placeholder="내 대화명"
-                        id="username"
-                        onKeyPress={(e) => {
-                          if (e.key === "Enter") checkEnter(e.target, e);
-                        }}
-                      />
-                    </div>
-                    <div className="input-group margin-bottom-md">
-                      <span className="input-group-addon">방제목</span>
-                      <input
-                        autoComplete="off"
-                        className="form-control"
-                        type="text"
-                        placeholder="방제목"
-                        id="description"
-                        onKeyPress={(e) => {
-                          if (e.key === "Enter") checkEnter(e.target, e);
-                        }}
-                      />
-                      <span className="input-group-btn">
-                        <button className="btn btn-success" autoComplete="off" id="register">
-                          대화방 만들기
-                        </button>
-                      </span>
-                    </div>
-                  </div>
+    <>
+      <TopNav /> {/* TopNav 컴포넌트 추가 */}
+      <div className="flex h-screen" style={{ marginTop: "60px" }}>
+        <div className="flex-grow flex justify-between items-center p-4">
+          <nav className="navbar navbar-default navbar-static-top"></nav>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="page-header">
+                  방참여하기
+                  <button className="btn btn-default" autoComplete="off" id="des" onClick={destroytest}>
+                    방나가기
+                  </button>
                 </div>
-              </div>
-            </div>
-            <div className="container hide" id="videos">
-              <div className="row">
-                <div className="col-md-4">
-                  <div className="panel panel-default">
-                    <div className="panel-heading">
-                      <h3 className="panel-title">
-                        Local Video <span className="label label-primary hide" id="publisher"></span>
-                        <div className="btn-group btn-group-xs pull-right hide">
-                          <div className="btn-group btn-group-xs">
-                            <button
-                              id="bitrateset"
-                              autoComplete="off"
-                              className="btn btn-primary dropdown-toggle"
-                              data-toggle="dropdown"
-                            >
-                              Bandwidth<span className="caret"></span>
-                            </button>
-                            <ul id="bitrate" className="dropdown-menu" role="menu">
-                              <li>
-                                <a href="#" id="0">
-                                  No limit
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" id="128">
-                                  Cap to 128kbit
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" id="256">
-                                  Cap to 256kbit
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" id="512">
-                                  Cap to 512kbit
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" id="1024">
-                                  Cap to 1mbit
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" id="1500">
-                                  Cap to 1.5mbit
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#" id="2000">
-                                  Cap to 2mbit
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
+                <div className="container hide" id="videojoin">
+                  <div className="row">
+                    <div className="col-md-12" id="controls">
+                      <div id="registernow">
+                        <span className="label label-info" id="room"></span>
+                        <div className="input-group margin-bottom-md" style={{ width: "100% !important" }}>
+                          <span className="input-group-addon">방번호</span>
+                          <input
+                            autoComplete="off"
+                            className="form-control"
+                            type="text"
+                            placeholder="방번호를 입력하세요"
+                            id="roomname"
+                            value={roomName}
+                            onChange={(e) => setRoomName(e.target.value)} // onChange 이벤트 핸들러 추가
+                          />
                         </div>
-                      </h3>
+                        <span className="label label-info" id="you"></span>
+                        <div className="input-group margin-bottom-md">
+                          <span className="input-group-addon">대화명</span>
+                          <input
+                            autoComplete="off"
+                            className="form-control"
+                            type="text"
+                            placeholder="내 대화명"
+                            id="username"
+                            onKeyPress={(e) => {
+                              if (e.key === "Enter") checkEnter(e.target, e);
+                            }}
+                            onChange={(e) => setUsername(e.target.value)} // Update the username state
+                          />
+                        </div>
+                        <div className="input-group margin-bottom-md">
+                          <span className="input-group-addon">방제목</span>
+                          <input
+                            autoComplete="off"
+                            className="form-control"
+                            type="text"
+                            placeholder="방제목"
+                            id="description"
+                            onKeyPress={(e) => {
+                              if (e.key === "Enter") checkEnter(e.target, e);
+                            }}
+                          />
+                          <span className="input-group-btn">
+                            <button className="btn btn-success" autoComplete="off" id="register" onClick={handleRegisterClick}>
+                              대화방 만들기
+                            </button>
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                    <div className="panel-body" id="videolocal"></div>
                   </div>
                 </div>
-                <div className="col-md-4">
-                  <div className="panel panel-default">
-                    <div className="panel-heading">
-                      <h3 className="panel-title">
-                        Remote Video #1 <span className="label label-info hide" id="remote1"></span>
-                      </h3>
+                <div className="container hide" id="videos">
+                  <div className="row">
+                    <div className="col-md-4">
+                      <div className="panel panel-default">
+                        <div className="panel-heading">
+                          <h3 className="panel-title">
+                            Local Video <span className="label label-primary hide" id="publisher"></span>
+                            <div className="btn-group btn-group-xs pull-right hide">
+                              <div className="btn-group btn-group-xs">
+                                <button
+                                  id="bitrateset"
+                                  autoComplete="off"
+                                  className="btn btn-primary dropdown-toggle"
+                                  data-toggle="dropdown"
+                                >
+                                  Bandwidth<span className="caret"></span>
+                                </button>
+                                <ul id="bitrate" className="dropdown-menu" role="menu">
+                                  <li>
+                                    <a href="#" id="0">
+                                      No limit
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#" id="128">
+                                      Cap to 128kbit
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#" id="256">
+                                      Cap to 256kbit
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#" id="512">
+                                      Cap to 512kbit
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#" id="1024">
+                                      Cap to 1mbit
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#" id="1500">
+                                      Cap to 1.5mbit
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#" id="2000">
+                                      Cap to 2mbit
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </h3>
+                        </div>
+                        <div className="panel-body" id="videolocal"></div>
+                      </div>
                     </div>
-                    <div className="panel-body relative" id="videoremote1"></div>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="panel panel-default">
-                    <div className="panel-heading">
-                      <h3 className="panel-title">
-                        Remote Video #2 <span className="label label-info hide" id="remote2"></span>
-                      </h3>
+                    <div className="col-md-4">
+                      <div className="panel panel-default">
+                        <div className="panel-heading">
+                          <h3 className="panel-title">
+                            Remote Video #1 <span className="label label-info hide" id="remote1"></span>
+                          </h3>
+                        </div>
+                        <div className="panel-body relative" id="videoremote1"></div>
+                      </div>
                     </div>
-                    <div className="panel-body relative" id="videoremote2"></div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-4">
-                  <div className="panel panel-default">
-                    <div className="panel-heading">
-                      <h3 className="panel-title">
-                        Remote Video #3 <span className="label label-info hide" id="remote3"></span>
-                      </h3>
+                    <div className="col-md-4">
+                      <div className="panel panel-default">
+                        <div className="panel-heading">
+                          <h3 className="panel-title">
+                            Remote Video #2 <span className="label label-info hide" id="remote2"></span>
+                          </h3>
+                        </div>
+                        <div className="panel-body relative" id="videoremote2"></div>
+                      </div>
                     </div>
-                    <div className="panel-body relative" id="videoremote3"></div>
                   </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="panel panel-default">
-                    <div className="panel-heading">
-                      <h3 className="panel-title">
-                        Remote Video #4 <span className="label label-info hide" id="remote4"></span>
-                      </h3>
+                  <div className="row">
+                    <div className="col-md-4">
+                      <div className="panel panel-default">
+                        <div className="panel-heading">
+                          <h3 className="panel-title">
+                            Remote Video #3 <span className="label label-info hide" id="remote3"></span>
+                          </h3>
+                        </div>
+                        <div className="panel-body relative" id="videoremote3"></div>
+                      </div>
                     </div>
-                    <div className="panel-body relative" id="videoremote4"></div>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="panel panel-default">
-                    <div className="panel-heading">
-                      <h3 className="panel-title">
-                        Remote Video #5 <span className="label label-info hide" id="remote5"></span>
-                      </h3>
+                    <div className="col-md-4">
+                      <div className="panel panel-default">
+                        <div className="panel-heading">
+                          <h3 className="panel-title">
+                            Remote Video #4 <span className="label label-info hide" id="remote4"></span>
+                          </h3>
+                        </div>
+                        <div className="panel-body relative" id="videoremote4"></div>
+                      </div>
                     </div>
-                    <div className="panel-body relative" id="videoremote5"></div>
+                    <div className="col-md-4">
+                      <div className="panel panel-default">
+                        <div className="panel-heading">
+                          <h3 className="panel-title">
+                            Remote Video #5 <span className="label label-info hide" id="remote5"></span>
+                          </h3>
+                        </div>
+                        <div className="panel-body relative" id="videoremote5"></div>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </div> {/* 여기가 마지노선 */}
               </div>
             </div>
           </div>
         </div>
-        <hr />
+
+        <div className="w-1/5 p-4 bg-white border-l border-gray-200 flex flex-col h-full">
+          <h2 className="text-xl font-bold mb-4">Chat Room {roomName}</h2>
+          <div className="flex-grow bg-gray-200 p-4 rounded-lg overflow-y-auto h-full">
+            <ul className="space-y-2">
+              {messages.map((msg, index) => (
+                <li key={index} className="bg-white p-2 rounded-lg shadow-sm">
+                  {msg}
+                </li>
+              ))}
+              <div ref={messagesEndRef} />
+            </ul>
+          </div>
+          <div className="mt-4">
+            <div className="flex items-center justify-center mb-2">
+              <label className="mr-2 text-xl font-bold">Nickname</label>
+              <input
+                type="text"
+                placeholder="Enter your ID"
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
+                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div className="flex mt-2">
+              <input
+                type="text"
+                placeholder="Enter your message"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') sendMessage();
+                }}
+                className="flex-grow p-2 border-t border-b focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                onClick={sendMessage}
+                className="p-2 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
