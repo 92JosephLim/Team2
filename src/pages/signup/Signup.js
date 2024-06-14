@@ -3,6 +3,7 @@ import TopNav from "../../components/topnav/TopNav";
 import Footer from "../../components/footer/Footer";
 import { useNavigate } from "react-router-dom";
 import { registerUser, sendEmailVerification, confirmEmailVerification } from "../../api/apiService"; // API 서비스 함수들 가져오기
+import grim from "../../assets/grim.jpg"
 
 function Signup() {
   const navigate = useNavigate();
@@ -171,6 +172,7 @@ function Signup() {
       <div className="relative min-h-screen flex">
         <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
           <div className="sm:w-1/2 xl:w-3/5 h-full md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative">
+            <img src={grim} alt="sign up img" className="h-full w-full object-cover absolute" />
           </div>
           <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 mt-5">
             <div className="py-8 px-8 rounded-xl">

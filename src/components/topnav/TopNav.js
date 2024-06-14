@@ -15,6 +15,11 @@ function TopNav() {
   const token = localStorage.getItem('token');
   const email = localStorage.getItem('email');
 
+  // 로고 클릭 시 메인 페이지로 이동
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
   // Video Chat 클릭 시 동작할 함수
   const handleVideoChat = () => {
     navigate("/video");
@@ -43,10 +48,10 @@ function TopNav() {
   };
 
   return (
-    <header className="header">
+    <header className="top">
       <div className="logo">
-        <button className="logo-button">
-          <Link to="/"><img src={newLogo} alt="New Logo" /></Link>
+        <button className="logo-button" onClick={handleLogoClick}>
+          <img src={newLogo} alt="New Logo" />
         </button>
       </div>
       <nav className="nav">
@@ -74,7 +79,16 @@ function TopNav() {
           </div>
         </div>
         {token && (
-          <button className="action-button" onClick={handleMyPage}>{t("mypage")}</button>
+          <div className="dropdown">
+            <button className="action-button" onClick={handleMyPage}>{t("mypage")}</button>
+            <div className="dropdown-content">
+              <Link to="/ProfileSettings">상세 프로필 설정</Link>
+              <Link to="/messageChat">채팅 내역</Link> {/* 경로 수정 */}
+              <Link to="/invite">친구추가</Link>
+              <Link to="/friendMain">친구목록</Link>
+            </div>
+          </div>
+
         )}
         <div className="login-options">
           {token ? (

@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom"; // Import useLocation
+import { useNavigate } from "react-router-dom";
 
 function initjanus() {
   if (!Janus.isWebrtcSupported()) {
@@ -191,13 +192,13 @@ function initjanus() {
                   // This is a "no such room" error: give a more meaningful description
                   bootbox.alert(
                     "<p>Apparently room <code>" +
-                      myroom +
-                      "</code> (the one this demo uses as a test room) " +
-                      "does not exist...</p><p>Do you have an updated <code>janus.plugin.videoroom.jcfg</code> " +
-                      "configuration file? If not, make sure you copy the details of room <code>" +
-                      myroom +
-                      "</code> " +
-                      "from that sample in your current configuration file, then restart Janus and try again."
+                    myroom +
+                    "</code> (the one this demo uses as a test room) " +
+                    "does not exist...</p><p>Do you have an updated <code>janus.plugin.videoroom.jcfg</code> " +
+                    "configuration file? If not, make sure you copy the details of room <code>" +
+                    myroom +
+                    "</code> " +
+                    "from that sample in your current configuration file, then restart Janus and try again."
                   );
                 } else {
                   bootbox.alert(msg["error"]);
@@ -223,9 +224,9 @@ function initjanus() {
               $("#myvideo").hide();
               $("#videolocal").append(
                 '<div class="no-video-container">' +
-                  '<i class="fa fa-video-camera fa-5 no-video-icon" style="height: 100%;"></i>' +
-                  '<span class="no-video-text" style="font-size: 16px;">Video rejected, no webcam</span>' +
-                  "</div>"
+                '<i class="fa fa-video-camera fa-5 no-video-icon" style="height: 100%;"></i>' +
+                '<span class="no-video-text" style="font-size: 16px;">Video rejected, no webcam</span>' +
+                "</div>"
               );
             }
           }
@@ -276,9 +277,9 @@ function initjanus() {
             if ($("#videolocal .no-video-container").length === 0) {
               $("#videolocal").append(
                 '<div class="no-video-container">' +
-                  '<i class="fa fa-video-camera fa-5 no-video-icon"></i>' +
-                  '<span class="no-video-text">No webcam available</span>' +
-                  "</div>"
+                '<i class="fa fa-video-camera fa-5 no-video-icon"></i>' +
+                '<span class="no-video-text">No webcam available</span>' +
+                "</div>"
               );
             }
           } else {
@@ -319,25 +320,30 @@ function JoinRoom() {
   const queryParams = new URLSearchParams(location.search);
   const roomId = queryParams.get("roomId");
   const [roomName, setRoomName] = useState("");
+  const navigate = useNavigate();
+  const destroytest = () => {
+    janus.destroy();
+    navigate("/roomList");
+  };
   useEffect(() => {
     if (roomId) {
       // 방번호와 방제목을 설정
       // $("#roomname").val(roomId);
       setRoomName(roomId);
+      initjanus();
     }
   }, [roomId]);
 
   return (
     <div>
-      <nav className="navbar navbar-default navbar-static-top"></nav>
       <div className="container">
         <div className="row">
           <div className="col-md-12">
             <div className="page-header">
               <h1>
                 방참여하기
-                <button className="btn btn-default" autoComplete="off" id="start" onClick={initjanus}>
-                  클릭!
+                <button className="btn btn-default" autoComplete="off" id="des" onClick={destroytest}>
+                  방나가기
                 </button>
               </h1>
             </div>
@@ -395,7 +401,11 @@ function JoinRoom() {
                   <div className="panel panel-default">
                     <div className="panel-heading">
                       <h3 className="panel-title">
-                        Local Video <span className="label label-primary hide" id="publisher"></span>
+                        <span
+                          className="badge badge-primary"
+                          id="publisher"
+                          style={{ fontSize: "1.5rem", padding: "0.5rem", borderRadius: "0.5rem" }}
+                        ></span>
                         <div className="btn-group btn-group-xs pull-right hide">
                           <div className="btn-group btn-group-xs">
                             <button

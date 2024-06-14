@@ -1,9 +1,17 @@
-import { React, useEffect, useState } from "react";
-import "./RoomList.css";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./RoomList.css";
+import Footer from "../../components/footer/Footer";
+import TopNav from "../../components/topnav/TopNav";
+import SideNav from "../../components/sidenav/SideNav";
+
 function RoomList() {
   const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [roomsPerPage] = useState(8); // 한 페이지에 표시할 방 수
+  const [isSearchBoxOpen, setIsSearchBoxOpen] = useState(false); // 검색 박스 상태 관리
+  const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 관리
 
   function getRoomList() {
     var body = { request: "list" };
@@ -21,8 +29,6 @@ function RoomList() {
 
   const handleJoinRoom = (roomId) => {
     console.log(`참가할 방 ID: ${roomId}`);
-    // 참가 로직을 여기에 추가하세요
-    // /video 경로로 이동하고 방번호와 방제목을 URL 파라미터로 전달
     navigate(`/joinRoom?roomId=${roomId}`);
   };
 
@@ -36,20 +42,133 @@ function RoomList() {
         console.error("Failed to initialize Janus:", error);
       });
   }, []);
+
+  const handleSearch = () => {
+    console.log("Search button clicked");
+    setIsSearchBoxOpen(true); // 검색 박스 열기
+  };
+
+  const closeSearchBox = () => {
+    setIsSearchBoxOpen(false); // 검색 박스 닫기
+    if (searchTerm) {
+      navigate(`/joinRoom?roomId=${searchTerm}`);
+    }
+  };
+
+  // 현재 페이지에 표시할 방 목록 계산
+  const indexOfLastRoom = currentPage * roomsPerPage;
+  const indexOfFirstRoom = indexOfLastRoom - roomsPerPage;
+  const currentRooms = rooms.slice(indexOfFirstRoom, indexOfLastRoom);
+
+  const totalPages = Math.ceil(rooms.length / roomsPerPage);
+
+  const handleClick = (event) => {
+    setCurrentPage(Number(event.target.id));
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // 페이지 번호 구성 요소
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    const maxPageNumbersToShow = 3;
+
+    // 이전 페이지로 돌아가는 버튼 추가
+    if (currentPage > 1) {
+      pageNumbers.push(
+        <li key="prev-button" className="arrow" onClick={handlePrev}>
+          &laquo;
+        </li>
+      );
+    }
+
+    for (let i = currentPage; i < currentPage + maxPageNumbersToShow && i <= totalPages; i++) {
+      pageNumbers.push(
+        <li key={i} id={i} onClick={handleClick} className={currentPage === i ? 'active' : ''}>
+          {i}
+        </li>
+      );
+    }
+
+    if (currentPage + maxPageNumbersToShow < totalPages) {
+      pageNumbers.push(<li key="right-dots" className="dots">...</li>);
+      pageNumbers.push(
+        <li key={totalPages} id={totalPages} onClick={handleClick} className={currentPage === totalPages ? 'active' : ''}>
+          {totalPages}
+        </li>
+      );
+    }
+
+    // 다음 페이지로 가는 버튼 추가
+    if (currentPage < totalPages) {
+      pageNumbers.push(
+        <li key="next-button" className="arrow" onClick={handleNext}>
+          &raquo;
+        </li>
+      );
+    }
+
+    return pageNumbers;
+  };
+
   return (
-    <div className="room-list-container">
-      <h1>방 목록</h1>
-      <ul>
-        {rooms.map((room) => (
-          <li key={room.room}>
-            <div>
-              <h2>{room.description}</h2>
-              <p>참여 인원수: {room.num_participants}</p>
-              <button onClick={() => handleJoinRoom(room.room)}>참가하기</button>
+    <div>
+      <TopNav /> {/* TopNav 컴포넌트를 추가 */}
+      <div className="main-container" style={{ display: 'flex' }}>
+        <SideNav /> {/* SideNav 컴포넌트를 추가 */}
+        <div className="room-list-content" style={{ flex: 1 }}>
+          <div className="room-list-container">
+            <div className="header-container">
+              <h1>방 목록</h1>
+              {/* 방 목록 검색 */}
+              <button className="search-button" onClick={handleSearch}>아이디 검색</button>
+              <button className="search-button" onClick={handleSearch}>방 번호 입장</button>
             </div>
-          </li>
-        ))}
-      </ul>
+            <ul className="room-list">
+              {currentRooms.map((room) => (
+                <li key={room.room} className="room-item">
+                  <div>
+                    <h2>{room.description}</h2>
+                    <p>참여 인원수: {room.num_participants}</p>
+                    <button onClick={() => handleJoinRoom(room.room)}>참가하기</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <ul id="page-numbers" className="pagination">
+              {renderPageNumbers()}
+            </ul>
+          </div>
+          <Footer /> {/* Footer 컴포넌트를 추가 */}
+        </div>
+      </div>
+
+      {/* 검색 박스 */}
+      {isSearchBoxOpen && (
+        <div className="search-box-overlay" onClick={closeSearchBox}>
+          <div className="search-box" onClick={(e) => e.stopPropagation()}>
+            <h2>방 번호를 입력하세요</h2>
+            <input
+              type="text"
+              placeholder="입력"
+              style={{ width: '80%' }}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button onClick={closeSearchBox}>이동</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -62,11 +181,9 @@ function initjanus() {
       return;
     }
 
-    // Create session
     janus = new Janus({
       server: server,
       success: function () {
-        // Attach to VideoRoom plugin
         janus.attach({
           plugin: "janus.plugin.videoroom",
           opaqueId: opaqueId,
@@ -76,7 +193,6 @@ function initjanus() {
             Janus.log("Plugin attached! (" + sfutest.getPlugin() + ", id=" + sfutest.getId() + ")");
             Janus.log("  -- This is a publisher/manager");
 
-            // Prepare the username registration
             $("#videojoin").removeClass("hide").show();
             $("#registernow").removeClass("hide").show();
             $("#register").click(registerUsername);
@@ -100,7 +216,6 @@ function initjanus() {
           consentDialog: function (on) {
             Janus.debug("Consent dialog should be " + (on ? "on" : "off") + " now");
             if (on) {
-              // Darken screen and show hint
               $.blockUI({
                 message: '<div><img src="up_arrow.png"/></div>',
                 css: {
@@ -113,7 +228,6 @@ function initjanus() {
                 },
               });
             } else {
-              // Restore screen
               $.unblockUI();
             }
           },
@@ -128,7 +242,6 @@ function initjanus() {
             $("#videolocal").parent().parent().unblock();
             if (!on) return;
             $("#publish").remove();
-            // This controls allows us to override the global room bitrate cap
             $("#bitrate").parent().parent().removeClass("hide").show();
             $("#bitrate a").click(function () {
               var id = $(this).attr("id");
@@ -152,7 +265,6 @@ function initjanus() {
             Janus.debug("Event: " + event);
             if (event) {
               if (event === "joined") {
-                // Publisher/manager created, negotiate WebRTC and attach to existing feeds, if any
                 myid = msg["id"];
                 mypvtid = msg["private_id"];
                 Janus.log("Successfully joined room " + msg["room"] + " with ID " + myid);
@@ -162,7 +274,6 @@ function initjanus() {
                 } else {
                   publishOwnFeed(true);
                 }
-                // Any new feed to attach to?
                 if (msg["publishers"]) {
                   var list = msg["publishers"];
                   Janus.debug("Got a list of available publishers/feeds:", list);
@@ -176,13 +287,11 @@ function initjanus() {
                   }
                 }
               } else if (event === "destroyed") {
-                // The room has been destroyed
                 Janus.warn("The room has been destroyed!");
                 bootbox.alert("The room has been destroyed", function () {
                   window.location.reload();
                 });
               } else if (event === "event") {
-                // Any new feed to attach to?
                 if (msg["publishers"]) {
                   var list = msg["publishers"];
                   Janus.debug("Got a list of available publishers/feeds:", list);
@@ -195,7 +304,6 @@ function initjanus() {
                     newRemoteFeed(id, display, audio, video);
                   }
                 } else if (msg["leaving"]) {
-                  // One of the publishers has gone away?
                   var leaving = msg["leaving"];
                   Janus.log("Publisher left: " + leaving);
                   var remoteFeed = null;
@@ -217,11 +325,9 @@ function initjanus() {
                     remoteFeed.detach();
                   }
                 } else if (msg["unpublished"]) {
-                  // One of the publishers has unpublished?
                   var unpublished = msg["unpublished"];
                   Janus.log("Publisher left: " + unpublished);
                   if (unpublished === "ok") {
-                    // That's us
                     sfutest.hangup();
                     return;
                   }
@@ -245,7 +351,6 @@ function initjanus() {
                   }
                 } else if (msg["error"]) {
                   if (msg["error_code"] === 426) {
-                    // This is a "no such room" error: give a more meaningful description
                     bootbox.alert(
                       "<p>Apparently room <code>" +
                       myroom +
@@ -265,18 +370,13 @@ function initjanus() {
             if (jsep) {
               Janus.debug("Handling SDP as well...", jsep);
               sfutest.handleRemoteJsep({ jsep: jsep });
-              // Check if any of the media we wanted to publish has
-              // been rejected (e.g., wrong or unsupported codec)
               var audio = msg["audio_codec"];
               if (mystream && mystream.getAudioTracks() && mystream.getAudioTracks().length > 0 && !audio) {
-                // Audio has been rejected
                 toastr.warning("Our audio stream has been rejected, viewers won't hear us");
               }
               var video = msg["video_codec"];
-              if (mystream && mystream.getVideoTracks() && mystream.getVideoTracks().length > 0 && !video) {
-                // Video has been rejected
+              if (mystream.getVideoTracks() && mystream.getVideoTracks().length > 0 && !video) {
                 toastr.warning("Our video stream has been rejected, viewers won't see us");
-                // Hide the webcam video
                 $("#myvideo").hide();
                 $("#videolocal").append(
                   '<div class="no-video-container">' +
@@ -296,12 +396,10 @@ function initjanus() {
               $("#videolocal").append(
                 '<video class="rounded centered" id="myvideo" width="100%" height="100%" autoplay playsinline muted="muted"/>'
               );
-              // Add a 'mute' button
               $("#videolocal").append(
                 '<button class="btn btn-warning btn-xs" id="mute" style="position: absolute; bottom: 0px; left: 0px; margin: 15px;">Mute</button>'
               );
               $("#mute").click(toggleMute);
-              // Add an 'unpublish' button
               $("#videolocal").append(
                 '<button class="btn btn-warning btn-xs" id="unpublish" style="position: absolute; bottom: 0px; right: 0px; margin: 15px;">Unpublish</button>'
               );
@@ -328,7 +426,6 @@ function initjanus() {
             }
             var videoTracks = stream.getVideoTracks();
             if (!videoTracks || videoTracks.length === 0) {
-              // No webcam
               $("#myvideo").hide();
               if ($("#videolocal .no-video-container").length === 0) {
                 $("#videolocal").append(
@@ -344,7 +441,6 @@ function initjanus() {
             }
           },
           onremotestream: function (stream) {
-            // The publisher stream is sendonly, we don't expect anything here
           },
           oncleanup: function () {
             Janus.log(" ::: Got a cleanup notification: we are unpublished now :::");

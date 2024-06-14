@@ -4,6 +4,7 @@ import Footer from "../../components/footer/Footer";
 import TopNav from "../../components/topnav/TopNav";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import people from "../../assets/people.jpg"
 
 function FindPassword() {
   //이메일 유효성 검사
@@ -47,8 +48,7 @@ function FindPassword() {
       <div className="relative min-h-screen flex">
         <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
           <div className="sm:w-1/2 xl:w-3/5 h-full md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative">
-            {/* 애니메이션 */}
-            {/* <img src={teamlogo} alt="this is our team logo" /> */}
+            <img src={people} alt="sidebackground" className="h-full w-full object-cover absolute" />
           </div>
           <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 mt-40">
             <div className="py-8 px-8 rounded-xl">

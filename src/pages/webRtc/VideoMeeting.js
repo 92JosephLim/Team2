@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function initjanus() {
   if (!Janus.isWebrtcSupported()) {
@@ -189,13 +190,13 @@ function initjanus() {
                   // This is a "no such room" error: give a more meaningful description
                   bootbox.alert(
                     "<p>Apparently room <code>" +
-                      myroom +
-                      "</code> (the one this demo uses as a test room) " +
-                      "does not exist...</p><p>Do you have an updated <code>janus.plugin.videoroom.jcfg</code> " +
-                      "configuration file? If not, make sure you copy the details of room <code>" +
-                      myroom +
-                      "</code> " +
-                      "from that sample in your current configuration file, then restart Janus and try again."
+                    myroom +
+                    "</code> (the one this demo uses as a test room) " +
+                    "does not exist...</p><p>Do you have an updated <code>janus.plugin.videoroom.jcfg</code> " +
+                    "configuration file? If not, make sure you copy the details of room <code>" +
+                    myroom +
+                    "</code> " +
+                    "from that sample in your current configuration file, then restart Janus and try again."
                   );
                 } else {
                   bootbox.alert(msg["error"]);
@@ -221,9 +222,9 @@ function initjanus() {
               $("#myvideo").hide();
               $("#videolocal").append(
                 '<div class="no-video-container">' +
-                  '<i class="fa fa-video-camera fa-5 no-video-icon" style="height: 100%;"></i>' +
-                  '<span class="no-video-text" style="font-size: 16px;">Video rejected, no webcam</span>' +
-                  "</div>"
+                '<i class="fa fa-video-camera fa-5 no-video-icon" style="height: 100%;"></i>' +
+                '<span class="no-video-text" style="font-size: 16px;">Video rejected, no webcam</span>' +
+                "</div>"
               );
             }
           }
@@ -274,9 +275,9 @@ function initjanus() {
             if ($("#videolocal .no-video-container").length === 0) {
               $("#videolocal").append(
                 '<div class="no-video-container">' +
-                  '<i class="fa fa-video-camera fa-5 no-video-icon"></i>' +
-                  '<span class="no-video-text">No webcam available</span>' +
-                  "</div>"
+                '<i class="fa fa-video-camera fa-5 no-video-icon"></i>' +
+                '<span class="no-video-text">No webcam available</span>' +
+                "</div>"
               );
             }
           } else {
@@ -312,26 +313,17 @@ function initjanus() {
   });
 }
 
-function getRoomList() {
-  var body = { request: "list" };
-  sfutest.send({
-    message: body,
-    success: function (result) {
-      if (result && result.list) {
-        var rooms = result.list;
-        console.log("Rooms list: ", rooms);
-        var roomListElement = $("#roomlist");
-        roomListElement.empty(); // Clear any previous list
-        for (var i = 0; i < rooms.length; i++) {
-          var room = rooms[i];
-          roomListElement.append("<li>Room ID: " + room.room + ", Description: " + room.description + "</li>");
-        }
-      }
-    },
-  });
-}
-
 function VideoMeeting() {
+  useEffect(() => {
+    initjanus();
+  }, []);
+
+  const navigate = useNavigate();
+  const destroytest = () => {
+    janus.destroy();
+    navigate("/roomList");
+  };
+
   return (
     <div>
       <nav className="navbar navbar-default navbar-static-top"></nav>
@@ -339,24 +331,10 @@ function VideoMeeting() {
         <div className="row">
           <div className="col-md-12">
             <div className="page-header">
-              <h1>
-                화상회의
-                <button className="btn btn-default" autoComplete="off" id="start" onClick={initjanus}>
-                  Start
-                </button>
-                <button className="roomlist" autoComplete="off" id="list" onClick={getRoomList}>
-                  방목록조회
-                </button>
-              </h1>
-            </div>
-            <div className="container" id="details">
-              <div className="row">
-                <div className="col-md-12">
-                  <h3>Start 버튼을 누르고 데모를 시작하세요</h3>
-                  <h4>채팅방 ID로 기존 채팅방을 연결하거나 새로 생성합니다.</h4>
-                  <h4>* ID는 영문 또는 숫자로 입력해야 합니다.</h4>
-                </div>
-              </div>
+              <h1>화상회의</h1>
+              <button className="btn btn-default" autoComplete="off" id="des" onClick={destroytest}>
+                방나가기
+              </button>
             </div>
             <div className="container hide" id="videojoin">
               <div className="row">
@@ -386,12 +364,6 @@ function VideoMeeting() {
                           if (e.key === "Enter") checkEnter(e.target, e);
                         }}
                       />
-
-                      {/* <span className="input-group-btn">
-                        <button className="btn btn-success" autoComplete="off" id="register">
-                          대화방 참여
-                        </button>
-                      </span> */}
                     </div>
                     <div className="input-group margin-bottom-md">
                       <span className="input-group-addon">방제목</span>

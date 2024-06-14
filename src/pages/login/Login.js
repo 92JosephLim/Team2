@@ -6,6 +6,8 @@ import Kakao from "../social/Kakao";
 import GoogleLoginButton from "../social/GoogleLoginButton";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode"; // Named import로 수정
+import color from "../../assets/color.jpg";
+
 
 function Login() {
   const navigate = useNavigate();
@@ -79,7 +81,11 @@ function Login() {
       <TopNav />
       <div className="relative min-h-screen flex">
         <div className="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
-          <div className="sm:w-1/2 xl:w-3/5 h-full md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative"></div>
+          <div className="sm:w-1/2 xl:w-3/5 h-full md:flex flex-auto items-center justify-center overflow-hidden text-white bg-no-repeat bg-cover relative">
+
+            <img src={color} alt="Login img" className="h-full w-full object-cover absolute" />
+          </div>
+
           <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 mt-40">
             <div className="py-8 px-8 rounded-xl">
               <h1 className="font-medium text-2xl mt-3 text-center">Login</h1>
@@ -109,7 +115,7 @@ function Login() {
                     id="password"
                     value={password}
                     onChange={onChangePassword}
-                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full"
+                    className="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 min-w-full text-2xl"
                     placeholder="Password"
                   />
                   <p className="errorMsg text-red-600 mt-2 text-xl">{passwordMessage}</p>

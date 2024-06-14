@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-//import Janus from "janus-gateway"; // Ensure you have imported Janus correctly
+import TopNav from "../../components/topnav/TopNav";
+import Footer from "../../components/footer/Footer";
+import we2 from "../../assets/we2.jpg";
 
 const server = "https://janus.jsflux.co.kr/janus"; // Janus server URL
 
@@ -19,7 +21,6 @@ function CreateRoom() {
   const [roomId, setRoomId] = useState(null);
 
   const createRoom = () => {
-    // Initialize the session and attach to the VideoRoom plugin
     const janusInstance = new Janus({
       server: server,
       success: () => {
@@ -71,19 +72,44 @@ function CreateRoom() {
   };
 
   return (
-    <div>
-      <input type="text" placeholder="Enter room name" value={roomName} onChange={(e) => setRoomName(e.target.value)} />
-      <button className="createroom" onClick={createRoom}>
-        방 만들기
-      </button>
-      <button className="check" onClick={checkTextRoomPlugin}>
-        체크
-      </button>
-      {roomId && (
-        <div>
-          <p>Created Room ID: {roomId}</p>
+    <div className="flex flex-col min-h-screen">
+      <TopNav className="top" />
+      <div className=" bg-gray-100 items-center justify-center h-60 flex-grow relative w-full">
+        <img src={we2} className="absolute top-0 left-0 w-full h-full object-cover z-0" />
+        <div className="bg-white p-10 mt-10 rounded shadow-md w-full max-w-lg absolute left-1/2 transform -translate-x-1/2">
+          <div className="text-2xl font-bold mb-6 text-center">Create a New Room</div>
+          <div className="w-full">
+            <input
+              type="text"
+              placeholder="Enter room name"
+              value={roomName}
+              onChange={(e) => setRoomName(e.target.value)}
+              className=" p-2 mb-4 border border-gray-300 rounded"
+              style={{ width: '16vw' }}
+            />
+          </div>
+          <div className="flex">
+            <button
+              className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+              onClick={createRoom}
+            >
+              Create Room
+            </button>
+            <button
+              className="w-full bg-gray-500 text-white p-2 rounded hover:bg-gray-600 ml-2"
+              onClick={checkTextRoomPlugin}
+            >
+              Check Plugins
+            </button>
+          </div>
+          {roomId && (
+            <div className="mt-4 p-4 border border-green-500 text-green-500 rounded">
+              <p>Created Room ID: {roomId}</p>
+            </div>
+          )}
         </div>
-      )}
+      </div>
+      <Footer />
     </div>
   );
 }
