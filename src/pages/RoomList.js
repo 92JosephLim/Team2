@@ -12,6 +12,10 @@ function RoomList() {
   const [roomsPerPage] = useState(8); // 한 페이지에 표시할 방 수
   const [isSearchBoxOpen, setIsSearchBoxOpen] = useState(false); // 검색 박스 상태 관리
   const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 관리
+  const [isTitleSearchBoxOpen, setIsTitleSearchBoxOpen] = useState(false); // 제목 검색 박스 상태 관리
+  const [titleSearchTerm, setTitleSearchTerm] = useState(""); // 제목 검색어 상태 관리
+  const [isCustomSearchBoxOpen, setIsCustomSearchBoxOpen] = useState(false); // 검색 박스 상태 관리
+
 
   function getRoomList() {
     var body = { request: "list" };
@@ -50,9 +54,36 @@ function RoomList() {
 
   const closeSearchBox = () => {
     setIsSearchBoxOpen(false); // 검색 박스 닫기
-    if (searchTerm) {
-      navigate(`/joinRoom?roomId=${searchTerm}`);
+    setSearchTerm(""); // 검색어 초기화
+  };
+
+  const handleTitleSearch = () => {
+    console.log("Title search button clicked");
+    setIsTitleSearchBoxOpen(true); // 제목 검색 박스 열기
+  };
+
+  const closeTitleSearchBox = () => {
+    setIsTitleSearchBoxOpen(false); // 제목 검색 박스 닫기
+    if (titleSearchTerm) {
+      // 방 목록에서 제목 검색
+      const foundRoom = rooms.find(room => room.description.includes(titleSearchTerm));
+      
+      if (foundRoom) {
+        navigate(`/joinRoom?roomId=${foundRoom.room}`);
+      } else {
+        alert("해당 제목의 방을 찾을 수 없습니다.");
+      }
     }
+  };
+
+  const handleCustomSearch = () => {
+    console.log("Custom search button clicked");
+    setIsCustomSearchBoxOpen(true); // 검색 박스 열기
+  };
+
+  const closeCustomSearchBox = () => {
+    setIsCustomSearchBoxOpen(false); // 검색 박스 닫기
+    setSearchTerm(""); // 검색어 초기화
   };
 
   // 현재 페이지에 표시할 방 목록 계산
@@ -128,11 +159,16 @@ function RoomList() {
         <SideNav /> {/* SideNav 컴포넌트를 추가 */}
         <div className="room-list-content" style={{ flex: 1 }}>
           <div className="room-list-container">
-            <div className="header-container">
+            <div className="header-container" style={{ display: 'flex', justifyContent: 'space-between' }}>
               <h1>방 목록</h1>
-              {/* 방 목록 검색 */}
-              <button className="search-button" onClick={handleSearch}>아이디 검색</button>
-              <button className="search-button" onClick={handleSearch}>방 번호 입장</button>
+              <div>
+                {/* 방 목록 검색 */}
+                <button className="search-button" onClick={handleSearch}>아이디 검색</button>
+                <button className="search-button" onClick={handleTitleSearch}>제목 검색</button>
+                {/* 추가된 div */}
+                <div style={{ display: 'inline-block', width: 'auto', padding: '9px', backgroundColor: '#007bff', color: '#fff', borderRadius: '5px', marginLeft: '910px', cursor: 'pointer' }} onClick={handleCustomSearch}>검색</div>
+                <button className="search-button" onClick={handleSearch}>방 번호 입장</button>
+              </div>
             </div>
             <ul className="room-list">
               {currentRooms.map((room) => (
@@ -153,7 +189,7 @@ function RoomList() {
         </div>
       </div>
 
-      {/* 검색 박스 */}
+      {/* 방 번호 검색 박스 */}
       {isSearchBoxOpen && (
         <div className="search-box-overlay" onClick={closeSearchBox}>
           <div className="search-box" onClick={(e) => e.stopPropagation()}>
@@ -169,6 +205,24 @@ function RoomList() {
           </div>
         </div>
       )}
+
+      {/* 검색 박스 */}
+      {isCustomSearchBoxOpen && (
+        <div className="search-box-overlay" onClick={closeCustomSearchBox}>
+          <div className="search-box" onClick={(e) => e.stopPropagation()}>
+            <h2>제목을 입력하세요</h2>
+            <input
+              type="text"
+              placeholder="입력"
+              style={{ width: '80%' }}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button onClick={closeCustomSearchBox}>이동</button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
@@ -381,8 +435,7 @@ function initjanus() {
                 $("#videolocal").append(
                   '<div class="no-video-container">' +
                     '<i class="fa fa-video-camera fa-5 no-video-icon" style="height: 100%;"></i>' +
-                    '<span class="no-video-text" style="font-size: 16px;">Video rejected, no webcam</span>' +
-                    "</div>"
+                    '<span class="no-video-text" style="font-size: 16px;">Video rejected, no webcam</span>'
                 );
               }
             }
