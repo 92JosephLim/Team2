@@ -47,6 +47,23 @@ function TopNav() {
     navigate('/');
   };
 
+  // 설정 옵션 클릭 시 동작할 함수
+  const handleRoomSettings = () => {
+    navigate("/settings/RoomSetting");
+  };
+
+  const handleVideoAudioSettings = () => {
+    navigate("/settings/VideoAudioSetting");
+  };
+
+  const handleChatSettings = () => {
+    navigate("/settings/ChatSetting");
+  };
+
+  const handleOtherSettings = () => {
+    navigate("/settings/OtherSetting");
+  };
+
   return (
     <header className="top">
       <div className="logo">
@@ -90,10 +107,20 @@ function TopNav() {
           </div>
 
         )}
+        {/* 설정 드롭다운 */}
+        <div className="dropdown">
+          <button className="dropdown-button">Settings</button>
+          <div className="dropdown-content">
+            <button className="dropdown-content-button" onClick={handleRoomSettings}>방 설정</button>
+            <button className="dropdown-content-button" onClick={handleVideoAudioSettings}>비디오 및 오디오 설정</button>
+            <button className="dropdown-content-button" onClick={handleChatSettings}>채팅 설정</button>
+            <button className="dropdown-content-button" onClick={handleOtherSettings}>기타 설정</button>
+          </div>
+        </div>
+        {/* 로그인 된 상태에서는 환영 메시지와 로그아웃 버튼 표시 */}
         <div className="login-options">
           {token ? (
             <>
-              {/* 로그인 된 상태에서는 환영 메시지와 로그아웃 버튼 표시 */}
               <span className="mr-4">Welcome, {email}</span>
               <button onClick={handleLogout} className="bg-red-500 px-3 py-2 rounded-md hover:bg-red-700">{t("logout")}</button>
             </>

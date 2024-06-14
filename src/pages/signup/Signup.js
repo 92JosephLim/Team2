@@ -6,6 +6,7 @@ import { registerUser, sendEmailVerification, confirmEmailVerification } from ".
 import grim from "../../assets/grim.jpg"
 
 function Signup() {
+
   const navigate = useNavigate();
 
   // 회원가입 폼 데이터 초기 상태 설정
