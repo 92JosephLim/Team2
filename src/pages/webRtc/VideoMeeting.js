@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
-import TopNav from "../../components/topnav/TopNav";
-import "../../components/topnav/TopNav"; // TopNav CSS 
-import "../../components/footer/Footer"; // Footer CSS
 
 function initjanus() {
   if (!Janus.isWebrtcSupported()) {
@@ -336,7 +334,7 @@ function VideoMeeting() {
   const navigate = useNavigate();
 
   const connectToChat = (roomId) => {
-    const socket = new SockJS('http://localhost:80/chat');
+    const socket = new SockJS('http://localhost:8080/chat');
     const client = Stomp.over(socket);
 
     client.connect({}, () => {
@@ -377,18 +375,10 @@ function VideoMeeting() {
     }
   };
 
-  useEffect(() => {
-    // 새 메시지가 추가될 때마다 스크롤을 아래로 이동
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-    }
-  }, [messages]);
-
   return (
     <>
-      <TopNav /> {/* TopNav 컴포넌트 추가 */}
-      <div className="flex h-screen" style={{ marginTop: "60px" }}>
-        <div className="flex-grow flex justify-between items-center p-4">
+      <div className="flex">
+        <div className="flex-grow-8 flex justify-between items-center p-4">
           <nav className="navbar navbar-default navbar-static-top"></nav>
           <div className="container">
             <div className="row">
@@ -573,9 +563,9 @@ function VideoMeeting() {
           </div>
         </div>
 
-        <div className="w-1/5 p-4 bg-white border-l border-gray-200 flex flex-col h-full">
+        <div className="w-1/5 p-4 bg-white border-l border-gray-200 flex flex-col">
           <h2 className="text-xl font-bold mb-4">Chat Room {roomName}</h2>
-          <div className="flex-grow bg-gray-200 p-4 rounded-lg overflow-y-auto h-full">
+          <div className="flex-grow bg-gray-200 p-4 rounded-lg overflow-y-auto">
             <ul className="space-y-2">
               {messages.map((msg, index) => (
                 <li key={index} className="bg-white p-2 rounded-lg shadow-sm">

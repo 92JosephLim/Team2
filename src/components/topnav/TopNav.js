@@ -73,7 +73,7 @@ function TopNav() {
       </div>
       <nav className="nav">
         {/* Video Chat 버튼 */}
-        <button className="nav-button video-chat-btn" onClick={handleVideoChat}>Video Chat</button>
+        <button className="nav-button video-chat-btn" onClick={handleVideoChat}>{t("VideoChat")}</button>
         <Link to="/cr" className="action-link">{t("room")}</Link>
         <Link to="/roomList" className="action-link">{t("list")}</Link>
         {/* About 드롭다운 */}
@@ -99,10 +99,10 @@ function TopNav() {
           <div className="dropdown">
             <button className="action-button" onClick={handleMyPage}>{t("mypage")}</button>
             <div className="dropdown-content">
-              <Link to="/ProfileSettings">상세 프로필 설정</Link>
-              <Link to="/messageChat">채팅 내역</Link> {/* 경로 수정 */}
-              <Link to="/invite">친구추가</Link>
-              <Link to="/friendMain">친구목록</Link>
+              <Link to="/ProfileSettings">{t("profile")}</Link>
+              <Link to="/messageChat">{t("chatLog")}</Link> {/* 경로 수정 */}
+              <Link to="/invite">{t("addFriend")}</Link>
+              <Link to="/friendMain">{t("FriendList")}</Link>
             </div>
           </div>
 
@@ -111,10 +111,10 @@ function TopNav() {
         <div className="dropdown">
           <button className="dropdown-button">Settings</button>
           <div className="dropdown-content">
-            <button className="dropdown-content-button" onClick={handleRoomSettings}>방 설정</button>
-            <button className="dropdown-content-button" onClick={handleVideoAudioSettings}>비디오 및 오디오 설정</button>
-            <button className="dropdown-content-button" onClick={handleChatSettings}>채팅 설정</button>
-            <button className="dropdown-content-button" onClick={handleOtherSettings}>기타 설정</button>
+            <button className="dropdown-content-button" onClick={handleRoomSettings}>{t("roomSetting")}</button>
+            <button className="dropdown-content-button" onClick={handleVideoAudioSettings}>{t("videoSetting")}</button>
+            <button className="dropdown-content-button" onClick={handleChatSettings}>{t("chatSetting")}</button>
+            <button className="dropdown-content-button" onClick={handleOtherSettings}>{t("etcSetting")}</button>
           </div>
         </div>
         {/* 로그인 된 상태에서는 환영 메시지와 로그아웃 버튼 표시 */}

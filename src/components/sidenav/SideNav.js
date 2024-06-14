@@ -70,22 +70,22 @@ function SideNav() {
               <ul className="pl-4">
                 <li className="rounded-sm hover:bg-sky-700">
                   <Link to="/settings/RoomSetting" className="block p-2 rounded-md text-white">
-                    방 설정
+                    {t("roomSetting")}
                   </Link>
                 </li>
                 <li className="rounded-sm hover:bg-sky-700">
                   <Link to="/settings/VideoAudioSetting" className="block p-2 rounded-md text-white">
-                    오디오 및 비디오 설정
+                    {t("videoSetting")}
                   </Link>
                 </li>
                 <li className="rounded-sm hover:bg-sky-700">
                   <Link to="/settings/ChatSetting" className="block p-2 rounded-md text-white">
-                    채팅 설정
+                    {t("chatSetting")}
                   </Link>
                 </li>
                 <li className="rounded-sm hover:bg-sky-700">
                   <Link to="/settings/OtherSetting" className="block p-2 rounded-md text-white">
-                    기타 설정
+                    {t("etcSetting")}
                   </Link>
                 </li>
               </ul>

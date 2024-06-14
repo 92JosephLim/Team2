@@ -3,22 +3,26 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
-import TopNav from '../../components/topnav/TopNav';
-import "../../components/topnav/TopNav"; // TopNav CSS
 
+// Janus 초기화 함수
 function initjanus() {
+  // WebRTC 지원 여부 확인
   if (!Janus.isWebrtcSupported()) {
     bootbox.alert("No WebRTC support... ");
     return;
   }
+
+  // Janus 인스턴스 생성
   janus = new Janus({
     server: server,
     success: function () {
+      // 비디오 룸 플러그인 연결
       janus.attach({
         plugin: "janus.plugin.videoroom",
         opaqueId: opaqueId,
         success: function (pluginHandle) {
           sfutest = pluginHandle;
+          // UI 업데이트: 비디오 참여 및 등록 섹션 표시
           $("#details").remove();
           $("#videojoin").removeClass("hide").show();
           $("#registernow").removeClass("hide").show();
@@ -28,10 +32,12 @@ function initjanus() {
           Janus.log("  -- This is a publisher/manager");
         },
         error: function (error) {
+          // 플러그인 연결 오류 처리
           Janus.error("  -- Error attaching plugin...", error);
           bootbox.alert("Error attaching plugin... " + error);
         },
         consentDialog: function (on) {
+          // 사용자 미디어 권한 요청 다이얼로그 표시/숨김
           Janus.debug("Consent dialog should be " + (on ? "on" : "off") + " now");
           if (on) {
             $.blockUI({
@@ -50,12 +56,15 @@ function initjanus() {
           }
         },
         iceState: function (state) {
+          // ICE 연결 상태 변경 로그
           Janus.log("ICE state changed to " + state);
         },
         mediaState: function (medium, on) {
+          // 미디어 스트림 상태 변경 로그
           Janus.log("Janus " + (on ? "started" : "stopped") + " receiving our " + medium);
         },
         webrtcState: function (on) {
+          // WebRTC 연결 상태 변경 로그
           Janus.log("Janus says our WebRTC PeerConnection is " + (on ? "up" : "down") + " now");
           $("#videolocal").parent().parent().unblock();
           if (!on) return;
@@ -78,11 +87,13 @@ function initjanus() {
           });
         },
         onmessage: function (msg, jsep) {
+          // 메시지 수신 처리
           Janus.debug(" ::: Got a message (publisher) :::", msg);
           var event = msg["videoroom"];
           Janus.debug("Event: " + event);
           if (event) {
             if (event === "joined") {
+              // 방 참여 성공 처리
               myid = msg["id"];
               mypvtid = msg["private_id"];
               Janus.log("Successfully joined room " + msg["room"] + " with ID " + myid);
@@ -93,6 +104,7 @@ function initjanus() {
                 publishOwnFeed(true);
               }
               if (msg["publishers"]) {
+                // 방 내의 퍼블리셔 목록 처리
                 var list = msg["publishers"];
                 Janus.debug("Got a list of available publishers/feeds:", list);
                 for (var f in list) {
@@ -105,12 +117,14 @@ function initjanus() {
                 }
               }
             } else if (event === "destroyed") {
+              // 방 파괴 처리
               Janus.warn("The room has been destroyed!");
               bootbox.alert("The room has been destroyed", function () {
                 window.location.reload();
               });
             } else if (event === "event") {
               if (msg["publishers"]) {
+                // 퍼블리셔 목록 업데이트 처리
                 var list = msg["publishers"];
                 Janus.debug("Got a list of available publishers/feeds:", list);
                 for (var f in list) {
@@ -122,6 +136,7 @@ function initjanus() {
                   newRemoteFeed(id, display, audio, video);
                 }
               } else if (msg["leaving"]) {
+                // 퍼블리셔가 방을 떠난 경우 처리
                 var leaving = msg["leaving"];
                 Janus.log("Publisher left: " + leaving);
                 var remoteFeed = null;
@@ -139,6 +154,7 @@ function initjanus() {
                   remoteFeed.detach();
                 }
               } else if (msg["unpublished"]) {
+                // 퍼블리셔가 게시 중단한 경우 처리
                 var unpublished = msg["unpublished"];
                 Janus.log("Publisher left: " + unpublished);
                 if (unpublished === "ok") {
@@ -160,6 +176,7 @@ function initjanus() {
                   remoteFeed.detach();
                 }
               } else if (msg["error"]) {
+                // 오류 메시지 처리
                 if (msg["error_code"] === 426) {
                   bootbox.alert("<p>Apparently room <code>" + myroom + "</code> (the one this demo uses as a test room) " +
                     "does not exist...</p><p>Do you have an updated <code>janus.plugin.videoroom.jcfg</code> " +
@@ -172,6 +189,7 @@ function initjanus() {
             }
           }
           if (jsep) {
+            // JSEP 메시지 처리
             Janus.debug("Handling SDP as well...", jsep);
             sfutest.handleRemoteJsep({ jsep: jsep });
             var audio = msg["audio_codec"];
@@ -190,6 +208,7 @@ function initjanus() {
           }
         },
         onlocalstream: function (stream) {
+          // 로컬 스트림 수신 처리
           Janus.debug(" ::: Got a local stream :::", stream);
           mystream = stream;
           $("#videojoin").hide();
@@ -198,12 +217,12 @@ function initjanus() {
             $("#videolocal").append(
               '<video class="rounded centered" id="myvideo" width="100%" height="100%" autoplay playsinline muted="muted"/>'
             );
-            // Add a 'mute' button
+            // 'Mute' 버튼 추가
             $("#videolocal").append(
               '<button class="btn btn-warning btn-xs" id="mute" style="position: absolute; bottom: 0px; left: 0px; margin: 15px;">Mute</button>'
             );
             $("#mute").click(toggleMute);
-            // Add an 'unpublish' button
+            // 'Unpublish' 버튼 추가
             $("#videolocal").append(
               '<button class="btn btn-warning btn-xs" id="unpublish" style="position: absolute; bottom: 0px; right: 0px; margin: 15px;">Unpublish</button>'
             );
@@ -245,9 +264,10 @@ function initjanus() {
           }
         },
         onremotestream: function (stream) {
-          // The publisher stream is sendonly, we don't expect anything here
+          // 퍼블리셔 스트림은 sendonly이므로 여기서는 기대하지 않음
         },
         oncleanup: function () {
+          // 클린업 처리
           Janus.log(" ::: Got a cleanup notification: we are unpublished now :::");
           mystream = null;
           $("#videolocal").html('<button id="publish" class="btn btn-primary">Publish</button>');
@@ -261,30 +281,33 @@ function initjanus() {
       });
     },
     error: function (error) {
+      // Janus 초기화 오류 처리
       Janus.error(error);
       bootbox.alert(error, function () {
         window.location.reload();
       });
     },
     destroyed: function () {
+      // Janus 인스턴스 파괴 처리
       window.location.reload();
     },
   });
 }
 
+// 방 참여 컴포넌트
 function JoinRoom() {
   useEffect(() => {
     initjanus(); // Janus 초기화 함수 직접 호출
   }, []);
 
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
-  const [username, setUsername] = useState('');
-  const [userId, setUserId] = useState('');
-  const [stompClient, setStompClient] = useState(null);
-  const [isConnected, setIsConnected] = useState(false);
+  const [messages, setMessages] = useState([]); // 메시지 상태
+  const [input, setInput] = useState(''); // 입력 상태
+  const [username, setUsername] = useState(''); // 사용자명 상태
+  const [userId, setUserId] = useState(''); // 사용자 ID 상태
+  const [stompClient, setStompClient] = useState(null); // STOMP 클라이언트 상태
+  const [isConnected, setIsConnected] = useState(false); // 연결 상태
 
-  const location = useLocation();
+  const location = useLocation(); // 현재 URL 정보 가져오기
   const queryParams = new URLSearchParams(location.search);
   const roomId = queryParams.get("roomId");
   const [roomName, setRoomName] = useState("");
@@ -297,11 +320,12 @@ function JoinRoom() {
     navigate("/roomList");
   };
 
+  // 방 ID가 존재할 경우 방 이름 설정 및 WebSocket 연결 설정
   useEffect(() => {
     if (roomId) {
       setRoomName(roomId);
 
-      const socket = new SockJS('http://localhost:80/chat');
+      const socket = new SockJS('http://localhost:8080/chat');
       const client = Stomp.over(socket);
 
       client.connect({}, () => {
@@ -325,13 +349,7 @@ function JoinRoom() {
     }
   }, [roomId]);
 
-  useEffect(() => {
-    // 새 메시지가 추가될 때마다 스크롤을 아래로 이동
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-    }
-  }, [messages]);
-
+  // 메시지 전송 함수
   const sendMessage = () => {
     if (isConnected && input.trim() !== '' && userId.trim() !== '') {
       const message = { content: `${userId}: ${input}` };
@@ -340,15 +358,15 @@ function JoinRoom() {
     }
   };
 
+  // 등록 버튼 클릭 핸들러
   const handleRegisterClick = () => {
     setUserId(username);
   };
 
   return (
     <>
-      <TopNav /> {/* TopNav 컴포넌트 추가 */}
-      <div className="flex h-screen" style={{ marginTop: "60px" }}>
-        <div className="flex-grow flex justify-between items-center p-4">
+      <div className="flex">
+        <div className="flex-grow-8 flex justify-between items-center p-4">
           <nav className="navbar navbar-default navbar-static-top"></nav>
           <div className="container">
             <div className="row">
@@ -398,7 +416,7 @@ function JoinRoom() {
                             onKeyPress={(e) => {
                               if (e.key === "Enter") checkEnter(e.target, e);
                             }}
-                            onChange={(e) => setUsername(e.target.value)} // Update the username state
+                            onChange={(e) => setUsername(e.target.value)} // 사용자명 상태 업데이트
                           />
                           <span className="input-group-btn">
                             <button className="btn btn-success" autoComplete="off" id="register" onClick={handleRegisterClick}>
@@ -535,9 +553,9 @@ function JoinRoom() {
           </div>
         </div>
 
-        <div className="w-1/5 p-4 bg-white border-l border-gray-200 flex flex-col h-full">
+        <div className="w-1/5 p-4 bg-white border-l border-gray-200 flex flex-col">
           <h2 className="text-xl font-bold mb-4">Chat Room {roomId}</h2>
-          <div className="flex-grow bg-gray-200 p-4 rounded-lg overflow-y-auto" style={{ height: "100%" }}>
+          <div className="flex-grow bg-gray-200 p-4 rounded-lg overflow-y-auto">
             <ul className="space-y-2">
               {messages.map((msg, index) => (
                 <li key={index} className="bg-white p-2 rounded-lg shadow-sm">
@@ -580,11 +598,14 @@ function JoinRoom() {
             </div>
           </div>
         </div>
+
+
       </div>
     </>
   );
 }
 
+// Enter 키 입력 시 로직
 const checkEnter = (target, event) => {
   if (event.key === "Enter") {
     // Your enter key logic here
@@ -592,4 +613,3 @@ const checkEnter = (target, event) => {
 };
 
 export default JoinRoom;
-
