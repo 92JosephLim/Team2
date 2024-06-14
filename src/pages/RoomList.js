@@ -7,15 +7,16 @@ import SideNav from "../components/SideNav";
 
 function RoomList() {
   const navigate = useNavigate();
+
   const [rooms, setRooms] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [roomsPerPage] = useState(8); // 한 페이지에 표시할 방 수
+  const [currentPage, setCurrentPage] = useState(1); // 페이징 처리를 위한 상태와 변수:
+  const [roomsPerPage] = useState(8); // 한 페이지에 표시할 방 수 8개
+
   const [isSearchBoxOpen, setIsSearchBoxOpen] = useState(false); // 검색 박스 상태 관리
   const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 관리
   const [isTitleSearchBoxOpen, setIsTitleSearchBoxOpen] = useState(false); // 제목 검색 박스 상태 관리
   const [titleSearchTerm, setTitleSearchTerm] = useState(""); // 제목 검색어 상태 관리
   const [isCustomSearchBoxOpen, setIsCustomSearchBoxOpen] = useState(false); // 검색 박스 상태 관리
-
 
   function getRoomList() {
     var body = { request: "list" };
@@ -31,6 +32,7 @@ function RoomList() {
     });
   }
 
+  //방에 참가하는 기능 - 방에 참가하기 버튼 클릭 시 동작하는 코드
   const handleJoinRoom = (roomId) => {
     console.log(`참가할 방 ID: ${roomId}`);
     navigate(`/joinRoom?roomId=${roomId}`);
@@ -74,6 +76,7 @@ function RoomList() {
         alert("해당 제목의 방을 찾을 수 없습니다.");
       }
     }
+    setTitleSearchTerm(""); // 검색어 초기화
   };
 
   const handleCustomSearch = () => {
@@ -93,16 +96,20 @@ function RoomList() {
 
   const totalPages = Math.ceil(rooms.length / roomsPerPage);
 
+  //페이지 이동을 위한 함수
+  //handleClick : 페이지 번호를 클릭했을 때 해당 페이지로 이동하는 함수
   const handleClick = (event) => {
-    setCurrentPage(Number(event.target.id));
+    setCurrentPage(Number(event.target.id));    
   };
 
+  //handleNext: 다음 버튼을 클릭했을 때 다음 페이지로 이동하는 함수.
   const handleNext = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
   };
 
+  //handlePrev: 이전 버튼을 클릭했을 때 이전 페이지로 이동하는 함수.
   const handlePrev = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
@@ -155,18 +162,19 @@ function RoomList() {
   return (
     <div>
       <TopNav /> {/* TopNav 컴포넌트를 추가 */}
-      <div className="main-container" style={{ display: 'flex' }}>
+      <div className="main-container" style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
         <SideNav /> {/* SideNav 컴포넌트를 추가 */}
         <div className="room-list-content" style={{ flex: 1 }}>
           <div className="room-list-container">
             <div className="header-container" style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <h1>방 목록</h1>
+              <h1>방das 목록</h1>
               <div>
                 {/* 방 목록 검색 */}
                 <button className="search-button" onClick={handleSearch}>아이디 검색</button>
                 <button className="search-button" onClick={handleTitleSearch}>제목 검색</button>
                 {/* 추가된 div */}
-                <div style={{ display: 'inline-block', width: 'auto', padding: '9px', backgroundColor: '#007bff', color: '#fff', borderRadius: '5px', marginLeft: '910px', cursor: 'pointer' }} onClick={handleCustomSearch}>검색</div>
+                <div style={{ display: 'inline-block', width: 'auto', padding: '9px', backgroundColor: '#007bff', color: '#fff', borderRadius: '5px', marginLeft: '910px', cursor: 'pointer' }} 
+                onClick={handleCustomSearch}>검색</div>
                 <button className="search-button" onClick={handleSearch}>방 번호 입장</button>
               </div>
             </div>
@@ -185,8 +193,8 @@ function RoomList() {
               {renderPageNumbers()}
             </ul>
           </div>
-          <Footer /> {/* Footer 컴포넌트를 추가 */}
         </div>
+        <Footer /> {/* Footer 컴포넌트를 추가 */}
       </div>
 
       {/* 방 번호 검색 박스 */}
@@ -222,7 +230,6 @@ function RoomList() {
           </div>
         </div>
       )}
-
     </div>
   );
 }
