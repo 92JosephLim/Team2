@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './My.css';
-
+// 다국어 지원 모드 추가
+import { useTranslation } from "react-i18next";
 import ProfileCard from '../../components/mypage/ProfileCard';
 
 const My = () => {
+
+  const { t } = useTranslation();
+
   const [userInfo, setUserInfo] = useState({
     email: '',
     gender: '',

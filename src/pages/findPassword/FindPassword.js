@@ -5,8 +5,12 @@ import TopNav from "../../components/topnav/TopNav";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import people from "../../assets/people.jpg"
+// 다국어 지원 모드 추가
+import { useTranslation } from "react-i18next";
 
 function FindPassword() {
+
+  const { t } = useTranslation();
   //이메일 유효성 검사
   // 이메일 유효성 검사 관련 코드 작성하기
   const [email, setEmail] = useState("");
@@ -52,17 +56,17 @@ function FindPassword() {
           </div>
           <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 mt-40">
             <div className="py-8 px-8 rounded-xl">
-              <h1 className="font-medium text-2xl mt-3 text-center">비밀번호 찾기</h1>
+              <h1 className="font-medium text-2xl mt-3 text-center">{t("passwordFind")}</h1>
               <h5 className="mt-3">
-                가입하신 이메일 주소를 입력해주세요.
+                {t("writeUrEmail")}
                 <br />
-                이메일 주소로 비밀번호를 재설정할 수 있는 이메일을 보내드립니다.
+                {t("sendEmail")}
                 <br />
               </h5>
               <form onSubmit={handleSubmit} className="mt-6">
                 <div className="my-5 text-sm">
                   <label htmlFor="email" className="block text-black text-left">
-                    Email
+                    {t("email")}
                   </label>
                   <input
                     type="email"
@@ -79,20 +83,20 @@ function FindPassword() {
                   type="submit"
                   className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
                 >
-                  인증번호 전송
+                  {t("getVerify")}
                 </button>
                 {message && <p className="text-green-500 mt-2">{message}</p>}
               </form>
               <p className="mt-12 text-xl text-center font-light text-gray-400">
-                계정이 있으신가요?{" "}
+                {t("haveAccount")}{" "}
                 <Link to="/login" className="text-blue-800 font-semibold">
-                  로그인하기
+                  {t("login")}
                 </Link>
               </p>
               <p className="mt-2 text-xl text-center font-light text-gray-400">
-                계정이 없으신가요?{" "}
+                {t("haveNoAccount")}{" "}
                 <Link to="/signup" className="text-blue-800 font-semibold">
-                  회원가입하기
+                  {t("signup")}
                 </Link>
               </p>
             </div>

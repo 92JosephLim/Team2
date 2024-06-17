@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import Footer from "../../components/footer/Footer";
-import TopNav from "../../components/topnav/TopNav";
-import SideNav from '../../components/sidenav/SideNav';
 import AddFriendTitle from "../../components/friend/AddFriendTitle";
 import axios from "axios";
 import { FaCheck } from "react-icons/fa";
+// 다국어 지원 모드 추가
+import { useTranslation } from "react-i18next";
 
 // 친구 추가 페이지
 function InviteFriend() {
   const [nickName, setNickName] = useState(""); // 입력하는 닉네임
   const [results, setResults] = useState([]); // 검색결과
   const [error, setError] = useState(""); // 에러 메시지
+  const { t } = useTranslation();
 
   const handleSearch = async (event) => {
     event.preventDefault();
@@ -80,7 +80,7 @@ function InviteFriend() {
                     value={nickName}
                     onChange={(e) => setNickName(e.target.value)}
                   />
-                  <button className="ml-2 rounded-lg bg-blue-500 p-5 text-white hover:bg-blue-600">검색</button>
+                  <button className="ml-2 rounded-lg bg-blue-500 p-5 text-white hover:bg-blue-600">{t("search")}</button>
                 </div>
               </form>
               {error && <div className="text-red-500 text-center mt-4">{error}</div>}
@@ -91,8 +91,8 @@ function InviteFriend() {
             <table className="min-w-full text-md bg-white rounded mb-4">
               <tbody>
                 <tr className="border-b">
-                  <th className="text-center p-3 px-5">닉네임</th>
-                  <th className="text-center p-3 px-5">Email</th>
+                  <th className="text-center p-3 px-5">{t("nickname")}</th>
+                  <th className="text-center p-3 px-5">{t("email")}</th>
                   <th />
                 </tr>
                 {results.length > 0 ? (
@@ -108,20 +108,13 @@ function InviteFriend() {
                         >
                           <FaCheck size={24} />
                         </button>
-                        {/* <button
-                          type="button"
-                          className="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                          onClick={() => handleReject(result.email)}
-                        >
-                          <RiDeleteBin5Line size={24} />
-                        </button> */}
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr className="border-b">
                     <td colSpan="3" className="text-center p-3 px-5">
-                      검색 결과가 없습니다.
+                      {t("searchNotFound")}
                     </td>
                   </tr>
                 )}

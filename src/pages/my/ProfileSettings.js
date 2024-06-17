@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import './ProfileSettings.css'; // 올바른 경로로 업데이트
 import { updateUserInfo } from '../../api/apiService'; // API 서비스 함수 임포트
 // 다국어 지원 모드 추가
-import i18next from "../../locales/i18n";
 import { useTranslation } from "react-i18next";
 
 function ProfileSettings() {
+
+  const { t } = useTranslation();
+
   const [userInfo, setUserInfo] = useState({
     email: '',
     phoneNumber: '',
@@ -199,14 +201,14 @@ function ProfileSettings() {
       <div className="flex flex-1">
         <main className="flex-1 p-6">
           <div className="profile-settings-content">
-            <h1>상세 프로필 설정</h1>
+            <h1>{t("profile")}</h1>
             <form className="profile-settings-form" onSubmit={handleSubmit}>
               <div className="form-group">
-                <label>프로필 사진</label>
+                <label>{t("picture")}</label>
                 <input type="file" name="profileImage" onChange={handleFileChange} />
               </div>
               <div className="form-group">
-                <label>전화번호</label>
+                <label>{t("phoneCall")}</label>
                 <input
                   type="text"
                   name="phoneNumber"
@@ -217,34 +219,34 @@ function ProfileSettings() {
                 <p className="errorMsg mt-2 text-xl text-red-600">{messages.phoneNumberMessage}</p>
               </div>
               <div className="form-group">
-                <label>현재 비밀번호</label>
+                <label>{t("password")}</label>
                 <input type="password" name="password" value={userInfo.password} onChange={handleChange} placeholder="현재 비밀번호 입력" />
               </div>
               <div className="form-group">
-                <label>새 비밀번호</label>
+                <label>{t("passwordNew")}</label>
                 <input type="password" name="newPassword" value={userInfo.newPassword} onChange={validateNewPassword} placeholder="새 비밀번호 입력" />
                 <p className="errorMsg mt-2 text-xl text-red-600">{messages.newPasswordMessage}</p>
               </div>
               <div className="form-group">
-                <label>새 비밀번호 확인</label>
+                <label>{t("passwordNewCheck")}</label>
                 <input type="password" name="newPasswordCheck" value={userInfo.newPasswordCheck} onChange={validateNewPasswordCheck} placeholder="새 비밀번호 확인" />
                 <p className="errorMsg mt-2 text-xl text-red-600">{messages.newPasswordCheckMessage}</p>
               </div>
               {/* 성별 */}
               <div className="my-5 text-sm">
-                <label htmlFor="gender" className="block text-black text-left">Gender</label>
+                <label htmlFor="gender" className="block text-black text-left">{t("gender")}</label>
                 <div className="flex items-center mt-4">
                   <label className="inline-flex items-center mr-4">
                     <input type="radio" name="gender" value="none" className="mr-2" defaultChecked onChange={handleChange} />
-                    선택안함
+                    {t("noCheck")}
                   </label>
                   <label className="inline-flex items-center mr-4">
                     <input type="radio" name="gender" value="male" className="mr-2" onChange={handleChange} />
-                    남성
+                    {t("man")}
                   </label>
                   <label className="inline-flex items-center">
                     <input type="radio" name="gender" value="female" className="mr-2" onChange={handleChange} />
-                    여성
+                    {t("woman")}
                   </label>
                 </div>
               </div>
@@ -255,9 +257,9 @@ function ProfileSettings() {
                   type="submit"
                   className="save-button"
                 >
-                  변경 사항 저장
+                  {t("changeSave")}
                 </button>
-                <button type="button" className="cancel-button" onClick={handleCancel}>변경 사항 취소</button>
+                <button type="button" className="cancel-button" onClick={handleCancel}>{t("cancleChange")}</button>
               </div>
             </form>
           </div>

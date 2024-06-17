@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./RoomList.css";
-import Footer from "../../components/footer/Footer";
-import TopNav from "../../components/topnav/TopNav";
-import SideNav from "../../components/sidenav/SideNav";
 
 function RoomList() {
   const navigate = useNavigate();

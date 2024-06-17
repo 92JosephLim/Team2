@@ -7,9 +7,12 @@ import pic2 from "../../assets/2.jpg";
 import pic3 from "../../assets/3.jpg";
 import pic4 from "../../assets/4.jpg";
 import MainSide from "../../animation/MainSide"
+// 다국어 지원 모드 추가
+import { useTranslation } from "react-i18next";
 
 function Main() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="main-page">
@@ -52,7 +55,7 @@ function Main() {
               className="start-button flash-border"
               onClick={() => navigate("/video")}
             >
-              시작하기
+              {t("start")}
             </button>
           </div>
         </div>

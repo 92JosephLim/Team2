@@ -1,14 +1,14 @@
 import React from "react";
-import Footer from "../../components/footer/Footer";
-import TopNav from "../../components/topnav/TopNav";
-import SideNav from '../../components/sidenav/SideNav';
 import FriendTitle from "../../components/friend/FriendTitle";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { TbMessages } from "react-icons/tb";
 import { RiDeleteBin5Line } from "react-icons/ri";
+// 다국어 지원 모드 추가
+import { useTranslation } from "react-i18next";
 // 친구 목록 창 => dm, 친구 삭제 가능
 function FriendMain() {
+  const { t } = useTranslation();
   // 친구목록
   const [friends, setFriends] = useState([]);
   // 내가 보낸 요청
@@ -120,8 +120,8 @@ function FriendMain() {
             <table className="min-w-full text-md bg-white rounded mb-4">
               <tbody>
                 <tr className="border-b">
-                  <th className="text-center p-3 px-5">Name</th>
-                  <th className="text-center p-3 px-5">Email</th>
+                  <th className="text-center p-3 px-5">{t("name")}</th>
+                  <th className="text-center p-3 px-5">{t("email")}</th>
                   <th />
                 </tr>
                 {friends.map((friend) => (
@@ -152,8 +152,8 @@ function FriendMain() {
             <table className="min-w-full text-md bg-white rounded mb-4">
               <tbody>
                 <tr className="border-b">
-                  <th className="text-center p-3 px-5">Name</th>
-                  <th className="text-center p-3 px-5">Email</th>
+                  <th className="text-center p-3 px-5">{t("name")}</th>
+                  <th className="text-center p-3 px-5">{t("email")}</th>
                   <th />
                 </tr>
                 {toRequests.map((request) => (
@@ -184,8 +184,8 @@ function FriendMain() {
             <table className="min-w-full text-md bg-white rounded mb-4">
               <tbody>
                 <tr className="border-b">
-                  <th className="text-center p-3 px-5">Name</th>
-                  <th className="text-center p-3 px-5">Email</th>
+                  <th className="text-center p-3 px-5">{t("name")}</th>
+                  <th className="text-center p-3 px-5">{t("email")}</th>
                   <th />
                 </tr>
                 {fromRequests.map((request) => (

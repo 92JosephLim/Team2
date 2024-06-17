@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ProfileSettings.css'; // Update with correct path
 import { SocialupdateUserInfo } from '../../api/apiService';
+// 다국어 지원 모드 추가
+import { useTranslation } from "react-i18next";
 
 const SocialProfileSettings = () => {
+
+  const { t } = useTranslation();
+
   const [userInfo, setUserInfo] = useState({
     email: '',
     phoneNumber: '',
@@ -126,14 +131,14 @@ const SocialProfileSettings = () => {
       <div className="flex flex-1">
         <main className="flex-1 p-6">
           <div className="profile-settings-content">
-            <h1>상세 프로필 설정</h1>
+            <h1>{t("profile")}</h1>
             <form className="profile-settings-form" onSubmit={handleSubmit}>
               <div className="form-group">
-                <label>프로필 사진</label>
+                <label>{t("picture")}</label>
                 <input type="file" name="profileImage" onChange={handleFileChange} />
               </div>
               <div className="form-group">
-                <label>전화번호</label>
+                <label>{t("phoneCall")}</label>
                 <input
                   type="text"
                   name="phoneNumber"
@@ -150,15 +155,15 @@ const SocialProfileSettings = () => {
                 <div className="flex items-center mt-4">
                   <label className="inline-flex items-center mr-4">
                     <input type="radio" name="gender" value="none" className="mr-2" checked={userInfo.gender === 'none'} onChange={handleChange} />
-                    선택안함
+                    {t("noCheck")}
                   </label>
                   <label className="inline-flex items-center mr-4">
                     <input type="radio" name="gender" value="male" className="mr-2" checked={userInfo.gender === 'male'} onChange={handleChange} />
-                    남성
+                    {t("man")}
                   </label>
                   <label className="inline-flex items-center">
                     <input type="radio" name="gender" value="female" className="mr-2" checked={userInfo.gender === 'female'} onChange={handleChange} />
-                    여성
+                    {t("woman")}
                   </label>
                 </div>
               </div>
@@ -169,9 +174,9 @@ const SocialProfileSettings = () => {
                   type="submit"
                   className="save-button"
                 >
-                  변경 사항 저장
+                  {t("changeSave")}
                 </button>
-                <button type="button" className="cancel-button" onClick={handleCancel}>변경 사항 취소</button>
+                <button type="button" className="cancel-button" onClick={handleCancel}>{t("cancleChange")}</button>
               </div>
             </form>
           </div>

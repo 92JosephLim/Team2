@@ -4,10 +4,13 @@ import Footer from "../../components/footer/Footer";
 import { useNavigate } from "react-router-dom";
 import { registerUser, sendEmailVerification, confirmEmailVerification } from "../../api/apiService"; // API 서비스 함수들 가져오기
 import grim from "../../assets/grim.jpg"
+// 다국어 지원 모드 추가
+import { useTranslation } from "react-i18next";
 
 function Signup() {
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   //5m timer 상태
   const [isCodeInputVisible, setIsCodeInputVisible] = useState(false);
@@ -217,10 +220,10 @@ function Signup() {
           </div>
           <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 mt-5">
             <div className="py-8 px-8 rounded-xl">
-              <h1 className="font-medium text-2xl mt-3 text-center">회원가입</h1>
+              <h1 className="font-medium text-2xl mt-3 text-center">{t("signup")}</h1>
               <form onSubmit={handleSUSubmit} className="mt-6">
                 <div className="my-5 text-sm">
-                  <label htmlFor="email" className="block text-black text-left">Email</label>
+                  <label htmlFor="email" className="block text-black text-left">{t("email")}</label>
                   <div className="relative flex mt-3">
                     <input
                       type="email"
@@ -235,7 +238,7 @@ function Signup() {
                       className="ml-2 text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black"
                       onClick={handleEmailSubmit}
                     >
-                      인증번호 받기
+                      {t("getVerify")}
                     </button>
                   </div>
                   <p className="errorMsg mt-1 text-red-600 text-xl">{messages.emailMessage}</p>
@@ -258,14 +261,14 @@ function Signup() {
                         onClick={handleCodeSubmit}
                         disabled={isTimerExpired}
                       >
-                        인증번호 확인
+                        {t("checkVerify")}
                       </button>
-                      <p className="timer mt-1 text-red-600 text-xl grid place-items-center ml-5">{min}분{sec}초</p>
+                      <p className="timer mt-1 text-red-600 text-xl grid place-items-center ml-5">{min}:{sec}</p>
                     </div>
                   </div>
                 )}
                 <div className="my-5 text-sm">
-                  <label htmlFor="password" className="block text-black text-left">Password</label>
+                  <label htmlFor="password" className="block text-black text-left">{t("password")}</label>
                   <input
                     type="password"
                     name="password"
@@ -278,7 +281,7 @@ function Signup() {
                   <p className="errorMsg mt-2 text-xl text-red-600">{messages.passwordMessage}</p>
                 </div>
                 <div className="my-5 text-sm">
-                  <label htmlFor="passwordCheck" className="block text-black text-left">Password Check</label>
+                  <label htmlFor="passwordCheck" className="block text-black text-left">{t("checkPassword")}</label>
                   <input
                     type="password"
                     name="passwordCheck"
@@ -291,7 +294,7 @@ function Signup() {
                   <p className="errorMsg mt-2 text-xl text-red-600">{messages.passwordCheckMessage}</p>
                 </div>
                 <div className="my-5 text-sm">
-                  <label htmlFor="phoneNumber" className="block text-black text-left">Phone Number</label>
+                  <label htmlFor="phoneNumber" className="block text-black text-left">{t("phoneCall")}</label>
                   <input
                     type="text"
                     name="phoneNumber"
@@ -304,40 +307,40 @@ function Signup() {
                   <p className="errorMsg mt-2 text-xl text-red-600">{messages.phoneNumberMessage}</p>
                 </div>
                 <div className="my-5 text-sm">
-                  <label htmlFor="gender" className="block text-black text-left">Gender</label>
+                  <label htmlFor="gender" className="block text-black text-left">{t("gender")}</label>
                   <div className="flex items-center mt-4">
                     <label className="inline-flex items-center mr-4">
                       <input type="radio" name="gender" value="none" className="mr-2" defaultChecked onChange={handleChange} />
-                      선택안함
+                      {t("noCheck")}
                     </label>
                     <label className="inline-flex items-center mr-4">
                       <input type="radio" name="gender" value="male" className="mr-2" onChange={handleChange} />
-                      남성
+                      {t("man")}
                     </label>
                     <label className="inline-flex items-center">
                       <input type="radio" name="gender" value="female" className="mr-2" onChange={handleChange} />
-                      여성
+                      {t("woman")}
                     </label>
                   </div>
                 </div>
                 <div className="my-5 text-sm">
-                  <label htmlFor="language" className="block text-black text-left">Language</label>
+                  <label htmlFor="language" className="block text-black text-left">{t("language")}</label>
                   <select
                     name="language"
                     value={formData.language}
                     onChange={handleChange}
                     className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 mt-3 text-2xl"
                   >
-                    <option value="korean">한국어</option>
-                    <option value="english">English</option>
-                    <option value="japanese">일본어</option>
-                    <option value="chinese">중국어</option>
-                    <option value="spanish">스페인어</option>
-                    <option value="arabic">아랍어</option>
+                    <option value="korean">{t("korean")}</option>
+                    <option value="english">{t("english")}</option>
+                    <option value="japanese">{t("japanese")}</option>
+                    <option value="chinese">{t("chinese")}</option>
+                    <option value="spanish">{t("spanish")}</option>
+                    <option value="arabic">{t("arabic")}</option>
                   </select>
                 </div>
                 <div className="my-5 text-sm">
-                  <label htmlFor="profilePicture" className="block text-black text-left">Profile Image</label>
+                  <label htmlFor="profilePicture" className="block text-black text-left">{t("picture")}</label>
                   <input
                     type="file"
                     name="profilePicture"
@@ -350,16 +353,16 @@ function Signup() {
                   type="submit"
                   disabled={!validity.isEmail || !validity.isPassword || !validity.isPasswordCheck || !validity.isPhoneNumber}
                 >
-                  회원가입
+                  {t("signup")}
                 </button>
               </form>
               <p className="mt-12 text-xl text-center font-light text-gray-400">
-                계정이 있으신가요?{" "}
+                {t("haveAccount")}{" "}
                 <span
                   onClick={() => navigate("/login")}
                   className="text-blue-800 font-semibold cursor-pointer"
                 >
-                  로그인하기
+                  {t("login")}
                 </span>
               </p>
             </div>

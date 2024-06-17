@@ -7,10 +7,14 @@ import GoogleLoginButton from "../social/GoogleLoginButton";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode"; // Named import로 수정
 import color from "../../assets/color.jpg";
-
+// 다국어 지원 모드 추가
+import { useTranslation } from "react-i18next";
 
 function Login() {
+
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -88,11 +92,11 @@ function Login() {
 
           <div className="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 mt-40">
             <div className="py-8 px-8 rounded-xl">
-              <h1 className="font-medium text-2xl mt-3 text-center">Login</h1>
+              <h1 className="font-medium text-2xl mt-3 text-center"> {t("login")}</h1>
               <form onSubmit={handleLISubmit} className="mt-6">
                 <div className="my-5">
                   <label htmlFor="email" className="block text-black text-left">
-                    Email
+                    {t("email")}
                   </label>
                   <input
                     type="email"
@@ -107,7 +111,7 @@ function Login() {
                 </div>
                 <div className="my-5 text-sm">
                   <label htmlFor="password" className="block text-black text-left">
-                    Password
+                    {t("password")}
                   </label>
                   <input
                     type="password"
@@ -124,7 +128,7 @@ function Login() {
                       onClick={() => navigate("/findpwd")}
                       className="text-blue-800 font-semibold cursor-pointer"
                     >
-                      비밀번호가 생각나지 않는다면?
+                      {t("passwordForgot")}
                     </span>
                   </div>
                 </div>
@@ -133,7 +137,7 @@ function Login() {
                   className="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
                   type="submit"
                 >
-                  Login
+                  {t("login")}
                 </button>
               </form>
               <div className="flex md:justify-between justify-center items-center mt-10">
@@ -151,13 +155,13 @@ function Login() {
               </div>
               <p className="mt-12 text-xl text-center font-light text-gray-400">
                 {" "}
-                계정이 없으신가요?{" "}
+                {t("haveNoAccount")}{" "}
                 <span
                   onClick={() => navigate("/signup")}
                   className="text-blue-800 font-semibold cursor-pointer"
                 >
                   {" "}
-                  회원가입하기{" "}
+                  {t("signup")}{" "}
                 </span>
               </p>
             </div>

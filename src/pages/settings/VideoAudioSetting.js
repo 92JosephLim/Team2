@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom'; // useNavigate 임포트
-import Footer from "../../components/footer/Footer";
-import TopNav from "../../components/topnav/TopNav";
-import SideNav from '../../components/sidenav/SideNav';
+// 다국어 지원 모드 추가
+import { useTranslation } from "react-i18next";
 
 const VideoAudioSetting = () => {
+
   const navigate = useNavigate(); // useNavigate 초기화
+  const { t } = useTranslation();
+
   const [videoQuality, setVideoQuality] = useState('High');
   const [videoEnabled, setVideoEnabled] = useState(true);
   const [micEnabled, setMicEnabled] = useState(true);
@@ -57,23 +59,23 @@ const VideoAudioSetting = () => {
     <div className="flex flex-col min-h-screen">
       <div className="flex flex-1">
         <div className="container mx-auto p-6 flex flex-col items-center flex-1">
-          <h1 className="text-3xl font-bold mb-8">비디오 및 오디오 설정</h1>
+          <h1 className="text-3xl font-bold mb-8">{t("videoSetting")}</h1>
           <div className="w-full max-w-2xl">
             <div className="mb-6">
-              <label className="block mb-2 text-xl font-semibold text-left">비디오 품질</label>
+              <label className="block mb-2 text-xl font-semibold text-left">{t("videoQuality")}</label>
               <select
                 className="block w-full px-4 py-3 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-lg"
                 value={videoQuality}
                 onChange={(e) => setVideoQuality(e.target.value)}
               >
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
+                <option value="High">{t("high")}</option>
+                <option value="Medium">{t("middel")}</option>
+                <option value="Low">{t("low")}</option>
               </select>
             </div>
             <div className="mb-6">
               <label className="flex items-center text-xl font-semibold">
-                비디오
+                {t("video")}
                 <input
                   type="checkbox"
                   className="ml-10"
@@ -84,7 +86,7 @@ const VideoAudioSetting = () => {
             </div>
             <div className="mb-6">
               <label className="flex items-center text-xl font-semibold">
-                마이크
+                {t("mic")}
                 <input
                   type="checkbox"
                   className="ml-10"
@@ -93,7 +95,7 @@ const VideoAudioSetting = () => {
                 />
               </label>
               <div className="flex items-center mt-4">
-                <label className="block text-lg font-medium">입력 음량</label>
+                <label className="block text-lg font-medium">{t("volumeInput")}</label>
                 <input
                   type="range"
                   className="w-full ml-4 mr-4"
@@ -111,17 +113,17 @@ const VideoAudioSetting = () => {
               </div>
               {isMicTesting && (
                 <div className="mt-4">
-                  <label className="block text-sm font-medium text-gray-700">마이크 테스트 중...</label>
+                  <label className="block text-sm font-medium text-gray-700">{t("micTest")}</label>
                   <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
                     <div className="h-full bg-blue-500 animate-pulse" style={{ width: '100%' }}></div>
                   </div>
-                  <p className="mt-2 text-sm text-gray-500">마이크 문제가 있나요? 테스트를 시작하고 아무 말이나 해보세요. 다시 들려 드릴게요.</p>
+                  <p className="mt-2 text-sm text-gray-500">{t("micProblem")}</p>
                 </div>
               )}
             </div>
             <div className="mb-6">
               <label className="flex items-center text-xl font-semibold">
-                스피커
+                {t("speaker")}
                 <input
                   type="checkbox"
                   className="ml-10"
@@ -130,7 +132,7 @@ const VideoAudioSetting = () => {
                 />
               </label>
               <div className="flex items-center mt-4">
-                <label className="block text-lg font-medium">출력 음량</label>
+                <label className="block text-lg font-medium">{t("volumeOutput")}</label>
                 <input
                   type="range"
                   className="w-full ml-4 mr-4"
@@ -148,11 +150,11 @@ const VideoAudioSetting = () => {
               </div>
               {isSpeakerTesting && (
                 <div className="mt-4">
-                  <label className="block text-sm font-medium text-gray-700">스피커 테스트 중...</label>
+                  <label className="block text-sm font-medium text-gray-700">{t("speakerTest")}</label>
                   <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
                     <div className="h-full bg-blue-500 animate-pulse" style={{ width: '100%' }}></div>
                   </div>
-                  <p className="mt-2 text-sm text-gray-500">스피커 테스트 중입니다. 소리가 잘 들리는지 확인하세요.</p>
+                  <p className="mt-2 text-sm text-gray-500">{t("speakerProblem")}</p>
                 </div>
               )}
             </div>
@@ -161,13 +163,13 @@ const VideoAudioSetting = () => {
                 className="px-8 py-4 bg-blue-500 text-white text-lg font-semibold rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 onClick={handleSave}
               >
-                저장
+                {t("save")}
               </button>
               <button
                 className="ml-4 px-8 py-4 bg-gray-500 text-white text-lg font-semibold rounded-md shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 onClick={() => navigate('/mypage')} // 취소 버튼 클릭 시 MyPage로 이동
               >
-                취소
+                {t("cancle")}
               </button>
             </div>
           </div>
