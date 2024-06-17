@@ -76,7 +76,7 @@ function InviteFriend() {
                   <input
                     type="text"
                     className="flex-grow rounded-lg border border-gray-400 p-4"
-                    placeholder="닉네임을 입력해주세요"
+                    placeholder={t("nickname")}
                     value={nickName}
                     onChange={(e) => setNickName(e.target.value)}
                   />
