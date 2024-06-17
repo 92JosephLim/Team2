@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
+import TopNav from "../../components/topnav/TopNav";
+import Footer from "../../components/footer/Footer";
+import "../../components/topnav/TopNav.css"; // TopNav CSS 
+import "../../components/footer/Footer.css"; // TopNav CSS 
 
 function initjanus() {
   if (!Janus.isWebrtcSupported()) {
@@ -328,13 +331,14 @@ function VideoMeeting() {
   const [roomName, setRoomName] = useState("");
   const [stompClient, setStompClient] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [isRoomCreated, setIsRoomCreated] = useState(false);
 
   const messagesEndRef = useRef(null);
 
   const navigate = useNavigate();
 
   const connectToChat = (roomId) => {
-    const socket = new SockJS('http://localhost:8080/chat');
+    const socket = new SockJS('http://localhost:80/chat');
     const client = Stomp.over(socket);
 
     client.connect({}, () => {
@@ -365,6 +369,7 @@ function VideoMeeting() {
   const handleRegisterClick = () => {
     setUserId(username);
     connectToChat(roomName); // 방 이름으로 채팅 연결
+    setIsRoomCreated(true);
   };
 
   const sendMessage = () => {
@@ -375,197 +380,115 @@ function VideoMeeting() {
     }
   };
 
+  useEffect(() => {
+    // 새 메시지가 추가될 때마다 스크롤을 아래로 이동
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+    }
+  }, [messages]);
+
   return (
     <>
-      <div className="flex">
-        <div className="flex-grow-8 flex justify-between items-center p-4">
-          <nav className="navbar navbar-default navbar-static-top"></nav>
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <div className="page-header">
-                  방참여하기
-                  <button className="btn btn-default" autoComplete="off" id="des" onClick={destroytest}>
-                    방나가기
-                  </button>
-                </div>
-                <div className="container hide" id="videojoin">
-                  <div className="row">
-                    <div className="col-md-12" id="controls">
-                      <div id="registernow">
-                        <span className="label label-info" id="room"></span>
-                        <div className="input-group margin-bottom-md" style={{ width: "100% !important" }}>
-                          <span className="input-group-addon">방번호</span>
-                          <input
-                            autoComplete="off"
-                            className="form-control"
-                            type="text"
-                            placeholder="방번호를 입력하세요"
-                            id="roomname"
-                            value={roomName}
-                            onChange={(e) => setRoomName(e.target.value)} // onChange 이벤트 핸들러 추가
-                          />
-                        </div>
-                        <span className="label label-info" id="you"></span>
-                        <div className="input-group margin-bottom-md">
-                          <span className="input-group-addon">대화명</span>
-                          <input
-                            autoComplete="off"
-                            className="form-control"
-                            type="text"
-                            placeholder="내 대화명"
-                            id="username"
-                            onKeyPress={(e) => {
-                              if (e.key === "Enter") checkEnter(e.target, e);
-                            }}
-                            onChange={(e) => setUsername(e.target.value)} // Update the username state
-                          />
-                        </div>
-                        <div className="input-group margin-bottom-md">
-                          <span className="input-group-addon">방제목</span>
-                          <input
-                            autoComplete="off"
-                            className="form-control"
-                            type="text"
-                            placeholder="방제목"
-                            id="description"
-                            onKeyPress={(e) => {
-                              if (e.key === "Enter") checkEnter(e.target, e);
-                            }}
-                          />
-                          <span className="input-group-btn">
-                            <button className="btn btn-success" autoComplete="off" id="register" onClick={handleRegisterClick}>
-                              대화방 만들기
-                            </button>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+      <TopNav /> {/* TopNav 컴포넌트 추가 */}
+      <div className="flex h-screen mt-16">
+        <div className="flex flex-col w-3/4 p-4">
+          <div className="flex-grow flex justify-center items-center">
+            {!isRoomCreated && (
+              <div className="w-full max-w-3xl bg-white shadow-lg rounded-lg p-8">
+                <h1 className="text-2xl font-bold text-center mb-8">방 생성/참여 하기</h1>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <label className="w-24">방번호</label>
+                    <input
+                      type="text"
+                      placeholder="방번호를 입력하세요"
+                      value={roomName}
+                      onChange={(e) => setRoomName(e.target.value)}
+                      className="flex-grow p-2 border rounded"
+                    />
+                  </div>
+                  <div className="flex items-center">
+                    <label className="w-24">대화명</label>
+                    <input
+                      type="text"
+                      placeholder="내 대화명"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      className="flex-grow p-2 border rounded"
+                    />
+                  </div>
+                  <div className="flex items-center">
+                    <label className="w-24">방제목</label>
+                    <input
+                      type="text"
+                      placeholder="방제목"
+                      className="flex-grow p-2 border rounded"
+                    />
+                  </div>
+                  <div className="flex justify-between mt-4">
+                    <button
+                      className="px-4 py-2 bg-green-500 text-white rounded"
+                      onClick={handleRegisterClick}
+                    >
+                      대화방 만들기
+                    </button>
+                    <button
+                      className="px-4 py-2 bg-red-500 text-white rounded"
+                      onClick={destroytest}
+                    >
+                      방목록으로
+                    </button>
                   </div>
                 </div>
-                <div className="container hide" id="videos">
-                  <div className="row">
-                    <div className="col-md-4">
-                      <div className="panel panel-default">
-                        <div className="panel-heading">
-                          <h3 className="panel-title">
-                            Local Video <span className="label label-primary hide" id="publisher"></span>
-                            <div className="btn-group btn-group-xs pull-right hide">
-                              <div className="btn-group btn-group-xs">
-                                <button
-                                  id="bitrateset"
-                                  autoComplete="off"
-                                  className="btn btn-primary dropdown-toggle"
-                                  data-toggle="dropdown"
-                                >
-                                  Bandwidth<span className="caret"></span>
-                                </button>
-                                <ul id="bitrate" className="dropdown-menu" role="menu">
-                                  <li>
-                                    <a href="#" id="0">
-                                      No limit
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="#" id="128">
-                                      Cap to 128kbit
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="#" id="256">
-                                      Cap to 256kbit
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="#" id="512">
-                                      Cap to 512kbit
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="#" id="1024">
-                                      Cap to 1mbit
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="#" id="1500">
-                                      Cap to 1.5mbit
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="#" id="2000">
-                                      Cap to 2mbit
-                                    </a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </h3>
-                        </div>
-                        <div className="panel-body" id="videolocal"></div>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="panel panel-default">
-                        <div className="panel-heading">
-                          <h3 className="panel-title">
-                            Remote Video #1 <span className="label label-info hide" id="remote1"></span>
-                          </h3>
-                        </div>
-                        <div className="panel-body relative" id="videoremote1"></div>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="panel panel-default">
-                        <div className="panel-heading">
-                          <h3 className="panel-title">
-                            Remote Video #2 <span className="label label-info hide" id="remote2"></span>
-                          </h3>
-                        </div>
-                        <div className="panel-body relative" id="videoremote2"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-4">
-                      <div className="panel panel-default">
-                        <div className="panel-heading">
-                          <h3 className="panel-title">
-                            Remote Video #3 <span className="label label-info hide" id="remote3"></span>
-                          </h3>
-                        </div>
-                        <div className="panel-body relative" id="videoremote3"></div>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="panel panel-default">
-                        <div className="panel-heading">
-                          <h3 className="panel-title">
-                            Remote Video #4 <span className="label label-info hide" id="remote4"></span>
-                          </h3>
-                        </div>
-                        <div className="panel-body relative" id="videoremote4"></div>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="panel panel-default">
-                        <div className="panel-heading">
-                          <h3 className="panel-title">
-                            Remote Video #5 <span className="label label-info hide" id="remote5"></span>
-                          </h3>
-                        </div>
-                        <div className="panel-body relative" id="videoremote5"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div> {/* 여기가 마지노선 */}
               </div>
-            </div>
+            )}
+            {isRoomCreated && (
+              <div className="w-full bg-gray-100 p-4 rounded-lg overflow-y-auto">
+                <div className="flex flex-wrap -mx-2">
+                  <div className="w-full md:w-1/3 px-2 mb-4">
+                    <div className="bg-white p-4 rounded shadow">
+                      <h3 className="text-lg font-bold mb-2">Local Video <span className="badge badge-primary hide" id="publisher"></span></h3>
+                      <div className="panel-body" id="videolocal"></div>
+                    </div>
+                  </div>
+                  <div className="w-full md:w-1/3 px-2 mb-4">
+                    <div className="bg-white p-4 rounded shadow">
+                      <h3 className="text-lg font-bold mb-2">Remote Video #1 <span className="badge badge-info hide" id="remote1"></span></h3>
+                      <div className="panel-body" id="videoremote1"></div>
+                    </div>
+                  </div>
+                  <div className="w-full md:w-1/3 px-2 mb-4">
+                    <div className="bg-white p-4 rounded shadow">
+                      <h3 className="text-lg font-bold mb-2">Remote Video #2 <span className="badge badge-info hide" id="remote2"></span></h3>
+                      <div className="panel-body" id="videoremote2"></div>
+                    </div>
+                  </div>
+                  <div className="w-full md:w-1/3 px-2 mb-4">
+                    <div className="bg-white p-4 rounded shadow">
+                      <h3 className="text-lg font-bold mb-2">Remote Video #3 <span className="badge badge-info hide" id="remote3"></span></h3>
+                      <div className="panel-body" id="videoremote3"></div>
+                    </div>
+                  </div>
+                  <div className="w-full md:w-1/3 px-2 mb-4">
+                    <div className="bg-white p-4 rounded shadow">
+                      <h3 className="text-lg font-bold mb-2">Remote Video #4 <span className="badge badge-info hide" id="remote4"></span></h3>
+                      <div className="panel-body" id="videoremote4"></div>
+                    </div>
+                  </div>
+                  <div className="w-full md:w-1/3 px-2 mb-4">
+                    <div className="bg-white p-4 rounded shadow">
+                      <h3 className="text-lg font-bold mb-2">Remote Video #5 <span className="badge badge-info hide" id="remote5"></span></h3>
+                      <div className="panel-body" id="videoremote5"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-
-        <div className="w-1/5 p-4 bg-white border-l border-gray-200 flex flex-col">
+        <div className="w-1/4 p-4 bg-white border-l border-gray-200 flex flex-col h-full">
           <h2 className="text-xl font-bold mb-4">Chat Room {roomName}</h2>
-          <div className="flex-grow bg-gray-200 p-4 rounded-lg overflow-y-auto">
+          <div className="flex-grow bg-gray-200 p-4 rounded-lg overflow-y-auto h-full">
             <ul className="space-y-2">
               {messages.map((msg, index) => (
                 <li key={index} className="bg-white p-2 rounded-lg shadow-sm">
@@ -609,6 +532,7 @@ function VideoMeeting() {
           </div>
         </div>
       </div>
+      <Footer /> {/* Footer 컴포넌트 추가 */}
     </>
   );
 }

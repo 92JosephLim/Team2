@@ -55,9 +55,7 @@ const VideoAudioSetting = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <TopNav />
       <div className="flex flex-1">
-        <SideNav />
         <div className="container mx-auto p-6 flex flex-col items-center flex-1">
           <h1 className="text-3xl font-bold mb-8">비디오 및 오디오 설정</h1>
           <div className="w-full max-w-2xl">
@@ -175,7 +173,6 @@ const VideoAudioSetting = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

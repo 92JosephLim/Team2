@@ -1,26 +1,25 @@
 import React from "react";
 import './Footer.css'; // css 폴더 안의 Footer.css 파일을 import
+import { IoLogoGithub } from "react-icons/io5";
+import { AiOutlineYoutube } from "react-icons/ai";
+import newLogo from "../../assets/new_logo.png";
 
 function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-links">
-        <a href="#about">About OurHour</a> |<a href="#blog">Blog</a> |<a href="#usage">OurHour 사용법</a> |
-        <a href="#guidelines">커뮤니티 가이드라인</a> |<a href="#terms">서비스이용약관</a> |
-        <a href="#privacy">개인정보처리방침</a> |<a href="#youth">청소년 보호 정책</a> |
-        <a href="#location">위치기반 서비스 약관</a> |<a href="#ip">지식 재산권</a> |<a href="#support">고객센터</a> |
-        <a href="#cookie-policy">Cookie Policy</a> |<a href="#cookie-settings">Cookie Settings</a>
+      <div className="footer-left">
+        <div>중앙 정보 기술 인재 개발원</div>
+        <div>화상 전화를 통한 글로벌 네트워킹</div>
+        <div>팀장 | 임요셉ewjwej77@gmail.com </div>
+        <div>팀원 | 김민곤min-gon@naver.com, 김원중gimpo5975@naver.com, 도현우alexdo323@naver.com</div>
+        <div>박지연qkrwluds7998@gmail.com, 변의성qusdml123@gmail.com, 한수정wow012380@gmail.com</div>
       </div>
-      <div className="footer-info">
-        대표 업무 집행자: 김린다수아 | 이메일: help@azarlive.com | 주소: 서울시 강남구 영동대로 517 | 사업자 등록번호:
-        220-88-75836 | Mail-order-sales approval number: 2019-SeoulGangnam-2501
-      </div>
-      <div className="footer-bottom">
-        <p>© 2024 Hyperconnect LLC. All rights reserved.</p>
-        <div className="store-buttons">
-          <button className="store-button">App Store</button>
-          <button className="store-button">Google Play</button>
-        </div>
+      <div className="footer-right">
+        <div><img src={newLogo} alt="New Logo" /></div>
+        <br />
+        <div>GitHub | https://github.com/92JosephLim/Team2</div>
+        <div>PPT | https://www.canva.com/design/DAGHI_MQRzs/-g4uMsGntAcBVR1l3sO6Zg/edit</div>
+        <div>YouTube | </div>
       </div>
     </footer>
   )

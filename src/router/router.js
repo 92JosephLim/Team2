@@ -7,7 +7,7 @@ import router3 from "./router3";
 
 // 로딩 페이지 만들기
 // 첫 로딩 속도 완화 => lazy, suspense 써서 완화하기
-const Mainpage = lazy(() => import("../pages/mainpage/Mainpage"));
+const MainPage = lazy(() => import("../pages/MainPage"));
 const Login = lazy(() => import("../pages/login/Login"));
 const KakaoRedirect = lazy(() => import("../pages/social/KakoRedirect"));
 const Signup = lazy(() => import("../pages/signup/Signup"));
@@ -19,7 +19,7 @@ const routes = [
     path: "/",
     element: (
       <Suspense fallback={<Loading />}>
-        <Mainpage />
+        <MainPage />
       </Suspense>
     )
   },

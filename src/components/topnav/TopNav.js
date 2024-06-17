@@ -2,10 +2,10 @@ import React from "react";
 import newLogo from "../../assets/new_logo.png"; // 새로운 로고 이미지 경로
 import { Link, useNavigate } from "react-router-dom";
 import "../topnav/TopNav.css"; // 스타일 파일 추가
+import { MdOutlineLanguage } from "react-icons/md";
 // 다국어 지원 모드 추가
 import i18next from "../../locales/i18n";
 import { useTranslation } from "react-i18next";
-import { MdOutlineLanguage } from "react-icons/md";
 
 function TopNav() {
   const navigate = useNavigate();
@@ -26,9 +26,9 @@ function TopNav() {
   };
 
   // My Page 클릭 시 동작할 함수
-  const handleMyPage = () => {
-    navigate("/mypage");
-  };
+  // const handleMyPage = () => {
+  //   navigate("/mypage");
+  // };
   // 클릭 시 언어 변경
   const clickHandler = (lang) => {
     i18next.changeLanguage(lang);
@@ -73,8 +73,8 @@ function TopNav() {
       </div>
       <nav className="nav">
         {/* Video Chat 버튼 */}
-        <button className="nav-button video-chat-btn" onClick={handleVideoChat}>{t("VideoChat")}</button>
-        <Link to="/cr" className="action-link">{t("room")}</Link>
+        {/* <button className="nav-button video-chat-btn" onClick={handleVideoChat}>{t("VideoChat")}</button> */}
+        {/* <Link to="/cr" className="action-link">{t("room")}</Link> */}
         <Link to="/roomList" className="action-link">{t("list")}</Link>
         {/* About 드롭다운 */}
         <div className="dropdown">
@@ -97,7 +97,7 @@ function TopNav() {
         </div>
         {token && (
           <div className="dropdown">
-            <button className="action-button" onClick={handleMyPage}>{t("mypage")}</button>
+            <button className="action-button">{t("mypage")}</button>
             <div className="dropdown-content">
               <Link to="/ProfileSettings">{t("profile")}</Link>
               <Link to="/messageChat">{t("chatLog")}</Link> {/* 경로 수정 */}
@@ -105,7 +105,6 @@ function TopNav() {
               <Link to="/friendMain">{t("FriendList")}</Link>
             </div>
           </div>
-
         )}
         {/* 설정 드롭다운 */}
         <div className="dropdown">

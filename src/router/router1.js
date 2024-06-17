@@ -1,9 +1,9 @@
 import React, { Suspense, lazy } from "react";
 import Loading from "../components/loading/Loading";
 
-const VideoMeeting = lazy(() => import("../pages/webRtc/VideoMeeting"));
-const CreateRoom = lazy(() => import("../pages/webRtc/CreateRoom"));
-const RoomList = lazy(() => import("../pages/webRtc/RoomList"));
+const VideoCreation = lazy(() => import("../pages/VideoCreationPage"));
+const VideoCreationPage = lazy(() => import("../pages/VideoCreationPage"));
+const VideoRoomListPage = lazy(() => import("../pages/VideoRoomListPage"));
 const JoinRoom = lazy(() => import("../pages/webRtc/JoinRoom"));
 
 // webRtc 관련 링크
@@ -13,7 +13,7 @@ const router1 = [
     path: "/video",
     element: (
       <Suspense fallback={<Loading />}>
-        <VideoMeeting />
+        <VideoCreation />
       </Suspense>
     )
   },
@@ -22,7 +22,7 @@ const router1 = [
     path: "/cr",
     element: (
       <Suspense fallback={<Loading />}>
-        <CreateRoom />
+        <VideoCreationPage />
       </Suspense>
     )
   },
@@ -31,7 +31,7 @@ const router1 = [
     path: "/roomlist",
     element: (
       <Suspense fallback={<Loading />}>
-        <RoomList />
+        <VideoRoomListPage />
       </Suspense>
     )
   },

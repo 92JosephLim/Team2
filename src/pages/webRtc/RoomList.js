@@ -123,9 +123,7 @@ function RoomList() {
 
   return (
     <div>
-      <TopNav /> {/* TopNav 컴포넌트를 추가 */}
       <div className="main-container" style={{ display: 'flex' }}>
-        <SideNav /> {/* SideNav 컴포넌트를 추가 */}
         <div className="room-list-content" style={{ flex: 1 }}>
           <div className="room-list-container">
             <div className="header-container">
@@ -149,7 +147,6 @@ function RoomList() {
               {renderPageNumbers()}
             </ul>
           </div>
-          <Footer /> {/* Footer 컴포넌트를 추가 */}
         </div>
       </div>
 

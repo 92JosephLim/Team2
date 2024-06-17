@@ -1,10 +1,10 @@
 import React, { Suspense, lazy } from "react";
 import Loading from "../components/loading/Loading";
 
-const ChatSetting = lazy(() => import("../pages/settings/ChatSetting"));
-const OtherSetting = lazy(() => import("../pages/settings/OtherSetting"));
-const RoomSetting = lazy(() => import("../pages/settings/RoomSetting"));
-const VideoAudioSetting = lazy(() => import("../pages/settings/VideoAudioSetting"));
+const ChatSettingPage = lazy(() => import("../pages/ChatSettingPage"));
+const OtherSettingPage = lazy(() => import("../pages/OtherSettingPage"));
+const RoomSettingPage = lazy(() => import("../pages/RoomSettingPage"));
+const VideoAudioSettingPage = lazy(() => import("../pages/VideoAudioSettingPage"));
 
 // 이 외 기타 기능2 링크
 const router3 = [
@@ -13,7 +13,7 @@ const router3 = [
     path: "/settings/ChatSetting",
     element: (
       <Suspense fallback={<Loading />}>
-        <ChatSetting />
+        <ChatSettingPage />
       </Suspense>
     )
   },
@@ -22,7 +22,7 @@ const router3 = [
     path: "/settings/OtherSetting",
     element: (
       <Suspense fallback={<Loading />}>
-        <OtherSetting />
+        <OtherSettingPage />
       </Suspense>
     )
   },
@@ -31,7 +31,7 @@ const router3 = [
     path: "/settings/RoomSetting",
     element: (
       <Suspense fallback={<Loading />}>
-        <RoomSetting />
+        <RoomSettingPage />
       </Suspense>
     )
   },
@@ -40,7 +40,7 @@ const router3 = [
     path: "/settings/VideoAudioSetting",
     element: (
       <Suspense fallback={<Loading />}>
-        <VideoAudioSetting />
+        <VideoAudioSettingPage />
       </Suspense>
     )
   },

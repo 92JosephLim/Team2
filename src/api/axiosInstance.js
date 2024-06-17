@@ -2,6 +2,9 @@ import axios from 'axios';
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:8080", // 기본 URL 설정
+  // headers: {
+  //   'Authorization': `Bearer ${token}`//token 맞는지 확인하기
+  // }
 });
 
 // 요청 인터셉터

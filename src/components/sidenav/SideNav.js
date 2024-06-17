@@ -27,16 +27,6 @@ function SideNav() {
               </Link>
             </li>
             <li className="rounded-sm hover:bg-sky-700">
-              <Link to="#" className="flex items-center p-2 space-x-3 rounded-md">
-                <span className="text-white">{t("chatLog")}</span>
-              </Link>
-            </li>
-            <li className="rounded-sm hover:bg-sky-700">
-              <Link to="#" className="flex items-center p-2 space-x-3 rounded-md">
-                <span className="text-white">{t("rtcLog")}</span>
-              </Link>
-            </li>
-            <li className="rounded-sm hover:bg-sky-700">
               <div
                 className="flex items-center p-2 space-x-3 rounded-md cursor-pointer"
                 onClick={toggleFriendsAccordion}

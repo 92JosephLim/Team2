@@ -1,13 +1,13 @@
 import React, { Suspense, lazy } from "react";
 import Loading from "../components/loading/Loading";
 
-const MyPage = lazy(() => import("../pages/mypage/MyPage"));
-const ProfileSettings = lazy(() => import("../pages/mypage/ProfileSettings"));
-const SocialProfileSettings = lazy(() => import("../pages/mypage/SocialProfileSettings"));
+const My = lazy(() => import("../pages/my/My"));
+const ProfileSettingsPage = lazy(() => import("../pages/ProfileSettingsPage"));
+const SocialProfileSettingsPage = lazy(() => import("../pages/SocialProfileSettingsPage"));
 const CustomerService = lazy(() => import("../pages/customerCenter/CustomerService"));
 const Announcement = lazy(() => import("../pages/customerCenter/Announcement"));
-const InviteFriend = lazy(() => import("../pages/friend/InviteFriend"));
-const FriendMain = lazy(() => import("../pages/friend/FriendMain"));
+const InviteFriendPage = lazy(() => import("../pages/InviteFriendPage"));
+const FriendMainPage = lazy(() => import("../pages/FriendMainPage"));
 
 // 이 외 기타 기능 링크
 const router2 = [
@@ -16,25 +16,25 @@ const router2 = [
     path: "/mypage",
     element: (
       <Suspense fallback={<Loading />}>
-        <MyPage />
+        <My />
       </Suspense>
     )
   },
   {
     // profileSettings
-    path: "/ProfileSettings",
+    path: "/profileSettings",
     element: (
       <Suspense fallback={<Loading />}>
-        <ProfileSettings />
+        <ProfileSettingsPage />
       </Suspense>
     )
   },
   {
     // socialProfileSettings
-    path: "/SocialProfileSettings",
+    path: "/socialProfileSettings",
     element: (
       <Suspense fallback={<Loading />}>
-        <SocialProfileSettings />
+        <SocialProfileSettingsPage />
       </Suspense>
     )
   },
@@ -61,7 +61,7 @@ const router2 = [
     path: "/invite",
     element: (
       <Suspense fallback={<Loading />}>
-        <InviteFriend />
+        <InviteFriendPage />
       </Suspense>
     )
   },
@@ -70,7 +70,7 @@ const router2 = [
     path: "/friendMain",
     element: (
       <Suspense fallback={<Loading />}>
-        <FriendMain />
+        <FriendMainPage />
       </Suspense>
     )
   },
