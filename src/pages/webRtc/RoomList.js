@@ -154,7 +154,7 @@ function RoomList() {
                   <div>
                     <h2>{room.description}</h2>
                     <p>참여 인원수: {room.num_participants}</p>
-                    <button onClick={() => handleJoinRoom(room.room)} className="bg-blue-500 text-white p-2 rounded">참가하기</button>
+                    <button onClick={() => handleJoinRoom(room.room)} className="bg-white text-black p-2 rounded">참가하기</button>
                   </div>
                 </li>
               ))}
