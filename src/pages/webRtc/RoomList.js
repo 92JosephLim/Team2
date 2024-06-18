@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./RoomList.css";
+import "../../index.css";
 
 function RoomList() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function RoomList() {
     });
   }
 
-  //방에 참가하는 기능 - 방에 참가하기 버튼 클릭 시 동작하는 코드
+  // 방에 참가하는 기능 - 방에 참가하기 버튼 클릭 시 동작하는 코드
   const handleJoinRoom = (roomId) => {
     console.log(`참가할 방 ID: ${roomId}`);
     navigate(`/joinRoom?roomId=${roomId}`);
@@ -70,13 +70,11 @@ function RoomList() {
 
   const totalPages = Math.ceil(filteredRooms.length / roomsPerPage);
 
-  //페이지 이동을 위한 함수
-  //handleClick : 페이지 번호를 클릭했을 때 해당 페이지로 이동하는 함수
+  // 페이지 이동을 위한 함수
   const handleClick = (event) => {
     setCurrentPage(Number(event.target.id));
   };
 
-  //handleNext: 다음 버튼을 클릭했을 때 다음 페이지로 이동하는 함수.
   const handleNext = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -97,7 +95,7 @@ function RoomList() {
     // 이전 페이지로 돌아가는 버튼 추가
     if (currentPage > 1) {
       pageNumbers.push(
-        <li key="prev-button" className="arrow" onClick={handlePrev}>
+        <li key="prev-button" className="px-3 py-1 border rounded cursor-pointer border-gray-300" onClick={handlePrev}>
           &laquo;
         </li>
       );
@@ -105,7 +103,7 @@ function RoomList() {
 
     for (let i = currentPage; i < currentPage + maxPageNumbersToShow && i <= totalPages; i++) {
       pageNumbers.push(
-        <li key={i} id={i} onClick={handleClick} className={currentPage === i ? 'active' : ''}>
+        <li key={i} id={i} onClick={handleClick} className={`px-3 py-1 border rounded cursor-pointer ${currentPage === i ? 'bg-blue-500 text-white' : 'border-gray-300'}`}>
           {i}
         </li>
       );
@@ -114,7 +112,7 @@ function RoomList() {
     if (currentPage + maxPageNumbersToShow < totalPages) {
       pageNumbers.push(<li key="right-dots" className="dots">...</li>);
       pageNumbers.push(
-        <li key={totalPages} id={totalPages} onClick={handleClick} className={currentPage === totalPages ? 'active' : ''}>
+        <li key={totalPages} id={totalPages} onClick={handleClick} className={`px-3 py-1 border rounded cursor-pointer ${currentPage === totalPages ? 'bg-blue-500 text-white' : 'border-gray-300'}`}>
           {totalPages}
         </li>
       );
@@ -123,7 +121,7 @@ function RoomList() {
     // 다음 페이지로 가는 버튼 추가
     if (currentPage < totalPages) {
       pageNumbers.push(
-        <li key="next-button" className="arrow" onClick={handleNext}>
+        <li key="next-button" className="px-3 py-1 border rounded cursor-pointer border-gray-300" onClick={handleNext}>
           &raquo;
         </li>
       );
@@ -134,55 +132,53 @@ function RoomList() {
 
   return (
     <div>
-      <div className="main-container" style={{ display: 'flex' }}>
-        <div className="room-list-content" style={{ flex: 1 }}>
-          <div className="room-list-container">
-            <div className="header-container">
-              
-              {/* 방 목록 검색 */}
-              <div className="search-container">
+      <div className="main-container flex">
+        <div className="room-list-content flex-1">
+          <div className="room-list-container w-4/5 p-5 pb-36">
+            <div className="header-container flex justify-center items-center relative mb-5 w-full">
+              <div className="search-container flex items-center">
                 <input
                   type="text"
                   placeholder="방제목을 입력하세요"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  className="p-2 border rounded"
                 />
-                <button onClick={handleSearch}>검색</button>
+                <button onClick={handleSearch} className="ml-2 p-2 bg-blue-500 text-white rounded">검색</button>
               </div>
-              <button className="search-button" onClick={() => setIsSearchBoxOpen(true)}>방 번호 입장</button> {/* 새로운 검색 버튼 추가 */}
+              <button className="search-button absolute right-[-100px] bg-blue-500 text-white p-2 rounded" onClick={() => setIsSearchBoxOpen(true)}>방 번호 입장</button>
             </div>
-            <ul className="room-list">
+            <ul className="room-list flex flex-wrap justify-center list-none p-0">
               {currentRooms.map((room) => (
-                <li key={room.room} className="room-item">
+                <li key={room.room} className="room-item m-2 p-2 border rounded w-[calc(50%-20px)] box-border">
                   <div>
                     <h2>{room.description}</h2>
                     <p>참여 인원수: {room.num_participants}</p>
-                    <button onClick={() => handleJoinRoom(room.room)}>참가하기</button>
+                    <button onClick={() => handleJoinRoom(room.room)} className="bg-blue-500 text-white p-2 rounded">참가하기</button>
                   </div>
                 </li>
               ))}
             </ul>
-            <ul id="page-numbers" className="pagination">
+            <ul id="page-numbers" className="pagination flex justify-center list-none p-0">
               {renderPageNumbers()}
             </ul>
           </div>
         </div>
       </div>
 
-
       {/* 검색 박스 */}
       {isSearchBoxOpen && (
-        <div className="search-box-overlay" onClick={closeSearchBox}>
-          <div className="search-box" onClick={(e) => e.stopPropagation()}>
+        <div className="search-box-overlay fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center" onClick={closeSearchBox}>
+          <div className="search-box bg-white p-5 rounded shadow max-w-[275px] w-1/2" onClick={(e) => e.stopPropagation()}>
             <h2>방 번호를 입력하세요</h2>
             <input
               type="text"
               placeholder="입력"
-              style={{ width: '80%' }}
+              className="w-full p-2 my-2 border rounded"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button onClick={closeSearchBox}>이동</button>
+            <button onClick={closeSearchBox} className="bg-blue-500 text-white p-2 w-full rounded">이동</button>
           </div>
         </div>
       )}
