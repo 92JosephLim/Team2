@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./RoomList.css";
-import Footer from "../../components/footer/Footer";
-import TopNav from "../../components/topnav/TopNav";
-import SideNav from "../../components/sidenav/SideNav";
 
 function RoomList() {
   const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
+  const [filteredRooms, setFilteredRooms] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [roomsPerPage] = useState(8); // 한 페이지에 표시할 방 수
   const [isSearchBoxOpen, setIsSearchBoxOpen] = useState(false); // 검색 박스 상태 관리
@@ -22,11 +20,13 @@ function RoomList() {
           var rooms = result.list;
           console.log("Rooms list: ", rooms);
           setRooms(rooms);
+          setFilteredRooms(rooms); // 초기에는 전체 방 목록을 설정
         }
       },
     });
   }
 
+  //방에 참가하는 기능 - 방에 참가하기 버튼 클릭 시 동작하는 코드
   const handleJoinRoom = (roomId) => {
     console.log(`참가할 방 ID: ${roomId}`);
     navigate(`/joinRoom?roomId=${roomId}`);
@@ -45,7 +45,15 @@ function RoomList() {
 
   const handleSearch = () => {
     console.log("Search button clicked");
-    setIsSearchBoxOpen(true); // 검색 박스 열기
+    if (searchTerm) {
+      const filtered = rooms.filter(room =>
+        room.description.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredRooms(filtered); // 검색된 방 목록으로 설정
+      setCurrentPage(1); // 검색 시 첫 페이지로 이동
+    } else {
+      setFilteredRooms(rooms); // 검색어가 없으면 전체 방 목록으로 설정
+    }
   };
 
   const closeSearchBox = () => {
@@ -58,14 +66,17 @@ function RoomList() {
   // 현재 페이지에 표시할 방 목록 계산
   const indexOfLastRoom = currentPage * roomsPerPage;
   const indexOfFirstRoom = indexOfLastRoom - roomsPerPage;
-  const currentRooms = rooms.slice(indexOfFirstRoom, indexOfLastRoom);
+  const currentRooms = filteredRooms.slice(indexOfFirstRoom, indexOfLastRoom);
 
-  const totalPages = Math.ceil(rooms.length / roomsPerPage);
+  const totalPages = Math.ceil(filteredRooms.length / roomsPerPage);
 
+  //페이지 이동을 위한 함수
+  //handleClick : 페이지 번호를 클릭했을 때 해당 페이지로 이동하는 함수
   const handleClick = (event) => {
     setCurrentPage(Number(event.target.id));
   };
 
+  //handleNext: 다음 버튼을 클릭했을 때 다음 페이지로 이동하는 함수.
   const handleNext = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -123,16 +134,22 @@ function RoomList() {
 
   return (
     <div>
-      <TopNav /> {/* TopNav 컴포넌트를 추가 */}
       <div className="main-container" style={{ display: 'flex' }}>
-        <SideNav /> {/* SideNav 컴포넌트를 추가 */}
         <div className="room-list-content" style={{ flex: 1 }}>
           <div className="room-list-container">
             <div className="header-container">
-              <h1>방 목록</h1>
+              
               {/* 방 목록 검색 */}
-              <button className="search-button" onClick={handleSearch}>아이디 검색</button>
-              <button className="search-button" onClick={handleSearch}>방 번호 입장</button>
+              <div className="search-container">
+                <input
+                  type="text"
+                  placeholder="방제목을 입력하세요"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button onClick={handleSearch}>검색</button>
+              </div>
+              <button className="search-button" onClick={() => setIsSearchBoxOpen(true)}>방 번호 입장</button> {/* 새로운 검색 버튼 추가 */}
             </div>
             <ul className="room-list">
               {currentRooms.map((room) => (
@@ -149,9 +166,9 @@ function RoomList() {
               {renderPageNumbers()}
             </ul>
           </div>
-          <Footer /> {/* Footer 컴포넌트를 추가 */}
         </div>
       </div>
+
 
       {/* 검색 박스 */}
       {isSearchBoxOpen && (
@@ -381,8 +398,7 @@ function initjanus() {
                 $("#videolocal").append(
                   '<div class="no-video-container">' +
                   '<i class="fa fa-video-camera fa-5 no-video-icon" style="height: 100%;"></i>' +
-                  '<span class="no-video-text" style="font-size: 16px;">Video rejected, no webcam</span>' +
-                  "</div>"
+                  '<span class="no-video-text" style="font-size: 16px;">Video rejected, no webcam</span>'
                 );
               }
             }
@@ -431,8 +447,7 @@ function initjanus() {
                 $("#videolocal").append(
                   '<div class="no-video-container">' +
                   '<i class="fa fa-video-camera fa-5 no-video-icon"></i>' +
-                  '<span class="no-video-text">No webcam available</span>' +
-                  "</div>"
+                  '<span class="no-video-text">No webcam available</span>'
                 );
               }
             } else {

@@ -113,9 +113,7 @@ function FriendMain() {
 
   return (
     <>
-      <TopNav />
       <div className="flex min-h-screen">
-        <SideNav />
         <div className="flex flex-col flex-1">
           <FriendTitle />
           <div className="py-4 flex justify-center ml-100">
@@ -217,7 +215,6 @@ function FriendMain() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

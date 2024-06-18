@@ -13,7 +13,7 @@ export const registerUser = async (data) => {
 // Function to send email verification code
 export const sendEmailVerification = async (email) => {
   try {
-    const response = await axiosInstance.post('/emailSend', { email });
+    const response = await axiosInstance.post('/api/emailSend', { email });
     return response.data;
   } catch (error) {
     throw error;
@@ -23,7 +23,7 @@ export const sendEmailVerification = async (email) => {
 // Function to confirm email verification code
 export const confirmEmailVerification = async (email, code) => {
   try {
-    const response = await axiosInstance.post('/emailConfirm', { email, code });
+    const response = await axiosInstance.post('/api/emailConfirm', { email, code });
     return response.data;
   } catch (error) {
     throw error;

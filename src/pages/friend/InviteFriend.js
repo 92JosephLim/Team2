@@ -66,9 +66,7 @@ function InviteFriend() {
 
   return (
     <>
-      <TopNav />
       <div className="flex min-h-screen">
-        <SideNav />
         <div className="flex flex-col flex-1">
           <AddFriendTitle />
           <div className="searchBar">
@@ -132,7 +130,6 @@ function InviteFriend() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

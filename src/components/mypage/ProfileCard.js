@@ -110,16 +110,16 @@ function ProfileCard() {
         </div>
         <div className="p-8 text-left">
           <h2 className="mb-4 block font-sans text-3xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-            내 정보
+            {t("myInfo")}
           </h2>
           <h3 className="block font-sans text-2xl font-light leading-relaxed text-inherit antialiased">
             {t("email")}: {userInfo.email}
           </h3>
           <h3 className="font-sans flex text-2xl font-light leading-relaxed text-inherit antialiased">
-            성별: {userInfo.gender} {renderGenderIcon()}
+            {t("gender")}: {userInfo.gender} {renderGenderIcon()}
           </h3>
           <h3 className="block font-sans text-2xl font-light leading-relaxed text-inherit antialiased">
-            전화번호: {formatPhoneNumber(userInfo.phoneNumber)}
+            {t("phoneCall")}: {formatPhoneNumber(userInfo.phoneNumber)}
           </h3>
         </div>
         <div className="p-8 pt-0">
@@ -129,7 +129,7 @@ function ProfileCard() {
             data-ripple-light="true"
             onClick={handleProfileSettings}
           >
-            정보 수정하기
+            {t("changeSave")}
           </button>
         </div>
       </div>

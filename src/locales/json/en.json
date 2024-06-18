@@ -1,4 +1,10 @@
 {
+  "myInfo": "My Info",
+  "gender": "Gender",
+  "roomSetting": "Room Setting",
+  "videoSetting": "Video and Audio Setting",
+  "chatSetting": "Chat Setting",
+  "etcSetting": "Other Settings",
   "VideoChat": "Video Chat",
   "login": "Login",
   "logout": "Logout",

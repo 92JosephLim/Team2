@@ -1,4 +1,10 @@
 {
+  "myInfo": "我的信息",
+  "gender": "性别",
+  "roomSetting": "房间设置",
+  "videoSetting": "视频和音频设置",
+  "chatSetting": "聊天设置",
+  "etcSetting": "其他设置",
   "VideoChat": "视频聊天",
   "login": "登录",
   "logout": "登出",

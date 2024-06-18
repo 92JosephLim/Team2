@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TopNav from "../../components/topnav/TopNav";
 import Footer from "../../components/footer/Footer";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,20 @@ import { registerUser, sendEmailVerification, confirmEmailVerification } from ".
 import grim from "../../assets/grim.jpg"
 
 function Signup() {
+
   const navigate = useNavigate();
+
+  //5m timer 상태
+  const [isCodeInputVisible, setIsCodeInputVisible] = useState(false);
+  const [isTimerExpired, setIsTimerExpired] = useState(false);
+
+  // 분, 초 설정
+  const [min, setMin] = useState(5);
+  const [sec, setSec] = useState(0);
+  // 5분
+  const time = useRef(300);
+  const timerId = useRef(null);
+
 
   // 회원가입 폼 데이터 초기 상태 설정
   const [formData, setFormData] = useState({
@@ -141,6 +154,7 @@ function Signup() {
       } else {
         setMessages({ ...messages, emailMessage: "인증 이메일이 전송되었습니다!" });
         setValidity({ ...validity, isEmail: true });
+        setIsCodeInputVisible(true);
       }
     } catch (error) {
       console.error("error : ", error);
@@ -160,6 +174,33 @@ function Signup() {
       console.error("error : ", error);
     }
   };
+
+  //5m timer useEffect로 관리
+  useEffect(() => {
+    if (isCodeInputVisible) {
+      time.current = 300; // 타이머 초기화
+      setMin(5);
+      setSec(0);
+      setIsTimerExpired(false);
+
+      timerId.current = setInterval(() => {
+        setMin(parseInt(time.current / 60));
+        setSec(time.current % 60);
+        time.current -= 1;
+      }, 1000);
+
+      return () => clearInterval(timerId.current);
+    }
+  }, [isCodeInputVisible]);
+
+  useEffect(() => {
+    if (time.current <= 0 && timerId.current) {
+      console.log("타이머 시간 끝!!!!!");
+      clearInterval(timerId.current);
+      setIsTimerExpired(true);
+    }
+  }, [sec]);
+
 
   // 인증번호 입력 필드 변경 핸들러
   const handleCodeChange = (e) => {
@@ -199,26 +240,30 @@ function Signup() {
                   </div>
                   <p className="errorMsg mt-1 text-red-600 text-xl">{messages.emailMessage}</p>
                 </div>
-                <div className="my-5 text-sm">
-                  <label htmlFor="emainCheck" className="flex justify-end block text-black text-center text-xl/2">인증 번호를 입력하세요</label>
-                  <div className="flex justify-end flex mt-3">
-                    <input
-                      type="text"
-                      name="emainCheck"
-                      id="emainCheck"
-                      value={verificationCode}
-                      onChange={handleCodeChange}
-                      className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-5/6 text-2xl"
-                      placeholder="인증번호"
-                    />
-                    <button
-                      className="ml-2 text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black"
-                      onClick={handleCodeSubmit}
-                    >
-                      인증번호 확인
-                    </button>
+                {isCodeInputVisible && (
+                  <div className="my-5 text-sm">
+                    <label htmlFor="emainCheck" className="flex justify-end block text-black text-center text-xl/2">인증 번호를 입력하세요</label>
+                    <div className="flex justify-end flex mt-3">
+                      <input
+                        type="text"
+                        name="emainCheck"
+                        id="emainCheck"
+                        value={verificationCode}
+                        onChange={handleCodeChange}
+                        className="rounded-sm px-4 py-3 focus:outline-none bg-gray-100 w-5/6 text-2xl"
+                        placeholder="인증번호"
+                      />
+                      <button
+                        className="ml-2 text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black"
+                        onClick={handleCodeSubmit}
+                        disabled={isTimerExpired}
+                      >
+                        인증번호 확인
+                      </button>
+                      <p className="timer mt-1 text-red-600 text-xl grid place-items-center ml-5">{min}분{sec}초</p>
+                    </div>
                   </div>
-                </div>
+                )}
                 <div className="my-5 text-sm">
                   <label htmlFor="password" className="block text-black text-left">Password</label>
                   <input
