@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "https://js2.jsflux.co.kr")
 public class RegisterController {
     @Autowired
     private MemberRepository memberRepository;
@@ -38,6 +37,7 @@ public class RegisterController {
                                           @RequestParam("phoneNumber") String phoneNumber,
                                           @RequestParam("gender") String gender,
                                           @RequestParam("language") String language,
+                                          @RequestParam("nickName") String nickname,
                                           @RequestParam(value = "profilePicture", required = false) MultipartFile profilePicture) {
         // 파일 저장 로직
         String profilePicturePath = null;
@@ -54,6 +54,7 @@ public class RegisterController {
                 .password(encodedPassword)
                 .phoneNumber(phoneNumber)
                 .gender(gender)
+                .nickname(nickname)
                 .language(language)
                 .profileImage(profilePicturePath)
                 .authority(Authority.ROLE_USER)
