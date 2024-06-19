@@ -116,8 +116,8 @@ public class KakaoOauthService {
             userAttributes.put("loginType", existingMember.getLoginType());
             userAttributes.put("email", existingMember.getEmail());
             userAttributes.put("profileImage", existingMember.getProfileImage());
-//            userAttributes.put("gender",existingMember.getGender());
-//            userAttributes.put("phoneNumber", existingMember.getPhoneNumber());
+            userAttributes.put("gender",existingMember.getGender());
+            userAttributes.put("phoneNumber", existingMember.getPhoneNumber());
 
             String jwtToken = jwtTokenProvider.createToken(userAttributes);
             Map<String,Object> response = new HashMap<>();

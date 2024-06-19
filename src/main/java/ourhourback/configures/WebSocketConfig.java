@@ -29,6 +29,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // "/chat" 엔드포인트를 등록하고, SockJS를 사용하도록 설정합니다. 이 엔드포인트는 웹 소켓 연결이 가능하도록 합니다.
-        registry.addEndpoint("/chat").setAllowedOrigins("http://localhost:3000").withSockJS();
+        registry.addEndpoint("/chat").setAllowedOrigins("http://localhost:3000","https://js2.jsflux.co.kr").withSockJS();
     }
 }

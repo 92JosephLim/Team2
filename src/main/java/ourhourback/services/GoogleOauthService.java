@@ -109,8 +109,8 @@ public class GoogleOauthService {
             userAttributes.put("pictureUrl", profileImageUrl);
             userAttributes.put("authority", Authority.ROLE_USER);
             userAttributes.put("loginType", LoginType.GOOGLE);
-//            userAttributes.put("phoneNumber", existingMember.getPhoneNumber());
-//            userAttributes.put("gender", existingMember.getGender());
+            userAttributes.put("phoneNumber", existingMember.getPhoneNumber());
+            userAttributes.put("gender", existingMember.getGender());
 
             String jwtToken = jwtTokenProvider.createToken(userAttributes);
             Map<String, Object> response = new HashMap<>();
