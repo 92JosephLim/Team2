@@ -63,7 +63,7 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000")//https://js2.jsflux.co.kr
+                        .allowedOrigins("http://localhost:3000","https://js2.jsflux.co.kr")//https://js2.jsflux.co.kr
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);

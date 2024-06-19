@@ -21,7 +21,7 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // 허용할 도메인 목록을 설정합니다. 여기서는 로컬호스트의 3000번 포트를 허용합니다.
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000","https://js2.jsflux.co.kr"));
 
         // 허용할 HTTP 메서드 목록을 설정합니다.
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
