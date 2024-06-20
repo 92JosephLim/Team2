@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import AddFriendTitle from "../../components/friend/AddFriendTitle";
 import axios from "axios";
 import { FaCheck } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 // 친구 추가 페이지
 function InviteFriend() {
+
   const [nickName, setNickName] = useState(""); // 입력하는 닉네임
   const [results, setResults] = useState([]); // 검색결과
   const [error, setError] = useState(""); // 에러 메시지
@@ -61,6 +63,7 @@ function InviteFriend() {
     }
   };
 
+  const { t } = useTranslation();
   return (
     <>
       <div className="flex min-h-screen">

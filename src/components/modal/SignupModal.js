@@ -33,6 +33,7 @@ Modal.setAppElement('#root'); // 애플리케이션 루트를 설정하여 접�
 
 function SignupModal({ isOpen, onRequestClose }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [isCodeInputVisible, setIsCodeInputVisible] = useState(false);
   const [isTimerExpired, setIsTimerExpired] = useState(false);
   const [min, setMin] = useState(5);

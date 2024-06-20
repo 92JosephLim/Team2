@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import mainback from "../../assets/mainback.jpg";
+import { useTranslation } from "react-i18next";
 import pic1 from "../../assets/1.jpg";
 import pic2 from "../../assets/2.jpg";
 import pic3 from "../../assets/3.jpg";
@@ -13,6 +14,7 @@ import pic9 from "../../assets/9.jpg";
 
 function Main() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const profileImages = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9];
 
   // 총 36개의 프로필 생성
