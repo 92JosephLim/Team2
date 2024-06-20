@@ -10,11 +10,9 @@ import pic6 from "../../assets/6.jpg";
 import pic7 from "../../assets/7.jpg";
 import pic8 from "../../assets/8.jpg";
 import pic9 from "../../assets/9.jpg";
-import { useTranslation } from "react-i18next";
 
 function Main() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const profileImages = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9];
 
   // 총 36개의 프로필 생성

@@ -17,6 +17,7 @@
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
+    "font-awesome": "^4.7.0",
     "i18next": "^23.11.5",
     "jquery": "^3.7.1",
     "jwt-decode": "^4.0.0",

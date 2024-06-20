@@ -3,7 +3,6 @@ import ProfileCard from '../../components/mypage/ProfileCard';
 import { useTranslation } from 'react-i18next';
 
 const My = () => {
-
   const { t } = useTranslation();
 
   const [userInfo, setUserInfo] = useState({

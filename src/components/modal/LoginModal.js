@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Kakao from "../../pages/social/Kakao";
 import GoogleLoginButton from "../../pages/social/GoogleLoginButton";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
-import SignupModal from "./SignupModal";
+import { jwtDecode } from "jwt-decode"; // Default import로 수정
+import SignupModal from "./SignupModal"; // 추가
 import { useTranslation } from "react-i18next";
 
 const customStyles = {
@@ -28,9 +28,9 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 function LoginModal({ isOpen, onRequestClose }) {
+
   const navigate = useNavigate();
   const { t } = useTranslation();
-
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false); // 추가
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -168,7 +168,7 @@ function LoginModal({ isOpen, onRequestClose }) {
               <Kakao />
             </div>
             <div>
-              <GoogleLoginButton />
+              <GoogleLoginButton onRequestClose={onRequestClose} />
             </div>
           </div>
           <p className="mt-12 text-xl text-center font-light text-gray-400">

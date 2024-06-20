@@ -1,7 +1,4 @@
 import React from "react";
-import Footer from "../../components/footer/Footer";
-import TopNav from "../../components/topnav/TopNav";
-import SideNav from "../../components/sidenav/SideNav";
 import FriendTitle from "../../components/friend/FriendTitle";
 import axios from "axios";
 import { useState, useEffect } from "react";

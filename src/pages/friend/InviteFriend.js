@@ -2,14 +2,9 @@ import React, { useState } from "react";
 import AddFriendTitle from "../../components/friend/AddFriendTitle";
 import axios from "axios";
 import { FaCheck } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
 
 // 친구 추가 페이지
 function InviteFriend() {
-
-  //다국어
-  const { t } = useTranslation();
-
   const [nickName, setNickName] = useState(""); // 입력하는 닉네임
   const [results, setResults] = useState([]); // 검색결과
   const [error, setError] = useState(""); // 에러 메시지
@@ -110,13 +105,6 @@ function InviteFriend() {
                         >
                           <FaCheck size={24} />
                         </button>
-                        {/* <button
-                          type="button"
-                          className="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                          onClick={() => handleReject(result.email)}
-                        >
-                          <RiDeleteBin5Line size={24} />
-                        </button> */}
                       </td>
                     </tr>
                   ))

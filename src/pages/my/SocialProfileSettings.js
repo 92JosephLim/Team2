@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SocialupdateUserInfo } from '../../api/apiService';
 import './SocialAndProfileSetting.css';
+import { useTranslation } from 'react-i18next';
 
 const SocialProfileSettings = () => {
+  const { t } = useTranslation();
   const [userInfo, setUserInfo] = useState({
     email: '',
     phoneNumber: '',
@@ -134,10 +136,10 @@ const SocialProfileSettings = () => {
       <div className="flex flex-1 justify-center items-center">
         <main className="flex-1 p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md">
           <div className="profile-settings-content">
-            <h1 className="text-3xl font-bold mb-6 text-center">{t("profile")}</h1>
+            <h1 className="text-3xl font-bold mb-6 text-center">상세 프로필 설정</h1>
             <form className="profile-settings-form" onSubmit={handleSubmit}>
               <div className="form-group mb-6 text-center">
-                <label className="block text-lg font-medium text-gray-700 mb-2">{t("picture")}</label>
+                <label className="block text-lg font-medium text-gray-700 mb-2">프로필 사진</label>
                 <div
                   className="flex items-center justify-center w-32 h-32 mx-auto border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-500"
                   onClick={() => document.getElementById('file-upload').click()}
@@ -163,7 +165,7 @@ const SocialProfileSettings = () => {
                 />
               </div>
               <div className="form-group mb-6">
-                <label className="block text-lg font-medium text-gray-700">{t("phoneCall")}</label>
+                <label className="block text-lg font-medium text-gray-700">전화번호</label>
                 <input
                   type="text"
                   name="phoneNumber"
@@ -177,7 +179,7 @@ const SocialProfileSettings = () => {
 
               {/* 성별 */}
               <div className="form-group mb-6 text-center">
-                <label htmlFor="gender" className="block text-lg font-medium text-gray-700">{t("gender")}</label>
+                <label htmlFor="gender" className="block text-lg font-medium text-gray-700">Gender</label>
                 <div className="flex items-center justify-center mt-2 space-x-4">
                   <label className="inline-flex items-center">
                     <input
@@ -188,7 +190,7 @@ const SocialProfileSettings = () => {
                       checked={userInfo.gender === 'none'}
                       onChange={handleChange}
                     />
-                    <span className="radio-label animate">{t("noCheck")}</span>
+                    <span className="radio-label animate">선택안함</span>
                   </label>
                   <label className="inline-flex items-center">
                     <input
@@ -199,7 +201,7 @@ const SocialProfileSettings = () => {
                       checked={userInfo.gender === 'male'}
                       onChange={handleChange}
                     />
-                    <span className="radio-label animate">{t("man")}</span>
+                    <span className="radio-label animate">남성</span>
                   </label>
                   <label className="inline-flex items-center">
                     <input
@@ -210,7 +212,7 @@ const SocialProfileSettings = () => {
                       checked={userInfo.gender === 'female'}
                       onChange={handleChange}
                     />
-                    <span className="radio-label animate">{t("woman")}</span>
+                    <span className="radio-label animate">여성</span>
                   </label>
                 </div>
               </div>
@@ -221,20 +223,22 @@ const SocialProfileSettings = () => {
                   type="submit"
                   className="save-button px-6 py-3 bg-indigo-600 text-white text-base font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  {t("changeSave")}
+                  변경 사항 저장
                 </button>
                 <button
                   type="button"
                   className="cancel-button px-6 py-3 bg-gray-300 text-black text-base font-medium rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                   onClick={handleCancel}
                 >
-                  {t("cancleChange")}
+                  변경 사항 취소
                 </button>
               </div>
             </form>
           </div>
         </main>
       </div>
+      {/* //////////////////// */}
+
     </div>
   );
 }

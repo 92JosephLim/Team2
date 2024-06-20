@@ -28,10 +28,7 @@ function TopNav() {
 
   const handleLogoClick = () => navigate("/");
   const handleMyPage = () => navigate("/mypage");
-  const handleRoomSettings = () => navigate("/settings/RoomSetting");
   const handleVideoAudioSettings = () => navigate("/settings/VideoAudioSetting");
-  const handleChatSettings = () => navigate("/settings/ChatSetting");
-  const handleOtherSettings = () => navigate("/settings/OtherSetting");
 
   const clickHandler = (lang) => i18next.changeLanguage(lang);
   const handleLogout = () => {
@@ -51,6 +48,14 @@ function TopNav() {
     setSubmenuOpen(null);
   };
 
+  const handleProtectedLinkClick = (path) => {
+    if (token) {
+      navigate(path);
+    } else {
+      openLoginModal();
+    }
+  };
+
   return (
     <header className="flex justify-between items-center bg-black p-4 z-50">
       {/* 로고 */}
@@ -62,8 +67,18 @@ function TopNav() {
 
       {/* 네비게이션 아이템 */}
       <nav className="hidden md:flex items-center space-x-4 text-white">
-        <Link to="/video" className="hover:text-blue-500">{t("room")}</Link>
-        <Link to="/roomList" className="hover:text-blue-500">{t("list")}</Link>
+        <button
+          className="hover:text-blue-500"
+          onClick={() => handleProtectedLinkClick("/video")}
+        >
+          {t("room")}
+        </button>
+        <button
+          className="hover:text-blue-500"
+          onClick={() => handleProtectedLinkClick("/roomList")}
+        >
+          {t("list")}
+        </button>
         <div className="relative">
           <button
             className="hover:text-blue-500"
@@ -128,23 +143,10 @@ function TopNav() {
         <div className="relative">
           <button
             className="hover:text-blue-500"
-            onClick={() => toggleDropdown("settings")}
+            onClick={handleVideoAudioSettings}
           >
             Settings
           </button>
-          {activeDropdown === "settings" && (
-            <div className="absolute bg-black mt-1 rounded-md shadow-lg z-50 flex flex-col p-2 whitespace-nowrap text-xs md:text-sm lg:text-base">
-              <button
-                onClick={() => {
-                  handleVideoAudioSettings();
-                  setSidebarOpen(false);
-                }}
-                className="block px-2 py-1 md:px-3 md:py-2 lg:px-4 lg:py-2 hover:bg-gray-700"
-              >
-                {t("videoSetting")}
-              </button>
-            </div>
-          )}
         </div>
 
         <div className="relative">
@@ -195,8 +197,6 @@ function TopNav() {
             </div>
           )}
         </div>
-
-
 
         {/* 로그인 했을때 로그아웃으로 변경 / 프로필, 닉네임 추가 */}
         <div className="flex items-center space-x-4">
@@ -253,20 +253,18 @@ function TopNav() {
           </button>
           {!submenuOpen ? (
             <div className="flex flex-col items-center space-y-6">
-              <Link
-                to="/video"
+              <button
                 className="text-white text-lg hover:text-blue-500"
-                onClick={() => setSidebarOpen(false)}
+                onClick={() => handleProtectedLinkClick("/video")}
               >
                 {t("room")}
-              </Link>
-              <Link
-                to="/roomList"
+              </button>
+              <button
                 className="text-white text-lg hover:text-blue-500"
-                onClick={() => setSidebarOpen(false)}
+                onClick={() => handleProtectedLinkClick("/roomList")}
               >
                 {t("list")}
-              </Link>
+              </button>
               <button
                 className="text-white text-lg hover:text-blue-500"
                 onClick={() => toggleSubmenu("about")}
@@ -289,7 +287,7 @@ function TopNav() {
               )}
               <button
                 className="text-white text-lg hover:text-blue-500"
-                onClick={() => toggleSubmenu("settings")}
+                onClick={handleVideoAudioSettings}
               >
                 Settings
               </button>
@@ -390,46 +388,6 @@ function TopNav() {
                   >
                     {t("FriendList")}
                   </Link>
-                </div>
-              )}
-              {submenuOpen === "settings" && (
-                <div className="flex flex-col items-center bg-gray-800 rounded-lg p-4 mt-2">
-                  <button
-                    onClick={() => {
-                      handleRoomSettings();
-                      setSidebarOpen(false);
-                    }}
-                    className="block text-white text-lg px-4 py-2 hover:bg-gray-700"
-                  >
-                    {t("roomSetting")}
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleVideoAudioSettings();
-                      setSidebarOpen(false);
-                    }}
-                    className="block text-white text-lg px-4 py-2 hover:bg-gray-700"
-                  >
-                    {t("videoSetting")}
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleChatSettings();
-                      setSidebarOpen(false);
-                    }}
-                    className="block text-white text-lg px-4 py-2 hover:bg-gray-700"
-                  >
-                    {t("chatSetting")}
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleOtherSettings();
-                      setSidebarOpen(false);
-                    }}
-                    className="block text-white text-lg px-4 py-2 hover:bg-gray-700"
-                  >
-                    {t("etcSetting")}
-                  </button>
                 </div>
               )}
               {token && (

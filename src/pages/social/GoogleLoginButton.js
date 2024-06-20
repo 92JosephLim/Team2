@@ -1,16 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types"; // PropTypes 추가
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { jwtDecode } from 'jwt-decode'; // Named import로 수정
+import {jwtDecode} from "jwt-decode"; // Default import로 수정
 import { useNavigate } from "react-router-dom";
-const GoogleLoginButton = () => {
 
+const GoogleLoginButton = ({ onRequestClose }) => {
   const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
   const navigate = useNavigate();
 
   const handleLoginSuccess = (response) => {
-
     console.log(response);
     // .env 파일에서 선언한 변수로 변경하기
     // fetch(process.env.REACT_APP_GOOGLE_OAUTH_URL, {
@@ -31,12 +31,13 @@ const GoogleLoginButton = () => {
         console.log(decodedToken);
         localStorage.setItem("token", data.token);
         localStorage.setItem("email", decodedToken.email);
-        localStorage.setItem("profileImage", decodedToken.pictureUrl);
+        localStorage.setItem("profileImage", decodedToken.profileImage);
         localStorage.setItem("loginType", decodedToken.loginType);
         localStorage.setItem("phoneNumber", decodedToken.phoneNumber);
         localStorage.setItem("gender", decodedToken.gender);
         localStorage.setItem("nickName", decodedToken.nickName);
         navigate("/");
+        onRequestClose(); // 로그인 성공 시 모달 닫기
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -52,6 +53,10 @@ const GoogleLoginButton = () => {
       <GoogleLogin onSuccess={handleLoginSuccess} onFailure={handleLoginFailure} />
     </GoogleOAuthProvider>
   );
+};
+
+GoogleLoginButton.propTypes = {
+  onRequestClose: PropTypes.func.isRequired, // PropTypes 정의
 };
 
 export default GoogleLoginButton;

@@ -33,8 +33,6 @@ Modal.setAppElement('#root'); // 애플리케이션 루트를 설정하여 접�
 
 function SignupModal({ isOpen, onRequestClose }) {
   const navigate = useNavigate();
-  const { t } = useTranslation();
-
   const [isCodeInputVisible, setIsCodeInputVisible] = useState(false);
   const [isTimerExpired, setIsTimerExpired] = useState(false);
   const [min, setMin] = useState(5);
@@ -149,6 +147,11 @@ function SignupModal({ isOpen, onRequestClose }) {
   const handleSUSubmit = async (e) => {
     e.preventDefault();
 
+    if (!validity.isEmail || !validity.isPassword || !validity.isPasswordCheck || !validity.isPhoneNumber) {
+      alert("모든 항목을 작성해 주세요.");
+      return;
+    }
+
     const data = new FormData();
     Object.keys(formData).forEach((key) => {
       data.append(key, formData[key]);
@@ -157,6 +160,7 @@ function SignupModal({ isOpen, onRequestClose }) {
     try {
       const response = await registerUser(data);
       if (response.success) { // 서버 응답의 success 필드 확인
+        onRequestClose(); // 모달 닫기
         navigate("/"); // 성공 시 메인 페이지로 이동
       } else {
         alert(response.message); // 실패 시 메시지 알림
@@ -335,6 +339,7 @@ function SignupModal({ isOpen, onRequestClose }) {
                 />
                 <p className="errorMsg mt-1 text-lg text-red-600">{messages.phoneNumberMessage}</p>
               </div>
+
               {/* 성별 */}
               <div className="text-sm">
                 <label htmlFor="gender" className="block text-black text-left">{t("gender")}</label>
@@ -422,11 +427,9 @@ function SignupModal({ isOpen, onRequestClose }) {
               <button
                 className="block text-center text-white bg-gray-800 p-2 duration-300 rounded-sm hover:bg-black w-full"
                 type="submit"
-                disabled={!validity.isEmail || !validity.isPassword || !validity.isPasswordCheck || !validity.isPhoneNumber}
               >
                 {t("signup")}
               </button>
-
             </div>
           </form>
         </div>
