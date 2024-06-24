@@ -51,7 +51,7 @@ public class LoginController {
 
         // JWT 토큰 생성
         Map<String, Object> claims = new HashMap<>();
-        // claims.put("id", member.getId().toString()); // Long 타입을 String으로 변환
+
         claims.put("email", member.getEmail());
         claims.put("phoneNumber", member.getPhoneNumber());
         claims.put("gender", member.getGender());

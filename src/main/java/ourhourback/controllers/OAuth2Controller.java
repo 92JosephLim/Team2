@@ -1,12 +1,6 @@
 package ourhourback.controllers;
 
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.gson.GsonFactory;
-import com.google.api.client.json.webtoken.JsonWebSignature;
-import com.google.auth.oauth2.AccessToken;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.auth.oauth2.IdToken;
-import com.google.auth.oauth2.TokenVerifier;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +9,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ourhourback.services.GoogleOauthService;
 import ourhourback.services.KakaoOauthService;
 
-import java.util.Collections;
+
 import java.util.Map;
 
 @RestController
@@ -37,15 +31,6 @@ public class OAuth2Controller {
     @Value("${kakao.token-uri}")
     private String kakaoaccessTokenUrl;
 
-//    @Value("${google.token-uri}")
-//    private String googleAccessTokenUrl;
-//
-//    @Value("${google.client.id}")
-//    private String googleClientId;
-//    @Value("${google.client.secret}")
-//    private String googleClientSecret;
-//    @Value("${google.redirect.uri}")
-//    private String googleRedirectUri;
 
     private final KakaoOauthService kakaoOauthService;
     private final GoogleOauthService googleOauthService;

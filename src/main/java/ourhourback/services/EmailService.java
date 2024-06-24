@@ -144,7 +144,7 @@ public class EmailService {
         Member member = existingMember.get();
         String tempPassword = generateTemporaryPassword();
         String newEncodedPassword = passwordEncoder.encode(tempPassword);
-        member.setPassword(newEncodedPassword); // 이 부분은 실제 서비스에서는 암호화된 비밀번호를 설정해야 합니다.
+        member.setPassword(newEncodedPassword); // 임시비밀번호 설정
         memberRepository.save(member);
 
         MimeMessage message = createTemporaryPasswordMail(email, tempPassword);

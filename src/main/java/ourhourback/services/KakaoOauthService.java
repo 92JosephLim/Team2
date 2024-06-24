@@ -90,7 +90,7 @@ public class KakaoOauthService {
 
             Map<String,Object> userAttributes = new HashMap<>();
 //            userAttributes.put("id",kakaoEmail);
-            userAttributes.put("nickname",kakaoNickname);
+            userAttributes.put("nickName",kakaoNickname);
             userAttributes.put("authority",Authority.ROLE_USER);
             userAttributes.put("loginType",LoginType.KAKAO);
             userAttributes.put("email",kakaoEmail);
@@ -99,7 +99,7 @@ public class KakaoOauthService {
 
             System.out.println("처음 회원가입하는 사용자입니다. 사용자 정보를 데이터베이스에 저장하고 JWT 토큰을 생성하여 반환합니다.");
             Map<String,Object> response = new HashMap<>();
-            response.put("nickname",kakaoNickname);
+            response.put("nickName",kakaoNickname);
             response.put("token",jwtToken);
             return response;
         } else {

@@ -85,7 +85,7 @@ public class GoogleOauthService {
 
             Map<String, Object> userAttributes = new HashMap<>();
 //            userAttributes.put("id", googleEmail);
-            userAttributes.put("nickname", googleName);
+            userAttributes.put("nickName", googleName);
             userAttributes.put("email", googleEmail);
             userAttributes.put("pictureUrl", profileImageUrl);
             userAttributes.put("authority", Authority.ROLE_USER);
@@ -94,7 +94,7 @@ public class GoogleOauthService {
 
             System.out.println("처음 회원가입하는 사용자입니다. 사용자 정보를 데이터베이스에 저장하고 JWT 토큰을 생성하여 반환합니다.");
             Map<String, Object> response = new HashMap<>();
-            response.put("nickname", googleName);
+            response.put("nickName", googleName);
             response.put("token", jwtToken);
             return response;
         } else {
